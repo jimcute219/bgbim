@@ -68,7 +68,7 @@
   }
   .sidebar {
     background-color: lightgray;
-    height: 2000px;
+    height: 500px;
   }
   button {
     position: absolute;
@@ -107,7 +107,7 @@
 <body onload="changeheight()" onresize="changeheight()">
   <script>
     function changeheight() {
-        $('.sidebar').height($('.content').css('height'));
+        $('.sidebar').height($('.content img').css('height'));
         $('.content').height($('.content img').css('height'));
         $('[href]').height($('.content img').css('height'));
         $('[href]').width($('.content img').css('width'));
@@ -144,9 +144,19 @@
             <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
           </svg>
         </div>
-        <div class="content"> 
+        <div class="content">
+          <img src="1-15012621011V53.jpg">
+          <img src="wall.jpg" id="wall"  href="">
+          <svg width="400" height="180" z-index="30">
+            <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
+          </svg> 
         </div>
         <div class="content">
+          <img src="Green-background.jpg">
+          <img src="wall.jpg" id="wall"  href="">
+          <svg width="400" height="180" z-index="30">
+            <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
+          </svg>
         </div>
         
       </div>
@@ -163,7 +173,7 @@
         </div>
       </div>
     </div>
-    <div class="footer">
+    <div class="footer"  style="display: none;">
       <h1>Footer</h1>
     </div>
   </div>  
