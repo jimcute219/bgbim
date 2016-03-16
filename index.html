@@ -74,7 +74,7 @@
     position: absolute;
     top:0px;
   }
-  #wall {
+  .wall {
     width:100%;
     position: absolute;
     top:0px;
@@ -94,66 +94,136 @@
     width: 80%;
     height: 90%;
   }
+  .black {
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    z-index: 10;
+  }
+  .blackbutton {
+    z-index: 9;
+  }
+  .blackcontent{
+    background-color: rgba(0,0,0,0.8);
+    width: 70%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    z-index: 20;
+  }
+  .body-wrap{
+    position: relative;
+  }
+  .white {
+    background-color: white;
+    position: fixed;
+    z-index: 10;
+    width: 2000px;
+    height: 2000px;
+  }
+  #loading {
+    z-index: 50;
+    padding: 10px 10px 5px;
+    background: rgb(255, 0, 136);
+    left: 45%;
+    top: 0;
+    color: #fff;
+    position: fixed;
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    box-shadow: 2px 2px 10px;
+    border-radius: 5px;
+  }
+  
+  
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
         $('svg').click(function(){
-          $(this).siblings("#wall").fadeToggle("slow");
+          $(this).siblings(".wall").fadeToggle("slow");
         });
+        $('.blackbutton').click(function(){
+          $('.blackcontent').children().css("display","none").delay(100).fadeIn(750);
+          $('.black').show();
+          $("body").css("overflow", "hidden");
+        });
+        $('.black').on('click', function(e){
+          var target = $(e.target);
+          if (target.attr('class') == 'black') {
+            $(this).hide();
+            $("body").css("overflow", "scroll");
+          }
+        });
+        $(window).load(function() {
+          $(".white").delay(3000).hide(1000);
+        }); 
     });
   </script>
 </head>
 <body onload="changeheight()" onresize="changeheight()">
   <script>
-    function changeheight() {
+      function changeheight() {
         $('.sidebar').height($('.content img').css('height'));
         $('.content').height($('.content img').css('height'));
-        $('[href]').height($('.content img').css('height'));
-        $('[href]').width($('.content img').css('width'));
+        $('.wall').height($('.content img').css('height'));
+        $('.wall').width($('.content img').css('width'));
         $('svg').css({"width":"3%","height":"60%","top":"40%",
           "right":"0%"});
-        
+        $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+        $('.white').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
     }
   </script>
   <div class="body-wrap">
     <div class="header" style="display: none;">
       <h1>Header</h1>
     </div>
+    <div class="black" style="display: none;">
+      <div class="blackcontent" style="display: block;">
+        <p style="color: white">this is a good test.</p>
+        <img src="thumb_dsc01763_1024.jpg" width="50%" 
+        height="50%">
+      </div>
+    </div>
+    <div class="white" style="display: block">
+      <div id='loading'>正在載入頁面資料...</div>
+    </div>
     <div class="row">
       <div class="col-9 col-m-9">
- 
         <div class="content">
+        <button class="blackbutton">black</button>
           <img src="thumb_dsc01763_1024.jpg">
-          <img src="wall.jpg" id="wall"  href="">
+          <img src="wall.jpg" class="wall">
           <svg width="400" height="180" z-index="30">
             <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
           </svg>
         </div>
         <div class="content">
+        <button class="blackbutton">black</button>
           <img src="thumb_227-301-62_1024.jpg">
-          <img src="wall.jpg" id="wall"  href="">
+          <img src="wall.jpg" class="wall">
           <svg width="400" height="180" z-index="30">
             <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
           </svg>
         </div>
         <div class="content">
           <img src="thumb_dsc01954_1024.jpg">
-          <img src="wall.jpg" id="wall"  href="">
+          <img src="wall.jpg" class="wall">
           <svg width="400" height="180" z-index="30">
             <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
           </svg>
         </div>
         <div class="content">
           <img src="1-15012621011V53.jpg">
-          <img src="wall.jpg" id="wall"  href="">
+          <img src="wall.jpg" class="wall">
           <svg width="400" height="180" z-index="30">
             <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
           </svg> 
         </div>
         <div class="content">
           <img src="Green-background.jpg">
-          <img src="wall.jpg" id="wall"  href="">
+          <img src="wall.jpg" class="wall">
           <svg width="400" height="180" z-index="30">
             <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
           </svg>
