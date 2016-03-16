@@ -145,8 +145,8 @@
           $(this).siblings(".wall").fadeToggle("slow");
         });
         $('.blackbutton').click(function(){
-          $('.blackcontent').children().css("display","none").delay(100).fadeIn(750);
           $('.black').show();
+          $('.blackcontent').children().css("display","none").delay(100).fadeIn(750);
           $("body").css("overflow", "hidden");
         });
         $('.black').on('click', function(e){
