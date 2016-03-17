@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
+  <style>  
   body{
     padding: 0px;
     margin: 0px;
@@ -113,6 +113,24 @@
     left: 15%;
     z-index: 20;
   }
+  .blackcontent div {
+    width: 50%;
+    height: 100%;
+    float: left;
+  }
+  .blackcontent div h1 {
+    text-align: center;
+    color: lightgreen;
+  }
+  .blackcontent div p {
+    margin: 5px;
+    margin-top: 10%;
+    text-align: left;
+    text-indent: 30px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+  }
   .body-wrap{
     position: relative;
   }
@@ -147,8 +165,6 @@
   
   
   </style>
-  <script src="js/prefixfree.min.js"></script>
-  <script src="js/modernizr.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
@@ -198,9 +214,15 @@
     </div>
     <div class="black" style="display: none;">
       <div class="blackcontent" style="display: block;">
-        <p style="color: white">this is a good test.</p>
-        <img src="thumb_dsc01763_1024.jpg" width="50%" 
-        height="50%">
+        <div>
+          <h1>this is a good test.</h1>
+          <img src="thumb_dsc01763_1024.jpg" width="100%" 
+          height="50%">
+        </div>
+        <div>
+          <p>"Never increase, beyond what is necessary, the number of entities required to explain anything." William of Ockham (1285-1349),Free Web Building Tutorials At W3Schools you will find all the Web-building tutorials you need.W3Schools.com - The largest Web Developers' Site on the internet!
+          </p>
+        </div>
       </div>
     </div>
     <div class="white" style="display: block">
