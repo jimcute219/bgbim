@@ -24,38 +24,47 @@
   [class*="col-3"] {
     width: 100%;
   }
-  [class*="col-9"] {
+  [class*="col-10"] {
     width: 0%;
   }
   @media only screen and (min-width: 0px) {
     /* For tablets: */
-    .col-m-1 {width: 8.33%;}
-    .col-m-2 {width: 16.66%;}
-    .col-m-3 {width: 25%;}
-    .col-m-4 {width: 33.33%;}
-    .col-m-5 {width: 41.66%;}
-    .col-m-6 {width: 50%;}
-    .col-m-7 {width: 58.33%;}
-    .col-m-8 {width: 66.66%;}
-    .col-m-9 {width: 75%;}
-    .col-m-10 {width: 83.33%;}
-    .col-m-11 {width: 91.66%;}
-    .col-m-12 {width: 100%;}
+    .col-m-1 {width: 6.25%;}
+    .col-m-2 {width: 12.5%;}
+    .col-m-3 {width: 18.75%;}
+    .col-m-4 {width: 25%;}
+    .col-m-5 {width: 31.25%;}
+    .col-m-6 {width: 37.5%;}
+    .col-m-7 {width: 43.75%;}
+    .col-m-8 {width: 50%;}
+    .col-m-9 {width: 56.25%;}
+    .col-m-10 {width: 62.5%;}
+    .col-m-11 {width: 68.75%;}
+    .col-m-12 {width: 75%;}
+    .col-m-13 {width: 81.25%;}
+    .col-m-14 {width: 87.5%;}
+    .col-m-15 {width: 93.75%;}
+    .col-m-16 {width: 100%;}
+
   }
   @media only screen and (min-width: 768px) {
     /* For desktop: */
-    .col-1 {width: 8.33%;}
-    .col-2 {width: 16.66%;}
-    .col-3 {width: 25%;}
-    .col-4 {width: 33.33%;}
-    .col-5 {width: 41.66%;}
-    .col-6 {width: 50%;}
-    .col-7 {width: 58.33%;}
-    .col-8 {width: 66.66%;}
-    .col-9 {width: 75%;}
-    .col-10 {width: 83.33%;}
-    .col-11 {width: 91.66%;}
-    .col-12 {width: 100%;}
+    .col-1 {width: 6.25%;}
+    .col-2 {width: 12.5%;}
+    .col-3 {width: 18.75%;}
+    .col-4 {width: 25%;}
+    .col-5 {width: 31.25%;}
+    .col-6 {width: 37.5%;}
+    .col-7 {width: 43.75%;}
+    .col-8 {width: 50%;}
+    .col-9 {width: 56.25%;}
+    .col-10 {width: 62.5%;}
+    .col-11 {width: 68.75%;}
+    .col-12 {width: 75%;}
+    .col-13 {width: 81.25%;}
+    .col-14 {width: 87.5%;}
+    .col-15 {width: 93.75%;}
+    .col-16 {width: 100%;}
   }
 
   .content {
@@ -162,6 +171,24 @@
     transform: rotate(1turn);
   }
 }
+  .side {
+    /*background-color: #33ccff;
+    background: -webkit-linear-gradient(#33ccff, white);
+    background: -o-linear-gradient(#33ccff, white);
+    background: -moz-linear-gradient(#33ccff, white);
+    background: linear-gradient(#33ccff, white);*/
+  }
+  .scrollsp {
+    position: fixed;
+    background-image: url('cloud.jpg');
+    background-size: cover;
+  }
+  .scrollsp2 {
+    position: fixed;
+    background-image: url('cloud2.jpg');
+    background-size: cover;
+  }
+
   
   
   </style>
@@ -169,7 +196,11 @@
   <script>
     $(document).ready(function(){
         $('svg').click(function(){
-          $(this).siblings(".wall").fadeToggle("slow");
+          if($(this).is(":animated")){
+          }
+          else {
+            $(this).siblings(".wall").fadeToggle("slow");
+          }
         });
         $('.blackbutton').click(function(){
           $('.black').show();
@@ -194,11 +225,24 @@
         }); 
     });
   </script>
+  <script>
+    $(window).bind('scroll',function(e){
+      parallaxScroll();
+    });
+
+    function parallaxScroll(){
+      var scrolled = $(window).scrollTop();
+      $('.scrollsp,.scrollsp2').css('top',(0-(scrolled*.25))+'px');
+    }
+  </script>
 </head>
 <body onload="changeheight()" onresize="changeheight()">
   <script>
       function changeheight() {
+        var h = $('.content img').css('height');
+        var h5 = parseFloat(h.replace("px", ""))*5;
         $('.sidebar').height($('.content img').css('height'));
+        $('.side').height(h5 + "px");
         $('.content').height($('.content img').css('height'));
         $('.wall').height($('.content img').css('height'));
         $('.wall').width($('.content img').css('width'));
@@ -206,6 +250,8 @@
           "right":"0%"});
         $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
         $('.white').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+        $('.scrollsp').width($('.col-3').css('width')).height($('.col-1').css('height'));
+        $('.scrollsp2').width($('.col-2').css('width')).height($('.col-2').css('height'));
     }
   </script>
   <div class="body-wrap">
@@ -229,7 +275,14 @@
       <div class='loader loader--circularSquare'></div>
     </div>
     <div class="row">
-      <div class="col-9 col-m-9">
+      <div class="col-1 col-m-1">
+        <div class="side">
+          <div class="scrollsp">
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-10 col-m-10">
         <div class="content">
         <button class="blackbutton">black</button>
           <img src="thumb_dsc01763_1024.jpg">
@@ -281,6 +334,13 @@
         <div class="sidebar">
         </div>
       </div>
+      <div class="col-2 col-m-2">
+        <div class="side">
+          <div class="scrollsp2" style="background-position:right top;">
+            
+          </div>
+        </div>
+    </div>
     </div>
     <div class="footer"  style="display: none;">
       <h1>Footer</h1>
