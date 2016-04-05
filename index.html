@@ -8,11 +8,6 @@
             margin: 0px;
             overflow: hidden;
         }
-        body.noscroll {
-            position: fixed; 
-            overflow-y: scroll;
-            width: 100%;
-        } 
         * {
             box-sizing: border-box;                      /*配合響應式*/                 
         }
@@ -164,20 +159,17 @@
             });
             $('.blackbutton').click(function(){                    //blackbutton叫出black
                 scrolly = window.pageYOffset;
-                $('.black').css('top', scrolly + "px").show(); 
+                $('.black').css("top",scrolly + "px").show(); 
                 $('.blackcontent').children().css("display","none").delay(100).fadeIn(750);
-                $('body').css('top', -scrolly + 'px').addClass('noscroll');
-                $('.outside_imagediv,.outside_imagediv2').css({'top':(0-(scrolly*.25))+'px'});
-                changeheight(); 
+                changeheight();
+                $("body").disableScroll(); 
             });
             $('.black').on('click', function(e){                   //black的click效果(消失)
                 var target = $(e.target);
                 if (target.attr('class') == 'black') {
                     $(this).hide();
-                    $('body').removeClass('noscroll');
-                    $('.outside_imagediv,.outside_imagediv2').css({'position':'fixed' ,'top':(0-(scrolly*.25))+'px'});
-                    window.scrollTo(0,scrolly);
                     changeheight();
+                    $("body").enableScroll();
                 }
             });
             $(window).load(function() {                            //讓loading_page load完之後消失
@@ -194,6 +186,16 @@
                 scrolled = $(window).scrollTop();
                 $('.outside_imagediv,.outside_imagediv2').css('top',(0-(scrolled*.25))+'px');
             } 
+            $.fn.disableScroll = function() {
+                window.oldScrollPos = $(window).scrollTop();            
+                $(window).on('scroll.scrolldisabler',function ( event ) {
+                   $(window).scrollTop( window.oldScrollPos );
+                   event.preventDefault();
+                });
+            };
+            $.fn.enableScroll = function() {
+                $(window).off('scroll.scrolldisabler');
+            };
         });
     </script>
 </head>
