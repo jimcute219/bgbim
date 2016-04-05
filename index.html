@@ -2,12 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>  
-        body{
+    <style> 
+        body {
             padding: 0px;
             margin: 0px;
             overflow: hidden;
         }
+        body.noscroll {
+            position: fixed; 
+            overflow-y: scroll;
+            width: 100%;
+        } 
         * {
             box-sizing: border-box;                      /*配合響應式*/                 
         }
@@ -62,23 +67,16 @@
             height:100px;
         }
         svg {                                         
-            width: 3%;
-            height: 60%;
             position: absolute;
-            top: 40%;
-            right: 0%;
-        }
-        svg rect {
-            width: 80%;
-            height: 90%;
+            z-index: 1;
         }
         .black {                                       /*彈出式div背景*/
             background-color: rgba(0,0,0,0.5);
-            position: fixed;
-            z-index: 2;
+            position: absolute;
+            z-index: 3;
         }
         .blackbutton {
-            z-index: 1;
+            z-index: 2;
         }
         .blackcontent{                                 /*彈出式wrap div*/
             background-color: rgba(0,0,0,0.8);
@@ -87,7 +85,7 @@
             position: absolute;
             top: 10%;
             left: 15%;
-            z-index: 3;
+            z-index: 4;
         }
         .blackcontent div {                            /*彈出式div內容 分左右半邊*/
             width: 50%;
@@ -110,7 +108,7 @@
         .loading_page {                                 /*loading頁面*/
             background: gainsboro;
             position: fixed;
-            z-index: 4;
+            z-index: 5;
             width: 100%;
             height: 100%;
         }
@@ -151,29 +149,34 @@
             position: fixed;
             background-image: url('cloud2.jpg');
             background-size: cover;
-        }  
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
     <script>
         $(document).ready(function(){
-            $('svg').click(function(){
+            var scrolly,scrolled;
+            $('.door').click(function(){
                 if($(this).is(":animated")){                       //svg讓牆消失
                 }
                 else {
-                    $(this).siblings(".wall").fadeToggle("slow");
+                    $(this).parent().siblings(".wall").fadeToggle("slow");
                 }
             });
             $('.blackbutton').click(function(){                    //blackbutton叫出black
-                $('.black').show(); 
+                scrolly = window.pageYOffset;
+                $('.black').css('top', scrolly + "px").show(); 
                 $('.blackcontent').children().css("display","none").delay(100).fadeIn(750);
-                $("body").css("overflow", "hidden");
+                $('body').css('top', -scrolly + 'px').addClass('noscroll');
+                $('.outside_imagediv,.outside_imagediv2').css({'top':(0-(scrolly*.25))+'px'});
                 changeheight(); 
             });
             $('.black').on('click', function(e){                   //black的click效果(消失)
                 var target = $(e.target);
                 if (target.attr('class') == 'black') {
                     $(this).hide();
-                    $("body").css("overflow", "scroll");
+                    $('body').removeClass('noscroll');
+                    $('.outside_imagediv,.outside_imagediv2').css({'position':'fixed' ,'top':(0-(scrolly*.25))+'px'});
+                    window.scrollTo(0,scrolly);
                     changeheight();
                 }
             });
@@ -188,7 +191,7 @@
                 parallaxScroll();
             }); 
             function parallaxScroll(){
-                var scrolled = $(window).scrollTop();
+                scrolled = $(window).scrollTop();
                 $('.outside_imagediv,.outside_imagediv2').css('top',(0-(scrolled*.25))+'px');
             } 
         });
@@ -197,17 +200,20 @@
 <body onload="changeheight()" onresize="changeheight()">
     <script>
         function changeheight() {
-            var h = $('.floor img').css('height');
-            var h5 = parseFloat(h.replace("px", ""))*5;
+            var w = parseFloat($('.floor img').css('width').replace("px", ""));
+            var h = parseFloat($('.floor img').css('height').replace("px", ""));
+            var h5 = h*5;
             $('.sidebar').height(h5 + "px");
             $('.outside').height(h5 + "px");
             $('.floor').height($('.floor img').css('height'));
             $('.wall').height($('.floor img').css('height')).width($('.floor img').css('width'));
-            $('svg').css({"width":"3%","height":"60%","top":"40%","right":"0%"});
+            $('svg').css({"width":"100%","height":"100%","top":"0%","right":"0%"});
             $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
             $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
             $('.outside_imagediv').width($('.col-1').css('width')).height($('.outside').css('height'));
             $('.outside_imagediv2').width($('.col-2').css('width')).height($('.outside').css('height'));
+            $('.door').attr('width',w/30).attr('height',h/2).attr('y',h/2).attr('x',w-$('.door').attr('width'));
+
         }
     </script>
     <div class="body-wrap">
@@ -240,37 +246,40 @@
                     <button class="blackbutton">black</button>
                     <img src="thumb_dsc01763_1024.jpg">
                     <img src="wall.jpg" class="wall">
-                    <svg width="400" height="180" z-index="30">
-                        <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
+                    <svg>
+                        <rect class="door" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
                     </svg>
                 </div>
                 <div class="floor">
                     <button class="blackbutton">black</button>
                     <img src="thumb_227-301-62_1024.jpg">
                     <img src="wall.jpg" class="wall">
-                    <svg width="400" height="180" z-index="30">
-                        <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
+                    <svg>
+                        <rect class="door" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
                     </svg>
                 </div>
                 <div class="floor">
+                    <button class="blackbutton">black</button>
                     <img src="thumb_dsc01954_1024.jpg">
                     <img src="wall.jpg" class="wall">
-                    <svg width="400" height="180" z-index="30">
-                        <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
+                    <svg>
+                        <rect class="door" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
                     </svg>
                 </div>
                 <div class="floor">
+                    <button class="blackbutton">black</button>
                     <img src="1-15012621011V53.jpg">
                     <img src="wall.jpg" class="wall">
-                    <svg width="400" height="180" z-index="30">
-                        <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
+                    <svg>
+                        <rect class="door" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
                     </svg> 
                 </div>
                 <div class="floor">
+                    <button class="blackbutton">black</button>
                     <img src="Green-background.jpg">
                     <img src="wall.jpg" class="wall">
-                    <svg width="400" height="180" z-index="30">
-                        <rect x="3" y="0" rx="20" ry="20" style="fill:red;stroke:black;stroke-width:5;opacity:0.5">
+                    <svg>
+                        <rect class="door" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
                     </svg>
                 </div>
             </div>
