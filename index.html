@@ -145,16 +145,27 @@
             background-image: url('cloud2.jpg');
             background-size: cover;
         }
+        .elevator {
+            position: fixed;
+            background-color: gray;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
     <script>
         $(document).ready(function(){
             var scrolly,scrolled;
+            var h = parseFloat($('.floor').css('height').replace("px", ""));
             $('.door').click(function(){
                 if($(this).is(":animated")){                       //svg讓牆消失
                 }
                 else {
                     $(this).parent().siblings(".wall").fadeToggle("slow");
+                    for (var i = 1;i <5; i++) {
+                        if (this.id == ("door"+ i)) {
+                             $("html,body").animate({scrollTop: (i-1)*h +'px'}, 600);
+                             break;
+                        }
+                    }
                 }
             });
             $('.blackbutton').click(function(){                    //blackbutton叫出black
@@ -215,7 +226,7 @@
             $('.outside_imagediv').width($('.col-1').css('width')).height($('.outside').css('height'));
             $('.outside_imagediv2').width($('.col-2').css('width')).height($('.outside').css('height'));
             $('.door').attr('width',w/30).attr('height',h/2).attr('y',h/2).attr('x',w-$('.door').attr('width'));
-
+            $('.elevator').css({"width":"100%","height":h*0.7+"px","top":h*0.3+"px"});
         }
     </script>
     <div class="body-wrap">
@@ -249,7 +260,7 @@
                     <img src="thumb_dsc01763_1024.jpg">
                     <img src="wall.jpg" class="wall">
                     <svg>
-                        <rect class="door" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
+                        <rect class="door" id="door1" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
                     </svg>
                 </div>
                 <div class="floor">
@@ -257,7 +268,7 @@
                     <img src="thumb_227-301-62_1024.jpg">
                     <img src="wall.jpg" class="wall">
                     <svg>
-                        <rect class="door" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
+                        <rect class="door" id="door2" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
                     </svg>
                 </div>
                 <div class="floor">
@@ -265,7 +276,7 @@
                     <img src="thumb_dsc01954_1024.jpg">
                     <img src="wall.jpg" class="wall">
                     <svg>
-                        <rect class="door" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
+                        <rect class="door" id="door3" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
                     </svg>
                 </div>
                 <div class="floor">
@@ -273,7 +284,7 @@
                     <img src="1-15012621011V53.jpg">
                     <img src="wall.jpg" class="wall">
                     <svg>
-                        <rect class="door" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
+                        <rect class="door" id="door4" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
                     </svg> 
                 </div>
                 <div class="floor">
@@ -281,12 +292,14 @@
                     <img src="Green-background.jpg">
                     <img src="wall.jpg" class="wall">
                     <svg>
-                        <rect class="door" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
+                        <rect class="door" id="door5" x="50" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9">
                     </svg>
                 </div>
             </div>
             <div class="col-3 col-m-3">
                 <div class="sidebar">
+                </div>
+                <div class="elevator">
                 </div>
             </div>
             <div class="col-2 col-m-2">
