@@ -9,7 +9,7 @@
             overflow: hidden;
         }
         * {
-            box-sizing: border-box;                      /*配合響應式*/                 
+            box-sizing: border-box;                     /*配合響應式*/                 
         }
         .row:after {
             content: "";
@@ -25,12 +25,18 @@
             .col-m-2 {width: 12.5%;}
             .col-m-3 {width: 18.75%;}
             .col-m-10 {width: 62.5%;}
+            .col-m-13 {width: 81.25%;}
+            .col-m-in-3 {width: 23%;}
+            .col-m-in-10 {width: 77%;}
         }
         @media only screen and (min-width: 748px) {
             .col-1 {width: 6.25%;}                      /*16分之幾*/
             .col-2 {width: 12.5%;}
             .col-3 {width: 18.75%;}
             .col-10 {width: 62.5%;}
+            .col-13 {width: 81.25%;}
+            .col-in-3 {width: 23%;}
+            .col-in-10 {width: 77%;}
         }
         .body-wrap{
             position: relative;
@@ -41,6 +47,15 @@
             margin: 0px;
         }
         .floor img{
+            width: 100%;
+            height: auto;
+        }
+        .roof {
+            position: relative;                         /*樓層div*/
+            padding: 0px;
+            margin: 0px;
+        }
+        .roof img{
             width: 100%;
             height: auto;
         }
@@ -56,6 +71,7 @@
             position: absolute;
             top:0px;
             left:0px;
+            z-index: 3;
         }
         .header {                                      /*已經隱藏的header*/
             width:100%;
@@ -63,12 +79,12 @@
         }
         svg {                                         
             position: absolute;
-            z-index: 1;
+            z-index: 4;
         }
         .black {                                       /*彈出式div背景*/
             background-color: rgba(0,0,0,0.5);
             position: absolute;
-            z-index: 3;
+            z-index: 9;
         }
         .blackbutton {
             z-index: 2;
@@ -80,7 +96,7 @@
             position: absolute;
             top: 10%;
             left: 15%;
-            z-index: 4;
+            z-index: 10;
         }
         .blackcontent div {                            /*彈出式div內容 分左右半邊*/
             width: 50%;
@@ -103,7 +119,7 @@
         .loading_page {                                 /*loading頁面*/
             background: gainsboro;
             position: fixed;
-            z-index: 5;
+            z-index: 20;
             width: 100%;
             height: 100%;
         }
@@ -149,26 +165,57 @@
             position: fixed;
             background-color: gray;
         }
+        .SD_intro {
+            position: absolute;
+            left: 64%;
+            top: 3.2%;
+            width: 30%;
+            z-index: 2;
+        }
+        .SD_tvwebpage {
+            position: absolute;
+            left: 2.5%;
+            top: 3.2%;
+            width: 30%;
+            z-index: 2;
+        }
+        .SD_table {
+            position: absolute;
+            left: 2%;
+            top: 56%;
+            width: 48.4%;
+            z-index: 2;
+        }
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
     <script>
         $(document).ready(function(){
             var scrolly,scrolled;
-            var h;
+            var roof_height = parseFloat($('.roof img').css('height').replace("px", ""));
+            var h = parseFloat($('.floor img').css('height').replace("px", ""));
             $('.door').click(function(){
+                h = parseFloat($('.floor img').css('height').replace("px", ""));
+                roof_height = parseFloat($('.roof img').css('height').replace("px", "")); 
                 if($(this).is(":animated")){                       //svg讓牆消失
                 }
                 else {
-                    $(this).parent().siblings(".wall").fadeToggle("slow");
+                    if ($(this).parent().siblings(".wall").is(':visible')) {
+                        $(".wall").fadeIn("slow");
+                        $(this).parent().siblings(".wall").fadeToggle("slow");   
+                    }
+                    else {
+                        $(this).parent().siblings(".wall").fadeToggle("slow");
+                    }
                     for (var i = 1;i <5; i++) {
                         if (this.id == ("door"+ i)) {
-                             $("html,body").animate({scrollTop: (i-1)*h +'px'}, 600);
+                             $("html,body").animate({scrollTop: ((i-1)*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 600);
                              break;
                         }
                     }
                 }
             });
-            $('.blackbutton').click(function(){                    //blackbutton叫出black
+            $('.SD_intro').bind('click',function(){                    //blackbutton叫出black
                 scrolly = window.pageYOffset;
                 $('.black').css("top",scrolly + "px").show(); 
                 $('.blackcontent').children().css("display","none").delay(100).fadeIn(750);
@@ -188,8 +235,7 @@
                 $("body").delay(3000).queue(function () { 
                     $('body').css("overflow", "scroll");
                     changeheight();
-                    h = parseFloat($('.floor img').css('height').replace("px", ""));
-                    console.log(h); 
+                    h = parseFloat($('.floor img').css('height').replace("px", "")); 
                 });
             }); 
             $(window).bind('scroll',function(e){                   //左右兩側滾動視差
@@ -215,20 +261,27 @@
 <body onload="changeheight()" onresize="changeheight()">
     <script>
         function changeheight() {
+            var roof_height = parseFloat($('.roof img').css('height').replace("px", ""));
             var w = parseFloat($('.floor img').css('width').replace("px", ""));
             var h = parseFloat($('.floor img').css('height').replace("px", ""));
             var h5 = h*5;
+            var elevator_top = (window.innerHeight - h)/2 + h*0.3 ;
+            //if (elevator_top < roof_height) elevator_top = roof_height;
             $('.sidebar').height(h5 + "px");
             $('.outside').height(h5 + "px");
             $('.floor').height($('.floor img').css('height'));
+            $('.roof').height($('.roof img').css('height'));
             $('.wall').height($('.floor img').css('height')).width($('.floor img').css('width'));
-            $('svg').css({"width":"100%","height":"100%","top":"0%","right":"0%"});
+            $('svg').css({"width":"2%","height":"80%","top":"20%","right":"0%"});
             $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
             $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
             $('.outside_imagediv').width($('.col-1').css('width')).height($('.outside').css('height'));
             $('.outside_imagediv2').width($('.col-2').css('width')).height($('.outside').css('height'));
-            $('.door').attr('width',w/50).attr('height',h*4/5).attr('y',h/5).attr('x',w-$('.door').attr('width'));
-            $('.elevator').css({"width":"100%","height":h*0.7+"px","top":h*0.3+"px"});
+            $('.door').attr('width',w/50).attr('height',h*4/5).attr('y',0).attr('x',0);
+            $('.elevator').css({"width":"100%","height":h*0.7+"px","top":elevator_top +"px"});
+            $('.SD_intro').css({"width":"30%"});
+            $('.SD_tvwebpage').css({"width":"30%"});
+            $('.SD_table').css({"width":"48.4%"});
         }
     </script>
     <div class="body-wrap">
@@ -241,7 +294,7 @@
         <div class="black" style="display: none;">
             <div class="blackcontent" style="display: block;">
                 <div>
-                    <h1>this is a good test.</h1>
+                    <h1>Software Development</h1>
                     <img src="thumb_dsc01763_1024.jpg" width="100%" height="50%">
                 </div>
                 <div>
@@ -256,52 +309,55 @@
                     </div>
                 </div>
             </div>
-            <div class="col-10 col-m-10">
-                <div class="floor">
-                    <button class="blackbutton">black</button>
-                    <img src="inWall_SD.jpg">
-                    <img src="wall.jpg" class="wall">
-                    <svg>
-                        <rect class="door" id="door1" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                    </svg>
+            <div class="col-13 col-m-13">
+                <div class="roof">
+                    <img src="roof.png">
                 </div>
-                <div class="floor">
-                    <button class="blackbutton">black</button>
-                    <img src="inWall_ATT.jpg">
-                    <img src="wall.jpg" class="wall">
-                    <svg>
-                        <rect class="door" id="door2" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                    </svg>
+                <div class="col-in-10 col-m-in-10">
+                    <div class="floor">
+                        <img src="inWall_SD.jpg">
+                        <img src="wall.jpg" class="wall">
+                        <svg>
+                            <rect class="door" id="door1" x="50" y="20" width="150" height="150" style="fill:#cc6600">
+                        </svg>
+                        <img src="SD_intro.png" class="SD_intro">
+                        <img src="SD_tvwebpage.png" class="SD_tvwebpage">
+                        <img src="SD_table.png" class="SD_table">
+                    </div>
+                    <div class="floor">
+                        <img src="inWall_ATT.jpg">
+                        <img src="wall.jpg" class="wall">
+                        <svg>
+                            <rect class="door" id="door2" x="50" y="20" width="150" height="150" style="fill:#cc6600">
+                        </svg>
+                    </div>
+                    <div class="floor">
+                        <img src="inWall_SD.jpg">
+                        <img src="wall.jpg" class="wall">
+                        <svg>
+                            <rect class="door" id="door3" x="50" y="20" width="150" height="150" style="fill:#cc6600">
+                        </svg>
+                    </div>
+                    <div class="floor">
+                        <img src="inWall_ATT.jpg">
+                        <img src="wall.jpg" class="wall">
+                        <svg>
+                            <rect class="door" id="door4" x="50" y="20" width="150" height="150" style="fill:#cc6600">
+                        </svg> 
+                    </div>
+                    <div class="floor">
+                        <img src="inWall_SD.jpg">
+                        <img src="wall.jpg" class="wall">
+                        <svg>
+                            <rect class="door" id="door5" x="50" y="20" width="150" height="150" style="fill:#cc6600">
+                        </svg>
+                    </div>
                 </div>
-                <div class="floor">
-                    <button class="blackbutton">black</button>
-                    <img src="inWall_SD.jpg">
-                    <img src="wall.jpg" class="wall">
-                    <svg>
-                        <rect class="door" id="door3" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                    </svg>
-                </div>
-                <div class="floor">
-                    <button class="blackbutton">black</button>
-                    <img src="inWall_ATT.jpg">
-                    <img src="wall.jpg" class="wall">
-                    <svg>
-                        <rect class="door" id="door4" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                    </svg> 
-                </div>
-                <div class="floor">
-                    <button class="blackbutton">black</button>
-                    <img src="inWall_SD.jpg">
-                    <img src="wall.jpg" class="wall">
-                    <svg>
-                        <rect class="door" id="door5" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                    </svg>
-                </div>
-            </div>
-            <div class="col-3 col-m-3">
-                <div class="sidebar">
-                </div>
-                <div class="elevator">
+                <div class="col-in-3 col-m-in-3">
+                    <div class="sidebar">
+                    </div>
+                    <div class="elevator">
+                    </div>
                 </div>
             </div>
             <div class="col-2 col-m-2">
