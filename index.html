@@ -87,6 +87,11 @@
             position: absolute;
             z-index: 9;
         }
+        .ATT_black {                                       /*彈出式div背景*/
+            background-color: rgba(0,0,0,0.5);
+            position: absolute;
+            z-index: 9;
+        }
         .blackbutton {
             z-index: 2;
         }
@@ -109,6 +114,31 @@
             color: lightgreen;
         }
         .blackcontent div p {
+            margin: 5px;
+            margin-top: 10%;
+            text-align: left;
+            text-indent: 30px;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 25px;
+        }
+        .ATT_blackcontent div {                            /*彈出式div內容 分左右半邊*/
+            width: 100%;
+            height: 100%;
+            float: left;
+        }
+        .ATT_blackcontent {                                
+            background-color: rgba(0,0,0,0.8);
+            width: 81.25%;
+            height: 100%;
+            position: absolute;
+            top: 0%;
+            left: 6.25%;
+            z-index: 10;
+            overflow-x: hidden;
+            overflow-y: scroll;  
+        }
+        .ATT_blackcontent p {
             margin: 5px;
             margin-top: 10%;
             text-align: left;
@@ -164,7 +194,6 @@
         }
         .elevator {
             position: fixed;
-            background-color: gray;
         }
         .SD_intro {
             position: absolute;
@@ -241,7 +270,20 @@
             top: 96.9%;
             left: 0%;
         }
-
+        .elevator .man {
+            position: fixed;
+            z-index: 10;
+            width: 18.75%;
+            height: auto;
+            left: 70%;
+        }
+        .elevator .vis_ele {
+            position: fixed;
+            z-index: 9;
+            width: 18.75%;
+            height: auto;
+            left: 68.75%;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
     <script>
@@ -277,9 +319,24 @@
                 changeheight();
                 $("body").disableScroll(); 
             });
+            $('.SD_tvwebpage').bind('click',function(){                    //blackbutton叫出black
+                scrolly = window.pageYOffset;
+                $('.ATT_black').css("top",scrolly + "px").show(); 
+                $('.ATT_blackcontent').children().css("display","none").delay(100).fadeIn(750);
+                changeheight();
+                $("body").disableScroll(); 
+            });
             $('.black').on('click', function(e){                   //black的click效果(消失)
                 var target = $(e.target);
                 if (target.attr('class') == 'black') {
+                    $(this).hide();
+                    changeheight();
+                    $("body").enableScroll();
+                }
+            });
+            $('.ATT_black').on('click', function(e){                   //black的click效果(消失)
+                var target = $(e.target);
+                if (target.attr('class') == 'ATT_black') {
                     $(this).hide();
                     changeheight();
                     $("body").enableScroll();
@@ -329,11 +386,14 @@
             $('.wall').height($('.floor img').css('height')).width($('.floor img').css('width'));
             $('.SD_door').css({"width":"2%","height":"70%","top":"30%","right":"0%"});
             $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+            $('.ATT_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
             $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
             $('.outside_imagediv').width($('.col-1').css('width')).height($('.outside').css('height'));
             $('.outside_imagediv2').width($('.col-2').css('width')).height($('.outside').css('height'));
             $('.door').attr('width',w/50).attr('height',h*7/10).attr('y',0).attr('x',0);
             $('.elevator').css({"width":"100%","height":h*0.7+"px","top":elevator_top +"px"});
+            $('.elevator .man').css({"width":"18.75%","height":"auto","top":elevator_top + h*0.7*0.25 +"px"});
+            $('.elevator .vis_ele').css({"width":"18.75%","height":"auto","top":elevator_top +"px"});
             $('.SD_intro').css({"width":"30%"});
             $('.SD_tvwebpage').css({"width":"27%"});
             $('.SD_tvroofdata').css({"width":"30.2%"});
@@ -360,7 +420,29 @@
                     <img src="thumb_dsc01763_1024.jpg" width="100%" height="50%">
                 </div>
                 <div>
-                    <p>"Never increase, beyond what is necessary, the number of entities required to explain anything." William of Ockham (1285-1349),Free Web Building Tutorials At W3Schools you will find all the Web-building tutorials you need.W3Schools.com - The largest Web Developers' Site on the internet!</p>
+                    <p>"Never increase, beyond what is necessary, the number of entities required to explain anything." William of Ockham (1285-1349),Free Web Building Tutorials At W3Schools you will find all the Web-building tutorials you need.W3Schools.com - The largest Web Developers' Site on the internet!
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="ATT_black" style="display: none;">
+            <div class="ATT_blackcontent" style="display: block;">
+                <div>
+                    <p>樹德：<br>
+                    在此專案中，我們學生團隊在樹德夢工廠的設計階段中，透過使用分析軟體進行模擬果，並依據結果來提供設計上的建議；反之，也可以將目前的設計，透過軟體來分析其優劣，並從中改善當前設計。在這項模擬中，我們使用為軟體 Ecotect 來進行分析，並建立樹德夢工廠的簡易模型，且著墨於辦公大樓的部分。於計畫開始時，大樓大部份的開窗尚未決定，所以我們透過思考方案，使用Ecotect建出了三種辦公室的開窗模型： 1.落地窗 2.大排開窗 3.簡單開窗，並透過軟體本身的日照、陰影模擬功能，了解各種開窗方式、位置受日照的影響，以及室內的照度值，最後探討各方案須補足的室內照明，以及辦公室各個主要區域較適合的開窗方式。<br>
+                    </p>
+                    <p>陰影分析：<br>
+                    透過移動太陽軌跡的動畫，了解目標建物在特定時間點的受遮蔽情形。<br>
+                    </p>
+                    <img src="att_img1.png" width="60%" height="auto">
+                    <p>視內開窗照度分析：<br>
+                    用三種不同的開窗方式，來了解室內中需補足的照度，並結合三者優缺點想出新方案。<br>
+                    </p>
+                    <img src="att_img2.png" width="75%" height="auto">
+                    <p>德田：<br>
+                    這項計劃的分析對象是資工系的德田館，透過軟體eQUEST進行建模與分析，目的是探討空調負載比重大的德田館，可否藉由裝設綠屋頂，來達到有利的節能功效。過程中設定位置、氣候、材質、機電、空調等參數，並假設綠屋頂的相關數值來模擬其對建築物的影響，如耗能、冷荷載等等；將各種配置的模擬結果以及目前的實際值比較，從中選出最適方案。另外也使用流體模擬的軟體如Simulation CFD，去模擬周圍的風場，並探討開窗的影響。<br>
+                    </p>
+                    <img src="att_img3.png" width="65%" height="auto">
                 </div>
             </div>
         </div>
@@ -437,6 +519,8 @@
                     <div class="sidebar">
                     </div>
                     <div class="elevator">
+                        <img src="elevator.png" class="vis_ele">
+                        <img src="man-dancing.png" class="man">
                     </div>
                 </div>
             </div>
