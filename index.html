@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-    <style> 
+    <style>
+        @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
         body {
             padding: 0px;
             margin: 0px;
@@ -57,6 +58,17 @@
             margin: 0px;
         }
         .roof img{
+            width: 100%;
+            height: auto;
+            position: absolute;
+            top: -50%;
+        }
+        .root {
+            position: relative;                         /*樓層div*/
+            padding: 0px;
+            margin: 0px;
+        }
+        .root img{
             width: 100%;
             height: auto;
         }
@@ -125,7 +137,7 @@
         .ATT_blackcontent div {                            /*彈出式div內容 分左右半邊*/
             width: 100%;
             height: 100%;
-            float: left;
+            position: absolute;
         }
         .ATT_blackcontent {                                
             background-color: rgba(0,0,0,0.8);
@@ -140,12 +152,31 @@
         }
         .ATT_blackcontent p {
             margin: 5px;
-            margin-top: 10%;
+            text-align: left;
+            margin-buttom: 2%;
+            text-indent: 30px;
+            color: #c3d825;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 25px;
+        }
+        .ATT_blackcontent h1 {
+            margin: 5px;
+            margin-buttom: 8%;
+            text-align: center;
+            text-indent: 30px;
+            color: #c3d825;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 50px;
+        }
+        .ATT_blackcontent h5 {
+            margin: 5px;
+            margin-top: 3%;
+            margin-top: 3%;
             text-align: left;
             text-indent: 30px;
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 25px;
+            color: #c3d825;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 35px;
         }
         .loading_page {                                 /*loading頁面*/
             background: gainsboro;
@@ -284,6 +315,15 @@
             height: auto;
             left: 68.75%;
         }
+        #att_content1{
+            top: 0%;
+            left: 0%;
+        }
+        #att_content2{
+            top: 0%;
+            left: 100%;
+        }
+        
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
     <script>
@@ -304,7 +344,7 @@
                     else {
                         $(this).parent().siblings(".wall").fadeToggle("slow");
                     }
-                    for (var i = 1;i <5; i++) {
+                    for (var i = 1;i <=5; i++) {
                         if (this.id == ("door"+ i)) {
                              $("html,body").animate({scrollTop: ((i-1)*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 600);
                              break;
@@ -342,6 +382,17 @@
                     $("body").enableScroll();
                 }
             });
+            $('#arrow_right').bind('click',function(){                  //black的click效果(消失)
+                $("#att_content1").animate({left: '-100%'});
+                $(".ATT_blackcontent").scrollTop(0);
+                $("#att_content2").animate({left: '0%',scrollTop: 0 + "px"});
+                
+            });
+            $('#arrow_left').bind('click',function(){                  //black的click效果(消失)
+                $("#att_content2").animate({left: '100%'});
+                $(".ATT_blackcontent").scrollTop(0);
+                $("#att_content1").animate({left: '0%'});
+            });
             $(window).load(function() {                            //讓loading_page load完之後消失
                 $(".loading_page").delay(3000).fadeOut(1000);
                 $("body").delay(3000).queue(function () { 
@@ -349,6 +400,7 @@
                     changeheight();
                     h = parseFloat($('.floor img').css('height').replace("px", "")); 
                 });
+                $("html,body").delay(4000).animate({scrollTop: (4*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 800);
             }); 
             $(window).bind('scroll',function(e){                   //左右兩側滾動視差
                 parallaxScroll();
@@ -378,11 +430,13 @@
             var h = parseFloat($('.floor img').css('height').replace("px", ""));
             var h5 = h*5;
             var elevator_top = (window.innerHeight - h)/2 + h*0.3 ;
+            var root_height = window.innerHeight - 20 - (elevator_top + h*0.7);
             //if (elevator_top < roof_height) elevator_top = roof_height;
             $('.sidebar').height(h5 + "px");
             $('.outside').height(h5 + "px");
             $('.floor').height($('.floor img').css('height'));
             $('.roof').height($('.roof img').css('height'));
+            $('.root img').height(root_height + "px");
             $('.wall').height($('.floor img').css('height')).width($('.floor img').css('width'));
             $('.SD_door').css({"width":"2%","height":"70%","top":"30%","right":"0%"});
             $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
@@ -398,12 +452,17 @@
             $('.SD_tvwebpage').css({"width":"27%"});
             $('.SD_tvroofdata').css({"width":"30.2%"});
             $('.SD_text').css({"left":"64%","top":"28%"});
-            $('.SD_text_inner1').attr({"x":"50%","y":"40%"});
-            $('.SD_text_inner2').attr({"x":"50%","y":"70%"});
+            $('.SD_text_inner1').attr({"x":"50%","y":"40%","font-size": innerWidth*0.02 + "px"});
+            $('.SD_text_inner2').attr({"x":"50%","y":"70%","font-size": innerWidth*0.026 + "px"});
+            $('.SD_text_inner1').css({"font-size": innerWidth*0.02 + "px"});
+            $('.SD_text_inner2').css({"font-size": innerWidth*0.026 + "px"});
             $('.wall_left_rect').attr('width',w/50).attr('height',h).attr('y',0).attr('x',0);
             $('.wall_right_rect').attr('width',w/50).attr('height',h).attr('y',0).attr('x',0);
             $('.wall_top_rect').attr('width',w).attr('height', h/1300*40).attr('y',0).attr('x',0);
             $('.wall_button_rect').attr('width',w).attr('height', h/1300*40).attr('y',0).attr('x',0);
+            $('.ATT_blackcontent p').css({"font-size": innerWidth*0.016 + "px"});
+            $('.ATT_blackcontent h1').css({"font-size": innerWidth*0.033 + "px"});
+            $('.ATT_blackcontent h5').css({"font-size": innerWidth*0.023 + "px"});
         }
     </script>
     <div class="body-wrap">
@@ -427,22 +486,38 @@
         </div>
         <div class="ATT_black" style="display: none;">
             <div class="ATT_blackcontent" style="display: block;">
-                <div>
-                    <p>樹德：<br>
-                    在此專案中，我們學生團隊在樹德夢工廠的設計階段中，透過使用分析軟體進行模擬果，並依據結果來提供設計上的建議；反之，也可以將目前的設計，透過軟體來分析其優劣，並從中改善當前設計。在這項模擬中，我們使用為軟體 Ecotect 來進行分析，並建立樹德夢工廠的簡易模型，且著墨於辦公大樓的部分。於計畫開始時，大樓大部份的開窗尚未決定，所以我們透過思考方案，使用Ecotect建出了三種辦公室的開窗模型： 1.落地窗 2.大排開窗 3.簡單開窗，並透過軟體本身的日照、陰影模擬功能，了解各種開窗方式、位置受日照的影響，以及室內的照度值，最後探討各方案須補足的室內照明，以及辦公室各個主要區域較適合的開窗方式。<br>
+                <div style="padding: 70px" id="att_content1">
+                    <h1>專案介紹－樹德夢工廠<br></h1>
+                    <p>
+                    &nbsp;&nbsp;在此專案中，我們學生團隊在樹德夢工廠的設計階段中，透過使用分析軟體進行模擬果，並依據結果來提供設計上的建議；反之，也可以將目前的設計，透過軟體來分析其優劣，並從中改善當前設計。在這項模擬中，我們使用為軟體 Ecotect 來進行分析，並建立樹德夢工廠的簡易模型，且著墨於辦公大樓的部分。於計畫開始時，大樓大部份的開窗尚未決定，所以我們透過思考方案，使用Ecotect建出了三種辦公室的開窗模型： 1.落地窗 2.大排開窗 3.簡單開窗，並透過軟體本身的日照、陰影模擬功能，了解各種開窗方式、位置受日照的影響，以及室內的照度值，最後探討各方案須補足的室內照明，以及辦公室各個主要區域較適合的開窗方式。
                     </p>
-                    <p>陰影分析：<br>
-                    透過移動太陽軌跡的動畫，了解目標建物在特定時間點的受遮蔽情形。<br>
+                    <h5>陰影分析：</h5>
+                    <p>透過移動太陽軌跡的動畫，了解目標建物在特定時間點的受遮蔽情形。
                     </p>
                     <img src="att_img1.png" width="60%" height="auto">
-                    <p>視內開窗照度分析：<br>
-                    用三種不同的開窗方式，來了解室內中需補足的照度，並結合三者優缺點想出新方案。<br>
+                    <h5>視內開窗照度分析：</h5>
+                    <p>用三種不同的開窗方式，來了解室內中需補足的照度，並結合三者優缺點想出新方案。
                     </p>
                     <img src="att_img2.png" width="75%" height="auto">
-                    <p>德田：<br>
-                    這項計劃的分析對象是資工系的德田館，透過軟體eQUEST進行建模與分析，目的是探討空調負載比重大的德田館，可否藉由裝設綠屋頂，來達到有利的節能功效。過程中設定位置、氣候、材質、機電、空調等參數，並假設綠屋頂的相關數值來模擬其對建築物的影響，如耗能、冷荷載等等；將各種配置的模擬結果以及目前的實際值比較，從中選出最適方案。另外也使用流體模擬的軟體如Simulation CFD，去模擬周圍的風場，並探討開窗的影響。<br>
+                    <div style="padding: 0px;height: 15%">
+                    <img src="arrow_right.png" width="6%" height="auto" id="arrow_right" style="position:absolute; right:10%">
+                    </div>
+                </div>
+                <div style="padding: 70px" id="att_content2">
+                    <h1>專案介紹－台大資工系德田館<br></h1>
+                    <p>
+                    &nbsp;&nbsp;這項計劃的分析對象是資工系的德田館，透過軟體eQUEST進行建模與分析，目的是探討空調負載比重大的德田館，可否藉由裝設綠屋頂，來達到有利的節能功效。過程中設定位置、氣候、材質、機電、空調等參數，並假設綠屋頂的相關數值來模擬其對建築物的影響，如耗能、冷荷載等等；將各種配置的模擬結果以及目前的實際值比較，從中選出最適方案。另外也使用流體模擬的軟體如Simulation CFD，去模擬周圍的風場，並探討開窗的影響。<br>
                     </p>
-                    <img src="att_img3.png" width="65%" height="auto">
+                    <img src="att_img3.png" width="50%" height="auto">
+                    <p>建製能源模型  使用軟體：eQUEST<br></p>
+                    <img src="att_img4.png" width="50%" height="auto">
+                    <p>能秏分析  使用軟體：eQUEST<br></p>
+                    <img src="att_img5.png" width="60%" height="auto">
+                    <p>能秏分析  使用軟體：eQUEST</p>
+                    <div style="padding: 0px;height: 15%">
+                    <img src="arrow_right.png" width="6%" height="auto" id="arrow_left" style="position:absolute; left:10%  -moz-transform: scaleX(-1);
+                        -o-transform: scaleX(-1);-webkit-transform: scaleX(-1);transform: scaleX(-1);filter: FlipH;-ms-filter: "FlipH";">
+                    </div>
                 </div>
             </div>
         </div>
@@ -459,16 +534,23 @@
                 </div>
                 <div class="col-in-10 col-m-in-10">
                     <div class="floor">
-                        <img src="inWall_SD.jpg">
-                        <img src="wall.jpg" class="wall">
+                        <img src="5F.png">
+                        <img src="ROOF_wall.png" class="wall">
                         <svg class="SD_door">
                             <rect class="door" id="door1" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
                     </div>
                     <div class="floor">
-                        <img src="SD_bg.png">
+                        <img src="4F.png">
+                        <img src="ATT_wall.png" class="wall">
                         <svg class="SD_door">
                             <rect class="door" id="door2" x="50" y="20" width="150" height="150" style="fill:#cc6600">
+                        </svg>
+                    </div>
+                    <div class="floor">
+                        <img src="SD_bg.png">
+                        <svg class="SD_door">
+                            <rect class="door" id="door3" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
                         <div class="SD_intro">
                             <img src="SD_intro_noword.png">
@@ -491,25 +573,18 @@
                         <svg class="wall_button">
                             <rect class="wall_button_rect" style="fill:#000033">
                         </svg>
-                        <img src="wall.jpg" class="wall">
+                        <img src="SD_wall.png" class="wall">
                     </div>
                     <div class="floor">
-                        <img src="inWall_SD.jpg">
-                        <img src="wall.jpg" class="wall">
-                        <svg class="SD_door">
-                            <rect class="door" id="door3" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                        </svg>
-                    </div>
-                    <div class="floor">
-                        <img src="inWall_ATT.jpg">
-                        <img src="wall.jpg" class="wall">
+                        <img src="2F.png">
+                        <img src="MOD_wall.png" class="wall">
                         <svg class="SD_door">
                             <rect class="door" id="door4" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg> 
                     </div>
                     <div class="floor">
-                        <img src="inWall_SD.jpg">
-                        <img src="wall.jpg" class="wall">
+                        <img src="1F.png">
+                        <img src="INT_wall.png" class="wall">
                         <svg class="SD_door">
                             <rect class="door" id="door5" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
@@ -522,6 +597,9 @@
                         <img src="elevator.png" class="vis_ele">
                         <img src="man-dancing.png" class="man">
                     </div>
+                </div>
+                <div class="root">
+                    <img src="grass.png" class="grass">
                 </div>
             </div>
             <div class="col-2 col-m-2">
