@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <title>Blue Green BIM</title>
     <style>
         @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
         body {
@@ -301,9 +302,25 @@
             top: 96.9%;
             left: 0%;
         }
+        .MOD_toybox {
+            position: absolute;
+            left: 65.5%;
+            top: 62%;
+            width: 22.6%;
+            z-index: 2;
+
+        }
+        .MOD_island {
+            position: absolute;
+            left: 12.9%;
+            top: 9%;
+            width: 52.2%;
+            z-index: 2;
+
+        }
         .elevator .man {
             position: fixed;
-            z-index: 10;
+            z-index: 13;
             width: 18.75%;
             height: auto;
             left: 70%;
@@ -323,14 +340,47 @@
             top: 0%;
             left: 100%;
         }
-        
+        #att_content3{
+            top: 0%;
+            left: 100%;
+        }
+        .arrow_left {
+            position: fixed;
+            top: 50%;
+            left: 6.25%;
+            z-index: 11;
+        }
+        .arrow_right {
+            position: fixed;
+            top: 50%;
+            left: 82%;
+            z-index: 11;
+        }
+        .img_gallery_black{
+            position: absolute;
+            background-color: rgba(0,0,0,0);
+            z-index: 8; 
+            right: 0%;
+        }
+        .img_gallery{
+            background-color: rgba(0,0,0,0.8);
+            position: absolute;
+            z-index: 9; 
+            width: 31.25%;
+            height: 100%;
+            top: 0%;
+            right: 0%;
+            overflow-x: hidden;
+            overflow-y: scroll; 
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
     <script>
         $(document).ready(function(){
-            var scrolly,scrolled;
+            var scrolly,scrolled,att_content_number = 1;
             var roof_height = parseFloat($('.roof img').css('height').replace("px", ""));
             var h = parseFloat($('.floor img').css('height').replace("px", ""));
+            var current_door;
             $('.door').click(function(){
                 h = parseFloat($('.floor img').css('height').replace("px", ""));
                 roof_height = parseFloat($('.roof img').css('height').replace("px", "")); 
@@ -339,39 +389,63 @@
                 else {
                     if ($(this).parent().siblings(".wall").is(':visible')) {
                         $(".wall").fadeIn("slow");
-                        $(this).parent().siblings(".wall").fadeToggle("slow");   
+                        $(this).parent().siblings(".wall").fadeToggle("slow");
+                        $(this).fadeToggle("slow") 
+                        current_door = $(this).attr('id');
+                        setTimeout(function(){
+                            $("body").disableScroll();
+                        }, 400);
                     }
                     else {
                         $(this).parent().siblings(".wall").fadeToggle("slow");
                     }
                     for (var i = 1;i <=5; i++) {
                         if (this.id == ("door"+ i)) {
-                             $("html,body").animate({scrollTop: ((i-1)*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 600);
+                               //$("html,body").animate({ scrollTop: 0 }, "slow",function(){
+                                    //alert("hi");});      
+                             //$("body").scrollTop((i-1)*h + roof_height -(window.innerHeight - h)/2 );
+                             $("html,body").animate({scrollTop: ((i-1)*h + roof_height -(window.innerHeight - h)/2 )}, 400);
+                             $(".man").delay(400).animate({left: 58 + "%"},300);
                              break;
                         }
                     }
                 }
             });
+            $('.vis_ele').bind('click',function(){
+                $(".man").animate({left: 70 + "%"},300);
+                $("#"+ current_door).delay(300).fadeToggle("slow");
+                $("#"+ current_door).parent().siblings(".wall").delay(300).fadeToggle("slow");
+                current_door = "";
+                setTimeout(function(){
+                    $("body").enableScroll();
+                }, 400);
+            });
             $('.SD_text').bind('click',function(){                    //blackbutton叫出black
                 scrolly = window.pageYOffset;
                 $('.black').css("top",scrolly + "px").show(); 
                 $('.blackcontent').children().css("display","none").delay(100).fadeIn(750);
-                changeheight();
-                $("body").disableScroll(); 
+                changeheight(); 
             });
             $('.SD_tvwebpage').bind('click',function(){                    //blackbutton叫出black
                 scrolly = window.pageYOffset;
                 $('.ATT_black').css("top",scrolly + "px").show(); 
-                $('.ATT_blackcontent').children().css("display","none").delay(100).fadeIn(750);
-                changeheight();
-                $("body").disableScroll(); 
+                $(".ATT_blackcontent").animate({scrollTop: 0},10);
+                $('.ATT_blackcontent *').css("display","none").delay(100).fadeIn(750);
+                for (var i = 1;i <=3; i++) {
+                    $("#att_content" + i).css({left: (i-1)*100 + '%'});
+                }
+                att_content_number = 1;
+                changeheight(); 
+            });
+            $('.SD_tvroofdata').bind('click',function(){                    //blackbutton叫出black
+                scrolly = window.pageYOffset;
+                $('.img_gallery_black').css("top",scrolly + "px").animate({width: "100%"}); 
             });
             $('.black').on('click', function(e){                   //black的click效果(消失)
                 var target = $(e.target);
                 if (target.attr('class') == 'black') {
                     $(this).hide();
                     changeheight();
-                    $("body").enableScroll();
                 }
             });
             $('.ATT_black').on('click', function(e){                   //black的click效果(消失)
@@ -379,19 +453,49 @@
                 if (target.attr('class') == 'ATT_black') {
                     $(this).hide();
                     changeheight();
-                    $("body").enableScroll();
                 }
             });
-            $('#arrow_right').bind('click',function(){                  //black的click效果(消失)
-                $("#att_content1").animate({left: '-100%'});
-                $(".ATT_blackcontent").scrollTop(0);
-                $("#att_content2").animate({left: '0%',scrollTop: 0 + "px"});
-                
+            $('.img_gallery_black').on('click', function(e){                   //black的click效果(消失)
+                var target = $(e.target);
+                if (target.attr('class') == 'img_gallery_black') {
+                    $(this).animate({width:"0%"});
+                    changeheight();
+                }
             });
-            $('#arrow_left').bind('click',function(){                  //black的click效果(消失)
-                $("#att_content2").animate({left: '100%'});
-                $(".ATT_blackcontent").scrollTop(0);
-                $("#att_content1").animate({left: '0%'});
+
+            $('#arrow_right').bind('click',function(){
+                if (att_content_number>=1 && att_content_number<3) {
+                    att_content_number += 1;
+                    $("#att_content" + (att_content_number-1)).animate({left: -100 + '%'},300);
+                    $(".ATT_blackcontent").delay(300).animate({scrollTop: 0},10);
+                    $("#att_content" + att_content_number).delay(310).animate({left: 0 + '%'},300);
+                    for (var i = 1;i <=3; i++) {
+                        if (i == (att_content_number-1) || i == att_content_number) {
+                            continue;
+                        }
+                        else  {
+                            $("#att_content" + i).animate({left: -(att_content_number - i)*100 + '%'}
+                            ,1);
+                        }
+                    }
+                }            
+            });
+            $('#arrow_left').bind('click',function(){
+                if (att_content_number>1 && att_content_number<=3) {       
+                    att_content_number -= 1;
+                    $("#att_content" + (att_content_number+1)).animate({left: 100 + '%'},300);
+                    $(".ATT_blackcontent").delay(300).animate({scrollTop: 0},10);
+                    $("#att_content" + att_content_number).delay(310).animate({left: 0 + '%'},300);
+                    for (var i = 1;i <=3; i++) {
+                        if (i == (att_content_number+1) || i == att_content_number) {
+                            continue;
+                        }
+                        else  {
+                            $("#att_content" + i).animate({left: -(att_content_number - i)*100 + '%'}
+                            ,1);
+                        }
+                    } 
+                }            
             });
             $(window).load(function() {                            //讓loading_page load完之後消失
                 $(".loading_page").delay(3000).fadeOut(1000);
@@ -401,6 +505,8 @@
                     h = parseFloat($('.floor img').css('height').replace("px", "")); 
                 });
                 $("html,body").delay(4000).animate({scrollTop: (4*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 800);
+                $(".ATT_black").css("display","none");
+                $(".img_gallery_black").animate({width:"0%"},10);
             }); 
             $(window).bind('scroll',function(e){                   //左右兩側滾動視差
                 parallaxScroll();
@@ -437,6 +543,7 @@
             $('.floor').height($('.floor img').css('height'));
             $('.roof').height($('.roof img').css('height'));
             $('.root img').height(root_height + "px");
+            $('.root').height($('.root img').height());
             $('.wall').height($('.floor img').css('height')).width($('.floor img').css('width'));
             $('.SD_door').css({"width":"2%","height":"70%","top":"30%","right":"0%"});
             $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
@@ -460,9 +567,17 @@
             $('.wall_right_rect').attr('width',w/50).attr('height',h).attr('y',0).attr('x',0);
             $('.wall_top_rect').attr('width',w).attr('height', h/1300*40).attr('y',0).attr('x',0);
             $('.wall_button_rect').attr('width',w).attr('height', h/1300*40).attr('y',0).attr('x',0);
+            $('.MOD_island').css({"width":"52.2%"});
+            $('.MOD_toybox').css({"width":"22.6%"});
             $('.ATT_blackcontent p').css({"font-size": innerWidth*0.016 + "px"});
             $('.ATT_blackcontent h1').css({"font-size": innerWidth*0.033 + "px"});
             $('.ATT_blackcontent h5').css({"font-size": innerWidth*0.023 + "px"});
+            if ($('.img_gallery_black').css("width") != "0px") {
+                $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+            }
+            else {
+                $('.img_gallery_black').css({"height":window.innerHeight+"px"});
+            }
         }
     </script>
     <div class="body-wrap">
@@ -471,6 +586,17 @@
         </div>
         <div class="loading_page" style="display: block">
             <div class='loader loader--circularSquare'></div>
+        </div>
+        <div class="img_gallery_black">
+            <div class="img_gallery">
+                <div style="padding: 15px">
+                    <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
+                    <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
+                    <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
+                    <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
+                    <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
+                </div>
+            </div>
         </div>
         <div class="black" style="display: none;">
             <div class="blackcontent" style="display: block;">
@@ -484,9 +610,16 @@
                 </div>
             </div>
         </div>
-        <div class="ATT_black" style="display: none;">
+        <div class="ATT_black" style="display: block;">
+            <div style="padding: 0px;height: 15%;width: 4%" class="arrow_left">
+                <img src="arrow_right.png" width="80%" height="auto" id="arrow_left" style="position:absolute; left:0%; -moz-transform: scaleX(-1);
+                        -o-transform: scaleX(-1);-webkit-transform: scaleX(-1);transform: scaleX(-1);filter: FlipH;-ms-filter: "FlipH";">
+            </div>
+            <div style="padding: 0px;height: 15%;width: 4%" class="arrow_right">
+                <img src="arrow_right.png" width="80%" height="auto" id="arrow_right" style="position:absolute; right:0%;">
+            </div>
             <div class="ATT_blackcontent" style="display: block;">
-                <div style="padding: 70px" id="att_content1">
+                <div style="padding: 90px" id="att_content1">
                     <h1>專案介紹－樹德夢工廠<br></h1>
                     <p>
                     &nbsp;&nbsp;在此專案中，我們學生團隊在樹德夢工廠的設計階段中，透過使用分析軟體進行模擬果，並依據結果來提供設計上的建議；反之，也可以將目前的設計，透過軟體來分析其優劣，並從中改善當前設計。在這項模擬中，我們使用為軟體 Ecotect 來進行分析，並建立樹德夢工廠的簡易模型，且著墨於辦公大樓的部分。於計畫開始時，大樓大部份的開窗尚未決定，所以我們透過思考方案，使用Ecotect建出了三種辦公室的開窗模型： 1.落地窗 2.大排開窗 3.簡單開窗，並透過軟體本身的日照、陰影模擬功能，了解各種開窗方式、位置受日照的影響，以及室內的照度值，最後探討各方案須補足的室內照明，以及辦公室各個主要區域較適合的開窗方式。
@@ -499,11 +632,8 @@
                     <p>用三種不同的開窗方式，來了解室內中需補足的照度，並結合三者優缺點想出新方案。
                     </p>
                     <img src="att_img2.png" width="75%" height="auto">
-                    <div style="padding: 0px;height: 15%">
-                    <img src="arrow_right.png" width="6%" height="auto" id="arrow_right" style="position:absolute; right:10%">
-                    </div>
                 </div>
-                <div style="padding: 70px" id="att_content2">
+                <div style="padding: 90px" id="att_content2">
                     <h1>專案介紹－台大資工系德田館<br></h1>
                     <p>
                     &nbsp;&nbsp;這項計劃的分析對象是資工系的德田館，透過軟體eQUEST進行建模與分析，目的是探討空調負載比重大的德田館，可否藉由裝設綠屋頂，來達到有利的節能功效。過程中設定位置、氣候、材質、機電、空調等參數，並假設綠屋頂的相關數值來模擬其對建築物的影響，如耗能、冷荷載等等；將各種配置的模擬結果以及目前的實際值比較，從中選出最適方案。另外也使用流體模擬的軟體如Simulation CFD，去模擬周圍的風場，並探討開窗的影響。<br>
@@ -514,10 +644,12 @@
                     <p>能秏分析  使用軟體：eQUEST<br></p>
                     <img src="att_img5.png" width="60%" height="auto">
                     <p>能秏分析  使用軟體：eQUEST</p>
-                    <div style="padding: 0px;height: 15%">
-                    <img src="arrow_right.png" width="6%" height="auto" id="arrow_left" style="position:absolute; left:10%  -moz-transform: scaleX(-1);
-                        -o-transform: scaleX(-1);-webkit-transform: scaleX(-1);transform: scaleX(-1);filter: FlipH;-ms-filter: "FlipH";">
-                    </div>
+                </div>
+                <div style="padding: 90px" id="att_content3">
+                    <img src="att_img7.png" width="60%" height="auto">
+                    <p><br></p>
+                    <img src="att_img8.png" width="50%" height="auto">
+                    <p>德田館風場模擬  使用軟體：Simulation CFD<br></p>
                 </div>
             </div>
         </div>
@@ -576,8 +708,10 @@
                         <img src="SD_wall.png" class="wall">
                     </div>
                     <div class="floor">
-                        <img src="2F.png">
+                        <img src="MOD_bg.png">
                         <img src="MOD_wall.png" class="wall">
+                        <img src="MOD_toybox.png" class="MOD_toybox">
+                        <img src="MOD_island.png" class="MOD_island">
                         <svg class="SD_door">
                             <rect class="door" id="door4" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg> 
