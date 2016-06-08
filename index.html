@@ -44,15 +44,6 @@
         .body-wrap{
             position: relative;
         }
-        .floor {                                       
-            position: relative;                         /*樓層div*/
-            padding: 0px;
-            margin: 0px;
-        }
-        .floor img{
-            width: 100%;
-            height: auto;
-        }
         .roof {
             position: relative;                         /*樓層div*/
             padding: 0px;
@@ -62,7 +53,7 @@
             width: 100%;
             height: auto;
             position: absolute;
-            top: -50%;
+            top: 0%;
         }
         .root {
             position: relative;                         /*樓層div*/
@@ -73,40 +64,58 @@
             width: 100%;
             height: auto;
         }
+        .floor {                                       
+            position: relative;                         /*樓層div*/
+            padding: 0px;
+            margin: 0px;
+        }
+        .floor_bg{
+            width: 100%;
+            height: auto;
+        }
         .sidebar {                                     /*電梯div*/
             background-color: lightgray;
         }
-        button {
-            position: absolute;
-            top:0px;
+        .loading_page {   
+            display: block;                              /*loading頁面*/
+            background: gainsboro;
+            position: fixed;
+            z-index: 20;
+            width: 100%;
+            height: 100%;
         }
-        .wall {                                        /*外牆圖片*/
-            width:100%;
-            position: absolute;
-            top:0px;
-            left:0px;
-            z-index: 3;
+        .loader--circularSquare {                       /*loading動畫*/
+            position: absolute ;
+            left: 50%;
+            top: 50%;
+            width: 0;
+            height: 0;
+            box-shadow: -0.625em -0.625em 0 0.625em #9b59b6, 0.625em -0.625em 0 0.625em #9b59b6, -0.625em 0.625em 0 0.625em #9b59b6, 0.625em 0.625em 0 0.625em #9b59b6;
+            animation: circSquare 1.5s ease-in-out infinite;
         }
-        .header {                                      /*已經隱藏的header*/
-            width:100%;
-            height:100px;
-        }
-        .SD_door {                                         
-            position: absolute;
-            z-index: 6;
+        @keyframes circSquare {
+            50% {
+                width: 1.25em;
+                height: 1.25em;
+                border-radius: 50%;
+                transform: rotate(0.5turn);
+                box-shadow: -2.5em 0 0 #2ecc71, 2.5em 0 0 #e74c3c, -2.5em 0 0 #3498db, 2.5em 0 0 #f1c40f;
+            }
+            80%, 100% {
+                transform: rotate(1turn);
+            }
         }
         .black {                                       /*彈出式div背景*/
             background-color: rgba(0,0,0,0.5);
             position: absolute;
             z-index: 9;
+            display: none;
         }
         .ATT_black {                                       /*彈出式div背景*/
             background-color: rgba(0,0,0,0.5);
             position: absolute;
             z-index: 9;
-        }
-        .blackbutton {
-            z-index: 2;
+            display: block;
         }
         .blackcontent{                                 /*彈出式wrap div*/
             background-color: rgba(0,0,0,0.8);
@@ -116,6 +125,7 @@
             top: 10%;
             left: 15%;
             z-index: 10;
+            display: block;
         }
         .blackcontent div {                            /*彈出式div內容 分左右半邊*/
             width: 50%;
@@ -139,6 +149,7 @@
             width: 100%;
             height: 100%;
             position: absolute;
+            display: block;
         }
         .ATT_blackcontent {                                
             background-color: rgba(0,0,0,0.8);
@@ -179,33 +190,22 @@
             font-family: 'Noto Sans TC', sans-serif;
             font-size: 35px;
         }
-        .loading_page {                                 /*loading頁面*/
-            background: gainsboro;
-            position: fixed;
-            z-index: 20;
-            width: 100%;
+        .img_gallery_black{
+            position: absolute;
+            background-color: rgba(0,0,0,0);
+            z-index: 8; 
+            right: 0%;
+        }
+        .img_gallery{
+            background-color: rgba(0,0,0,0.8);
+            position: absolute;
+            z-index: 9; 
+            width: 31.25%;
             height: 100%;
-        }
-        .loader--circularSquare {                       /*loading動畫*/
-            position: absolute ;
-            left: 50%;
-            top: 50%;
-            width: 0;
-            height: 0;
-            box-shadow: -0.625em -0.625em 0 0.625em #9b59b6, 0.625em -0.625em 0 0.625em #9b59b6, -0.625em 0.625em 0 0.625em #9b59b6, 0.625em 0.625em 0 0.625em #9b59b6;
-            animation: circSquare 1.5s ease-in-out infinite;
-        }
-        @keyframes circSquare {
-            50% {
-                width: 1.25em;
-                height: 1.25em;
-                border-radius: 50%;
-                transform: rotate(0.5turn);
-                box-shadow: -2.5em 0 0 #2ecc71, 2.5em 0 0 #e74c3c, -2.5em 0 0 #3498db, 2.5em 0 0 #f1c40f;
-            }
-            80%, 100% {
-                transform: rotate(1turn);
-            }
+            top: 0%;
+            right: 0%;
+            overflow-x: hidden;
+            overflow-y: scroll; 
         }
         .outside {                                      /*左右兩側div*/
             /*background-color: #33ccff;
@@ -224,15 +224,26 @@
             background-image: url('cloud2.jpg');
             background-size: cover;
         }
-        .elevator {
-            position: fixed;
+        .wall {                                        /*外牆圖片*/
+            width:100%;
+            position: absolute;
+            top:0px;
+            left:0px;
+            z-index: 3;
+        }
+        .door_svg {                                         
+            position: absolute;
+            z-index: 6;
+            width: 2%;
+            height: 70%;
+            top: 30%;
+            right: 0%;
         }
         .SD_intro {
             position: absolute;
             left: 64%;
             top: 3.2%;
             width: 30%;
-            z-index: 2;
         }
         .SD_tvwebpage {
             position: absolute;
@@ -250,9 +261,10 @@
         }
         .SD_text {
             position: absolute;
-            z-index: 2;
             width: 30%;
             height: 35%;
+            left: 64%;
+            top: 28%;
             -webkit-transform: scale(1);
             transform: scale(1);
             -webkit-transition: .3s ease-in-out;
@@ -308,7 +320,6 @@
             top: 62%;
             width: 22.6%;
             z-index: 2;
-
         }
         .MOD_island {
             position: absolute;
@@ -316,16 +327,18 @@
             top: 9%;
             width: 52.2%;
             z-index: 2;
-
         }
-        .elevator .man {
+        .elevator_div {
+            position: fixed;
+        }
+        .elevator_div .man {
             position: fixed;
             z-index: 13;
             width: 18.75%;
             height: auto;
             left: 70%;
         }
-        .elevator .vis_ele {
+        .elevator_div .elevator {
             position: fixed;
             z-index: 9;
             width: 18.75%;
@@ -349,86 +362,102 @@
             top: 50%;
             left: 6.25%;
             z-index: 11;
+            padding: 0px;
+            height: 15%;
+            width: 4%
+        }
+        #arrow_left {
+            position:absolute; 
+            left:0%; 
+            -moz-transform: scaleX(-1);
+            -o-transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            filter: FlipH;
+            -ms-filter: "FlipH";
+            width: 80%;
+            height: auto;
+            opacity: 0.4;
         }
         .arrow_right {
             position: fixed;
             top: 50%;
             left: 82%;
             z-index: 11;
+            padding: 0px;
+            height: 15%;
+            width: 4%;
         }
-        .img_gallery_black{
-            position: absolute;
-            background-color: rgba(0,0,0,0);
-            z-index: 8; 
-            right: 0%;
+        #arrow_right {
+            position:absolute; 
+            right:0%;
+            width: 80%;
+            height: auto;
         }
-        .img_gallery{
-            background-color: rgba(0,0,0,0.8);
+        .grass {
             position: absolute;
-            z-index: 9; 
-            width: 31.25%;
-            height: 100%;
-            top: 0%;
-            right: 0%;
-            overflow-x: hidden;
-            overflow-y: scroll; 
+            z-index: 10;
+            width: 100%;
+            height: 10%;
+            top: 90%;
+            left: 0%;
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
     <script>
         $(document).ready(function(){
-            var scrolly,scrolled,att_content_number = 1;
+            var scrolled,att_content_number;
             var roof_height = parseFloat($('.roof img').css('height').replace("px", ""));
-            var h = parseFloat($('.floor img').css('height').replace("px", ""));
-            var current_door;
+            var w = parseFloat($('.floor_bg').css('width').replace("px", ""));
+            var h = parseFloat($('.floor_bg').css('height').replace("px", ""));
+            var elevator_top = (window.innerHeight - h)/2 + h*0.3 ;
+            var root_height = window.innerHeight - 20 - (elevator_top + h*0.7);
+            var current_door = "";
             $('.door').click(function(){
-                h = parseFloat($('.floor img').css('height').replace("px", ""));
+                h = parseFloat($('.floor_bg').css('height').replace("px", ""));
                 roof_height = parseFloat($('.roof img').css('height').replace("px", "")); 
-                if($(this).is(":animated")){                       //svg讓牆消失
-                }
-                else {
-                    if ($(this).parent().siblings(".wall").is(':visible')) {
-                        $(".wall").fadeIn("slow");
-                        $(this).parent().siblings(".wall").fadeToggle("slow");
-                        $(this).fadeToggle("slow") 
-                        current_door = $(this).attr('id');
-                        setTimeout(function(){
-                            $("body").disableScroll();
-                        }, 400);
+                if (current_door == ""){
+                    if($(this).is(":animated")){                       //svg讓牆消失
                     }
                     else {
-                        $(this).parent().siblings(".wall").fadeToggle("slow");
-                    }
-                    for (var i = 1;i <=5; i++) {
-                        if (this.id == ("door"+ i)) {
-                               //$("html,body").animate({ scrollTop: 0 }, "slow",function(){
-                                    //alert("hi");});      
-                             //$("body").scrollTop((i-1)*h + roof_height -(window.innerHeight - h)/2 );
-                             $("html,body").animate({scrollTop: ((i-1)*h + roof_height -(window.innerHeight - h)/2 )}, 400);
-                             $(".man").delay(400).animate({left: 58 + "%"},300);
-                             break;
+                        if ($(this).parent().siblings(".wall").is(':visible')) {  //redundant
+                            $(".wall").fadeIn(400);                               //redundant
+                            $(this).parent().siblings(".wall").delay(400).fadeToggle(250);
+                            $(this).delay(400).fadeToggle(250); 
+                            current_door = $(this).attr('id');
+                            setTimeout(function(){
+                                $("body").disableScroll();
+                            }, 400);
+                        }
+                        else {                                                    //redundant
+                            $(this).parent().siblings(".wall").fadeToggle(400);   //redundant
+                        }
+                        for (var i = 1;i <=5; i++) {                              //redundant 直接抓
+                            if (this.id == ("door"+ i)) {
+                                 $("html,body").animate({scrollTop: ((i-1)*h + roof_height -(window.innerHeight - h)/2 )}, 400);
+                                 $(".man").delay(450).animate({left: 58 + "%"},200);
+                                 break;
+                            }
                         }
                     }
                 }
             });
-            $('.vis_ele').bind('click',function(){
-                $(".man").animate({left: 70 + "%"},300);
-                $("#"+ current_door).delay(300).fadeToggle("slow");
-                $("#"+ current_door).parent().siblings(".wall").delay(300).fadeToggle("slow");
+            $('.elevator,.man').bind('click',function(){
+                $(".man").animate({left: 70 + "%"},200);
+                $("#"+ current_door).delay(200).fadeToggle(400);
+                $("#"+ current_door).parent().siblings(".wall").delay(200).fadeToggle(400);
                 current_door = "";
                 setTimeout(function(){
                     $("body").enableScroll();
-                }, 400);
+                }, 200);
             });
             $('.SD_text').bind('click',function(){                    //blackbutton叫出black
-                scrolly = window.pageYOffset;
-                $('.black').css("top",scrolly + "px").show(); 
+                $('.black').css("top",window.pageYOffset + "px").show(); 
                 $('.blackcontent').children().css("display","none").delay(100).fadeIn(750);
                 changeheight(); 
             });
             $('.SD_tvwebpage').bind('click',function(){                    //blackbutton叫出black
-                scrolly = window.pageYOffset;
-                $('.ATT_black').css("top",scrolly + "px").show(); 
+                $('.ATT_black').css("top",window.pageYOffset + "px").show(); 
                 $(".ATT_blackcontent").animate({scrollTop: 0},10);
                 $('.ATT_blackcontent *').css("display","none").delay(100).fadeIn(750);
                 for (var i = 1;i <=3; i++) {
@@ -438,8 +467,7 @@
                 changeheight(); 
             });
             $('.SD_tvroofdata').bind('click',function(){                    //blackbutton叫出black
-                scrolly = window.pageYOffset;
-                $('.img_gallery_black').css("top",scrolly + "px").animate({width: "100%"}); 
+                $('.img_gallery_black').css("top",window.pageYOffset + "px").animate({width: "100%"}); 
             });
             $('.black').on('click', function(e){                   //black的click效果(消失)
                 var target = $(e.target);
@@ -453,18 +481,19 @@
                 if (target.attr('class') == 'ATT_black') {
                     $(this).hide();
                     changeheight();
+                    $('#arrow_left').css("opacity",0.5);
+                    $('#arrow_right').css("opacity",1);
                 }
             });
-            $('.img_gallery_black').on('click', function(e){                   //black的click效果(消失)
+            $('.img_gallery_black').on('click', function(e){                   
                 var target = $(e.target);
                 if (target.attr('class') == 'img_gallery_black') {
                     $(this).animate({width:"0%"});
                     changeheight();
                 }
             });
-
             $('#arrow_right').bind('click',function(){
-                if (att_content_number>=1 && att_content_number<3) {
+                if (att_content_number >= 1 && att_content_number < 3) {
                     att_content_number += 1;
                     $("#att_content" + (att_content_number-1)).animate({left: -100 + '%'},300);
                     $(".ATT_blackcontent").delay(300).animate({scrollTop: 0},10);
@@ -478,10 +507,16 @@
                             ,1);
                         }
                     }
-                }            
+                    if (att_content_number == 3)  {
+                        $('#arrow_right').css("opacity",0.4);
+                    } 
+                    else {
+                        $('#arrow_left,#arrow_right').css("opacity",1);
+                    }
+                }      
             });
             $('#arrow_left').bind('click',function(){
-                if (att_content_number>1 && att_content_number<=3) {       
+                if (att_content_number > 1 && att_content_number <= 3) {       
                     att_content_number -= 1;
                     $("#att_content" + (att_content_number+1)).animate({left: 100 + '%'},300);
                     $(".ATT_blackcontent").delay(300).animate({scrollTop: 0},10);
@@ -495,21 +530,49 @@
                             ,1);
                         }
                     } 
+                    if (att_content_number == 1)  {
+                        $('#arrow_left').css("opacity",0.4);
+                    } 
+                    else {
+                        $('#arrow_left,#arrow_right').css("opacity",1);
+                    }
                 }            
             });
             $(window).load(function() {                            //讓loading_page load完之後消失
-                $(".loading_page").delay(3000).fadeOut(1000);
-                $("body").delay(3000).queue(function () { 
-                    $('body').css("overflow", "scroll");
-                    changeheight();
-                    h = parseFloat($('.floor img').css('height').replace("px", "")); 
-                });
-                $("html,body").delay(4000).animate({scrollTop: (4*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 800);
+                $(".loading_page").delay(1000).fadeOut(1000);
+                setTimeout(function(){$('body').css("overflow", "scroll");changeheight();}, 1000);
+                changeheight();
+                $("html,body").delay(2000).animate({scrollTop: (4*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 800);
+                setTimeout(function(){$("body").disableScroll();}, 2800);
+                $("#door5,#1F_wall").delay(3000).fadeOut(300).delay(2000).fadeIn(300);
+                setTimeout(function(){$("body").enableScroll();}, 5600);
                 $(".ATT_black").css("display","none");
                 $(".img_gallery_black").animate({width:"0%"},10);
             }); 
+            $(window).resize(function() {
+                changeheight();
+                $("body").enableScroll();
+                if (current_door != "") {
+                     for (var i = 1;i <=5; i++) {                              //redundant 直接抓
+                        if (current_door == ("door"+ i)) {                                 
+                            $("html,body").scrollTop((i-1)*h + roof_height -(window.innerHeight - h)/2 );                                 
+                            break;
+                        }
+                    }
+                }
+                $("body").disableScroll();
+            });
             $(window).bind('scroll',function(e){                   //左右兩側滾動視差
+                scrolled = $(window).scrollTop();
                 parallaxScroll();
+                if (scrolled < (roof_height - elevator_top)) {
+                    $('.elevator_div,.elevator_div .elevator').css({"top":roof_height-scrolled +"px"});
+                    $('.elevator_div .man').css({"top":roof_height-scrolled + h*0.7*0.25 +"px"});
+                }
+                else {
+                    $('.elevator_div,.elevator_div .elevator').css({"top":elevator_top +"px"});
+                    $('.elevator_div .man').css({"top":elevator_top + h*0.7*0.25 +"px"});
+                }
             }); 
             function parallaxScroll(){
                 scrolled = $(window).scrollTop();
@@ -525,66 +588,59 @@
             $.fn.enableScroll = function() {
                 $(window).off('scroll.scrolldisabler');
             };
+            function changeheight() {
+                roof_height = parseFloat($('.roof img').css('height').replace("px", ""));
+                w = parseFloat($('.floor_bg').css('width').replace("px", ""));
+                h = parseFloat($('.floor_bg').css('height').replace("px", ""));
+                elevator_top = (window.innerHeight - h)/2 + h*0.3 ;
+                root_height = window.innerHeight - 20 - (elevator_top + h*0.7);
+                $('.roof').height($('.roof img').css('height'));
+                $('.root img').height(root_height + "px");
+                $('.root').height($('.root img').height());
+                $('.sidebar').height(h*5 + "px");
+                $('.outside').height(h*5 + "px");
+                $('.floor').height($('.floor_bg').css('height'));
+                $('.wall').height($('.floor_bg').css('height')).width($('.floor_bg').css('width'));
+                $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                $('.ATT_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                $('.outside_imagediv').width($('.col-1').css('width')).height($('.outside').css('height'));
+                $('.outside_imagediv2').width($('.col-2').css('width')).height($('.outside').css('height'));
+                $('.door').attr('width',w/50).attr('height',h*7/10).attr('y',0).attr('x',0);
+                if (elevator_top < roof_height) {
+                    $('.elevator_div,.elevator_div .elevator').css({"top":roof_height +"px"});
+                    $('.elevator_div .elevator').css({"top":roof_height +"px"});
+                    $('.elevator_div .man').css({"top":roof_height + h*0.7*0.25 +"px"});
+                }
+                else {
+                    $('.elevator_div').css({"width":"100%","height":h*0.7+"px","top":elevator_top +"px"});
+                    $('.elevator_div .man').css({"width":"18.75%","height":"auto","top":elevator_top + h*0.7*0.25 +"px"});
+                    $('.elevator_div .elevator').css({"width":"18.75%","height":"auto","top":elevator_top +"px"});
+                }
+                $('.SD_text_inner1').attr({"x":"50%","y":"40%","font-size": innerWidth*0.02 + "px"});
+                $('.SD_text_inner2').attr({"x":"50%","y":"70%","font-size": innerWidth*0.026 + "px"});
+                $('.SD_text_inner1').css({"font-size": innerWidth*0.02 + "px"});
+                $('.SD_text_inner2').css({"font-size": innerWidth*0.026 + "px"});
+                $('.wall_left_rect').attr('width',w/50).attr('height',h).attr('y',0).attr('x',0);
+                $('.wall_right_rect').attr('width',w/50).attr('height',h).attr('y',0).attr('x',0);
+                $('.wall_top_rect').attr('width',w).attr('height', h/1300*40).attr('y',0).attr('x',0);
+                $('.wall_button_rect').attr('width',w).attr('height', h/1300*40).attr('y',0).attr('x',0);
+                $('.ATT_blackcontent p').css({"font-size": innerWidth*0.016 + "px"});
+                $('.ATT_blackcontent h1').css({"font-size": innerWidth*0.033 + "px"});
+                $('.ATT_blackcontent h5').css({"font-size": innerWidth*0.023 + "px"});
+                if ($('.img_gallery_black').css("width") != "0px") {
+                    $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                }
+                else {
+                    $('.img_gallery_black').css({"height":window.innerHeight+"px"});
+                }
+            };
         });
     </script>
 </head>
-<body onload="changeheight()" onresize="changeheight()">
-    <script>
-        function changeheight() {
-            var roof_height = parseFloat($('.roof img').css('height').replace("px", ""));
-            var w = parseFloat($('.floor img').css('width').replace("px", ""));
-            var h = parseFloat($('.floor img').css('height').replace("px", ""));
-            var h5 = h*5;
-            var elevator_top = (window.innerHeight - h)/2 + h*0.3 ;
-            var root_height = window.innerHeight - 20 - (elevator_top + h*0.7);
-            //if (elevator_top < roof_height) elevator_top = roof_height;
-            $('.sidebar').height(h5 + "px");
-            $('.outside').height(h5 + "px");
-            $('.floor').height($('.floor img').css('height'));
-            $('.roof').height($('.roof img').css('height'));
-            $('.root img').height(root_height + "px");
-            $('.root').height($('.root img').height());
-            $('.wall').height($('.floor img').css('height')).width($('.floor img').css('width'));
-            $('.SD_door').css({"width":"2%","height":"70%","top":"30%","right":"0%"});
-            $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
-            $('.ATT_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
-            $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
-            $('.outside_imagediv').width($('.col-1').css('width')).height($('.outside').css('height'));
-            $('.outside_imagediv2').width($('.col-2').css('width')).height($('.outside').css('height'));
-            $('.door').attr('width',w/50).attr('height',h*7/10).attr('y',0).attr('x',0);
-            $('.elevator').css({"width":"100%","height":h*0.7+"px","top":elevator_top +"px"});
-            $('.elevator .man').css({"width":"18.75%","height":"auto","top":elevator_top + h*0.7*0.25 +"px"});
-            $('.elevator .vis_ele').css({"width":"18.75%","height":"auto","top":elevator_top +"px"});
-            $('.SD_intro').css({"width":"30%"});
-            $('.SD_tvwebpage').css({"width":"27%"});
-            $('.SD_tvroofdata').css({"width":"30.2%"});
-            $('.SD_text').css({"left":"64%","top":"28%"});
-            $('.SD_text_inner1').attr({"x":"50%","y":"40%","font-size": innerWidth*0.02 + "px"});
-            $('.SD_text_inner2').attr({"x":"50%","y":"70%","font-size": innerWidth*0.026 + "px"});
-            $('.SD_text_inner1').css({"font-size": innerWidth*0.02 + "px"});
-            $('.SD_text_inner2').css({"font-size": innerWidth*0.026 + "px"});
-            $('.wall_left_rect').attr('width',w/50).attr('height',h).attr('y',0).attr('x',0);
-            $('.wall_right_rect').attr('width',w/50).attr('height',h).attr('y',0).attr('x',0);
-            $('.wall_top_rect').attr('width',w).attr('height', h/1300*40).attr('y',0).attr('x',0);
-            $('.wall_button_rect').attr('width',w).attr('height', h/1300*40).attr('y',0).attr('x',0);
-            $('.MOD_island').css({"width":"52.2%"});
-            $('.MOD_toybox').css({"width":"22.6%"});
-            $('.ATT_blackcontent p').css({"font-size": innerWidth*0.016 + "px"});
-            $('.ATT_blackcontent h1').css({"font-size": innerWidth*0.033 + "px"});
-            $('.ATT_blackcontent h5').css({"font-size": innerWidth*0.023 + "px"});
-            if ($('.img_gallery_black').css("width") != "0px") {
-                $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
-            }
-            else {
-                $('.img_gallery_black').css({"height":window.innerHeight+"px"});
-            }
-        }
-    </script>
+<body>
     <div class="body-wrap">
-        <div class="header" style="display: none;">
-            <h1>Header</h1>
-        </div>
-        <div class="loading_page" style="display: block">
+        <div class="loading_page">
             <div class='loader loader--circularSquare'></div>
         </div>
         <div class="img_gallery_black">
@@ -598,8 +654,8 @@
                 </div>
             </div>
         </div>
-        <div class="black" style="display: none;">
-            <div class="blackcontent" style="display: block;">
+        <div class="black">
+            <div class="blackcontent">
                 <div>
                     <h1>Software Development</h1>
                     <img src="thumb_dsc01763_1024.jpg" width="100%" height="50%">
@@ -610,15 +666,14 @@
                 </div>
             </div>
         </div>
-        <div class="ATT_black" style="display: block;">
-            <div style="padding: 0px;height: 15%;width: 4%" class="arrow_left">
-                <img src="arrow_right.png" width="80%" height="auto" id="arrow_left" style="position:absolute; left:0%; -moz-transform: scaleX(-1);
-                        -o-transform: scaleX(-1);-webkit-transform: scaleX(-1);transform: scaleX(-1);filter: FlipH;-ms-filter: "FlipH";">
+        <div class="ATT_black">
+            <div class="arrow_left">
+                <img src="arrow_right.png" id="arrow_left">
             </div>
-            <div style="padding: 0px;height: 15%;width: 4%" class="arrow_right">
-                <img src="arrow_right.png" width="80%" height="auto" id="arrow_right" style="position:absolute; right:0%;">
+            <div class="arrow_right">
+                <img src="arrow_right.png" id="arrow_right">
             </div>
-            <div class="ATT_blackcontent" style="display: block;">
+            <div class="ATT_blackcontent">
                 <div style="padding: 90px" id="att_content1">
                     <h1>專案介紹－樹德夢工廠<br></h1>
                     <p>
@@ -666,27 +721,25 @@
                 </div>
                 <div class="col-in-10 col-m-in-10">
                     <div class="floor">
-                        <img src="5F.png">
+                        <img src="5F.png" class="floor_bg">
                         <img src="ROOF_wall.png" class="wall">
-                        <svg class="SD_door">
+                        <svg class="door_svg">
                             <rect class="door" id="door1" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
                     </div>
-                    <div class="floor">
-                        <img src="4F.png">
+                    <div class="floor" >
+                        <img src="4F.png" class="floor_bg">
                         <img src="ATT_wall.png" class="wall">
-                        <svg class="SD_door">
+                        <svg class="door_svg">
                             <rect class="door" id="door2" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
                     </div>
                     <div class="floor">
-                        <img src="SD_bg.png">
-                        <svg class="SD_door">
+                        <img src="SD_bg.png" class="floor_bg"> 
+                        <svg class="door_svg">
                             <rect class="door" id="door3" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
-                        <div class="SD_intro">
-                            <img src="SD_intro_noword.png">
-                        </div>
+                        <img src="SD_intro_noword.png" class="SD_intro">
                         <img src="SD_tvwebpage.png" class="SD_tvwebpage">
                         <img src="SD_tvroofdata.png" class="SD_tvroofdata">
                         <svg class="SD_text"> 
@@ -708,32 +761,33 @@
                         <img src="SD_wall.png" class="wall">
                     </div>
                     <div class="floor">
-                        <img src="MOD_bg.png">
+                        <img src="MOD_bg.png" class="floor_bg">
                         <img src="MOD_wall.png" class="wall">
                         <img src="MOD_toybox.png" class="MOD_toybox">
                         <img src="MOD_island.png" class="MOD_island">
-                        <svg class="SD_door">
+                        <svg class="door_svg">
                             <rect class="door" id="door4" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg> 
                     </div>
                     <div class="floor">
-                        <img src="1F.png">
-                        <img src="INT_wall.png" class="wall">
-                        <svg class="SD_door">
+                        <img src="1F.png" class="floor_bg">
+                        <img src="INT_wall.png" class="wall" id="1F_wall">
+                        <svg class="door_svg">
                             <rect class="door" id="door5" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
+                        <img src="grass.png" class="grass">
                     </div>
                 </div>
                 <div class="col-in-3 col-m-in-3">
                     <div class="sidebar">
                     </div>
-                    <div class="elevator">
-                        <img src="elevator.png" class="vis_ele">
+                    <div class="elevator_div">
+                        <img src="elevator.png" class="elevator">
                         <img src="man-dancing.png" class="man">
                     </div>
                 </div>
                 <div class="root">
-                    <img src="grass.png" class="grass">
+                    <img src="grass.png">
                 </div>
             </div>
             <div class="col-2 col-m-2">
@@ -742,9 +796,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footer"  style="display: none;">
-            <h1>Footer</h1>
         </div>
     </div>  
 </body>
