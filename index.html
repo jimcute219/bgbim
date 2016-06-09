@@ -132,6 +132,13 @@
             z-index: 9;
             display: block;
         }
+        .MOD_black {
+            background-color: rgba(0,0,0,0);
+            position: absolute;
+            display: block;
+            top: 0%;
+            z-index: 10;
+        }
         .blackcontent{                                 /*彈出式wrap div*/
             background-color: rgba(0,0,0,0.8);
             width: 70%;
@@ -204,6 +211,17 @@
             color: #c3d825;
             font-family: 'Noto Sans TC', sans-serif;
             font-size: 35px;
+        }
+        .MOD_blackcontent {
+            background-color: rgba(0,0,0,1);
+            position: absolute;
+            width: 81.25%;
+            height: 100%;
+            top: 0%;
+            left: 6.25%;
+            z-index: 10;
+            overflow-x: hidden;
+            overflow-y: scroll; 
         }
         .img_gallery_black{
             position: absolute;
@@ -427,6 +445,34 @@
             z-index: 10;
             display: none;
         }
+        p {
+            margin: 5px;
+            text-align: left;
+            margin-buttom: 2%;
+            text-indent: 30px;
+            color: #c3d825;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 25px;
+        }
+        h1 {
+            margin: 5px;
+            margin-buttom: 8%;
+            text-align: center;
+            text-indent: 30px;
+            color: #c3d825;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 50px;
+        }
+        h5 {
+            margin: 5px;
+            margin-top: 3%;
+            margin-top: 3%;
+            text-align: left;
+            text-indent: 30px;
+            color: #c3d825;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 35px;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
     <script>
@@ -494,6 +540,9 @@
             $('.SD_tvroofdata').bind('click',function(){                    //blackbutton叫出black
                 $('.img_gallery_black').css("top",window.pageYOffset + "px").animate({width: "100%"}); 
             });
+            $('.MOD_island').bind('click',function(){                    //blackbutton叫出black
+                $('.MOD_black').css("top",window.pageYOffset + "px").animate({height: window.innerHeight});
+            });
             $('.black').on('click', function(e){                   //black的click效果(消失)
                 var target = $(e.target);
                 if (target.attr('class') == 'black') {
@@ -514,6 +563,13 @@
                 var target = $(e.target);
                 if (target.attr('class') == 'img_gallery_black') {
                     $(this).animate({width:"0%"});
+                    changeheight();
+                }
+            });
+            $('.MOD_black').on('click', function(e){                   
+                var target = $(e.target);
+                if (target.attr('class') == 'MOD_black') {
+                    $(this).animate({height:"0%"});
                     changeheight();
                 }
             });
@@ -578,6 +634,7 @@
                 setTimeout(function(){$("body").enableScroll();}, 5600);
                 $(".ATT_black").css("display","none");
                 $(".img_gallery_black").animate({width:"0%"},10);
+                $(".MOD_black").animate({height:"0%"},10);
             }); 
             $(window).resize(function() {
                 changeheight();
@@ -663,6 +720,12 @@
                 else {
                     $('.img_gallery_black').css({"height":window.innerHeight+"px"});
                 }
+                if ($('.MOD_black').css("height") != "0px") {
+                    $('.MOD_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                }
+                else {
+                    $('.MOD_black').css({"width":window.innerWidth+"px"});
+                }
             };
         });
     </script>
@@ -737,6 +800,19 @@
                     <p><br></p>
                     <img src="att_img8.png" width="50%" height="auto">
                     <p>德田館風場模擬  使用軟體：Simulation CFD<br></p>
+                </div>
+            </div>
+        </div>
+        <div class="MOD_black">
+            <div class="MOD_blackcontent">
+                <div style="padding: 90px" id="MOD_content1">
+                    <h1>一、前言</h1>
+                    <p>&nbsp;&nbsp;本案未來所設計與建置的綠屋頂將位於台灣大學土木工程學系研究大樓頂，其設計概念參考英國團隊目前使用中的綠屋頂，為了使英國團隊在未來能提供廠商(ALUMASC)視覺化的綠屋頂建模，同時可用於能耗相關分析，因此期望繪製綠屋頂元件，增進後續階段不管是呈現上、溝通上、分析上的效率，甚至能上傳網路空間供其他相關單位使用。</p>
+                    <p>&nbsp;&nbsp;目前英國團隊共使用三種類型的屋頂如圖1，主要差別為灌溉層的類型，透過不同綠屋頂類型，比較效率與功能上較好的綠屋頂。為了能進行進一步的分析，綠屋頂各分層數據也相當重要，目前根據廠商提供資料整理各層數據如表1，欠缺部分尚未獲得相關數據，將於未來繼續向廠商詢問。<br></p>
+                    <p>&nbsp;&nbsp;藉由以上資料與數據期望使用Autodesk Revit 軟體繪製綠屋頂元件以達到以下目標:<br>
+                    1.  提供完整的綠屋頂模型樣板提供有需求者日後使用<br>
+                    2.  綠屋頂模型中各分層提供足夠的數據資料供日後分析使用。<br>
+                    3.  期望使用者可以簡單、快速依照需求，改變模型的規格與數據資料。</p>
                 </div>
             </div>
         </div>
