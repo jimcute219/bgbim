@@ -6,6 +6,19 @@
     <title>Blue Green BIM</title>
     <style>
         @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+        ::-webkit-scrollbar {
+            width: 15px;
+        }
+ 
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.4); 
+            border-radius: 3px;
+        }
+ 
+        ::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6); 
+        }
         body {
             padding: 0px;
             margin: 0px;
@@ -54,6 +67,7 @@
             height: auto;
             position: absolute;
             top: 0%;
+            opacity: 0;
         }
         .root {
             position: relative;                         /*樓層div*/
@@ -73,7 +87,8 @@
             width: 100%;
             height: auto;
         }
-        .sidebar {                                     /*電梯div*/
+        .sidebar {      
+            position: relative;                               /*電梯div*/
             background-color: lightgray;
         }
         .loading_page {   
@@ -213,16 +228,6 @@
             background: -o-linear-gradient(#33ccff, white);
             background: -moz-linear-gradient(#33ccff, white);
             background: linear-gradient(#33ccff, white);*/
-        }
-        .outside_imagediv {                             /*外側的背景圖片div*/
-            position: fixed;
-            background-image: url('cloud.jpg');
-            background-size: cover;
-        }
-        .outside_imagediv2 {
-            position: fixed;
-            background-image: url('cloud2.jpg');
-            background-size: cover;
         }
         .wall {                                        /*外牆圖片*/
             width:100%;
@@ -397,10 +402,30 @@
         .grass {
             position: absolute;
             z-index: 10;
-            width: 100%;
+            width: 129.9%;
             height: 10%;
             top: 90%;
             left: 0%;
+        }
+        .background_div {
+            z-index: -2;
+        }
+        .background_img {
+            position: fixed;
+            z-index: -1; 
+        }
+        .soil {
+            width: 100%;
+            height: 100%;
+        }
+        .clickicon {
+            position: absolute;
+            width: 10%;
+            height: auto;
+            top:45%;
+            left: 95%;
+            z-index: 10;
+            display: none;
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>    
@@ -544,7 +569,12 @@
                 changeheight();
                 $("html,body").delay(2000).animate({scrollTop: (4*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 800);
                 setTimeout(function(){$("body").disableScroll();}, 2800);
+                $(".clickicon").delay(2700).fadeIn(200).delay(300).fadeOut(200);
+                setTimeout(function(){$(".clickicon").css("left",113 + "%");}, 3400);
+                $(".clickicon").delay(900).fadeIn(200).delay(300).fadeOut(200);
                 $("#door5,#1F_wall").delay(3000).fadeOut(300).delay(2000).fadeIn(300);
+                $(".man").delay(3350).animate({left: 58 + "%"},200);
+                $(".man").delay(1250).animate({left: 70. + "%"},200);
                 setTimeout(function(){$("body").enableScroll();}, 5600);
                 $(".ATT_black").css("display","none");
                 $(".img_gallery_black").animate({width:"0%"},10);
@@ -576,7 +606,7 @@
             }); 
             function parallaxScroll(){
                 scrolled = $(window).scrollTop();
-                $('.outside_imagediv,.outside_imagediv2').css('top',(0-(scrolled*.25))+'px');
+                $('.background_img').css('top',(0-(scrolled*.25))+'px');
             } 
             $.fn.disableScroll = function() {
                 window.oldScrollPos = $(window).scrollTop();            
@@ -598,14 +628,13 @@
                 $('.root img').height(root_height + "px");
                 $('.root').height($('.root img').height());
                 $('.sidebar').height(h*5 + "px");
-                $('.outside').height(h*5 + "px");
+                $('.outside').height((h*5+roof_height+root_height) + "px");
+                $('background_img').height((h*5+roof_height+root_height) + "px").width(100 +"%");
                 $('.floor').height($('.floor_bg').css('height'));
                 $('.wall').height($('.floor_bg').css('height')).width($('.floor_bg').css('width'));
                 $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.ATT_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
-                $('.outside_imagediv').width($('.col-1').css('width')).height($('.outside').css('height'));
-                $('.outside_imagediv2').width($('.col-2').css('width')).height($('.outside').css('height'));
                 $('.door').attr('width',w/50).attr('height',h*7/10).attr('y',0).attr('x',0);
                 if (elevator_top < roof_height) {
                     $('.elevator_div,.elevator_div .elevator').css({"top":roof_height +"px"});
@@ -613,9 +642,9 @@
                     $('.elevator_div .man').css({"top":roof_height + h*0.7*0.25 +"px"});
                 }
                 else {
-                    $('.elevator_div').css({"width":"100%","height":h*0.7+"px","top":elevator_top +"px"});
-                    $('.elevator_div .man').css({"width":"18.75%","height":"auto","top":elevator_top + h*0.7*0.25 +"px"});
-                    $('.elevator_div .elevator').css({"width":"18.75%","height":"auto","top":elevator_top +"px"});
+                    $('.elevator_div').css({"top":elevator_top +"px"});
+                    $('.elevator_div .man').css({"top":elevator_top + h*0.7*0.25 +"px"});
+                    $('.elevator_div .elevator').css({"top":elevator_top +"px"});
                 }
                 $('.SD_text_inner1').attr({"x":"50%","y":"40%","font-size": innerWidth*0.02 + "px"});
                 $('.SD_text_inner2').attr({"x":"50%","y":"70%","font-size": innerWidth*0.026 + "px"});
@@ -640,6 +669,9 @@
 </head>
 <body>
     <div class="body-wrap">
+        <div class="background_div">
+            <img src="background.jpg" class="background_img">
+        </div>
         <div class="loading_page">
             <div class='loader loader--circularSquare'></div>
         </div>
@@ -711,8 +743,6 @@
         <div class="row">
             <div class="col-1 col-m-1">
                 <div class="outside">
-                    <div class="outside_imagediv">
-                    </div>
                 </div>
             </div>
             <div class="col-13 col-m-13">
@@ -775,6 +805,7 @@
                         <svg class="door_svg">
                             <rect class="door" id="door5" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
+                        <img src="clickicon.png" class="clickicon">
                         <img src="grass.png" class="grass">
                     </div>
                 </div>
@@ -787,13 +818,11 @@
                     </div>
                 </div>
                 <div class="root">
-                    <img src="grass.png">
+                    <img src="soil.png" class="soil">
                 </div>
             </div>
             <div class="col-2 col-m-2">
                 <div class="outside">
-                    <div class="outside_imagediv2" style="background-position:right top;">
-                    </div>
                 </div>
             </div>
         </div>
