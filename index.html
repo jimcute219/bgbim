@@ -163,8 +163,6 @@
             margin-top: 10%;
             text-align: left;
             text-indent: 30px;
-            color: white;
-            font-family: Arial, Helvetica, sans-serif;
             font-size: 25px;
         }
         .ATT_blackcontent div {                            /*彈出式div內容 分左右半邊*/
@@ -262,6 +260,42 @@
             top: 30%;
             right: 0%;
         }
+        .INT_infodesk {
+            position: absolute;
+            left: 37%;
+            top: 38%;
+            width: 27%;
+            z-index: 2;
+        }
+        .ROOF_potplant {
+            position: absolute;
+            left: 2%;
+            top: 77%;
+            width: 50%;
+            z-index: 2;
+        }
+        .ATT_fan {
+            position: absolute;
+            left: 66%;
+            top: 44%;
+            width: 15%;
+            z-index: 2;
+        }
+        .ATT_project {
+            position: absolute;
+            left: 14.5%;
+            top: 3%;
+            width: 68%;
+            z-index: 2;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        .ATT_project:hover {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+        }
         .SD_intro {
             position: absolute;
             left: 64%;
@@ -274,6 +308,14 @@
             top: 3.1%;
             width: 27%;
             z-index: 2;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        .SD_tvwebpage:hover {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
         }
         .SD_tvroofdata {
             position: absolute;
@@ -281,6 +323,14 @@
             top: 2.3%;
             width: 30.2%;
             z-index: 2;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        .SD_tvroofdata:hover {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
         }
         .SD_text {
             position: absolute;
@@ -305,44 +355,20 @@
             -webkit-transform: scale(1.1);
             transform: scale(1.1);
         }
-        .wall_left {
-            position: absolute;
-            z-index: 3;
-            width: 2%;
-            height: 100%;
-            top: 0%;
-            left: 0%;
-        }
-        .wall_right {
-            position: absolute;
-            z-index: 3;
-            width: 2%;
-            height: 100%;
-            top: 0%;
-            right: 0%;
-        }
-        .wall_top {
-            position: absolute;
-            z-index: 3;
-            width: 100%;
-            height: 3.1%;
-            top: 0%;
-            left: 0%;
-        }
-        .wall_button {
-            position: absolute;
-            z-index: 3;
-            width: 100%;
-            height: 3.1%;
-            top: 96.9%;
-            left: 0%;
-        }
         .MOD_toybox {
             position: absolute;
             left: 65.5%;
             top: 62%;
             width: 22.6%;
             z-index: 2;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        .MOD_toybox:hover {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
         }
         .MOD_island {
             position: absolute;
@@ -350,6 +376,29 @@
             top: 9%;
             width: 52.2%;
             z-index: 2;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        .MOD_island:hover {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+        .INT_license {
+            position: absolute;
+            left: 44%;
+            top: 74%;
+            width: 11%;
+            z-index: 2;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out; 
+        }
+        .INT_license:hover {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
         }
         .elevator_div {
             position: fixed;
@@ -380,16 +429,16 @@
             top: 0%;
             left: 100%;
         }
-        .arrow_left {
+        .att_arrow_left {
             position: fixed;
             top: 50%;
             left: 6.25%;
             z-index: 11;
             padding: 0px;
             height: 15%;
-            width: 4%
+            width: 4%;
         }
-        #arrow_left {
+        #att_arrow_left {
             position:absolute; 
             left:0%; 
             -moz-transform: scaleX(-1);
@@ -402,7 +451,7 @@
             height: auto;
             opacity: 0.4;
         }
-        .arrow_right {
+        .att_arrow_right {
             position: fixed;
             top: 50%;
             left: 82%;
@@ -411,7 +460,7 @@
             height: 15%;
             width: 4%;
         }
-        #arrow_right {
+        #att_arrow_right {
             position:absolute; 
             right:0%;
             width: 80%;
@@ -486,7 +535,7 @@
           float:left;  
           position: relative;  
         }  
-        .flip div{  
+        .flip div,.flip2 div,.flip3 div{  
           width: 100%;  
           height: 100%;  
           position: absolute;  
@@ -494,7 +543,7 @@
           top: 0;  
           box-shadow: 2px 2px 20px rgba(0,0,0,.5);  
         }   
-        .flip div:before{   
+        .flip div:before,.flip2 div:before,.flip3 div:before{   
           width:100%;  
           height:30px;  
           position:absolute;  
@@ -505,26 +554,62 @@
           color:#fff;  
           background-color:rgba(0,0,0,.3);  
         }   
-        .flip div.front{  
+        .flip div.front {  
           background: url(mod_img1.png); 
           background-size:100% 100%; 
           z-index: 1;  
         }  
-        .flip div.back{  
+        .flip div.back {  
           background: url(mod_img2.jpg); 
           background-size:100% 100%; 
           z-index: 2;  
-        }  
-        .flip{  
+        } 
+        .flip,.flip2,.flip3{  
           perspective: 1000px;  
         }  
-        .flip div{   
+        .flip div,.flip2 div,.flip3 div{   
           transition: all 1s ease;   
           transform-style: preserve-3d;   
           backface-visibility: hidden;  
         }   
-        .flip:hover div.front{ z-index: 2;;}  
-        .flip:hover div.back{ z-index: 1;;} 
+        .flip2{  
+          width:730px;  
+          height: 450px;  
+          margin:10px;  
+          float:right;  
+          position: relative; 
+          margin-right: 70px;  
+        }      
+        .flip2 div.front {  
+          background: url(mod_img3.jpg); 
+          background-size:100% 100%; 
+          z-index: 1;  
+        }  
+        .flip2 div.back {  
+          background: url(mod_img4.jpg); 
+          background-size:100% 100%; 
+          z-index: 2;  
+        } 
+        .flip3{  
+          width:550px;  
+          height: 300px;  
+          margin:10px;  
+          float:left;  
+          position: relative; 
+          margin-right: 70px;  
+        }      
+        .flip3 div.front {  
+          background: url(mod_img5.jpg); 
+          background-size:100% 100%; 
+          z-index: 1;  
+        }  
+        .flip3 div.back {  
+          background: url(mod_img6.jpg); 
+          background-size:100% 100%; 
+          z-index: 2;  
+        } 
+        .flip:hover div.front,.flip2:hover div.front,.flip3:hover div.front{ z-index: 2;;}  
+        .flip:hover div.back,.flip2:hover div.back,.flip3:hover div.back{ z-index: 1;;} 
         .Y div.back{ transform:rotateY(180deg);}  
         .Y:hover div.front{ transform:rotateY(180deg);}  
         .Y:hover div.back{ transform:rotateY(0deg);}  
@@ -585,7 +670,7 @@
                 $('.blackcontent').children().css("display","none").delay(100).fadeIn(750);
                 changeheight(); 
             });
-            $('.SD_tvwebpage').bind('click',function(){                    //blackbutton叫出black
+            $('.ATT_project').bind('click',function(){                    //blackbutton叫出black
                 $('.ATT_black').css("top",window.pageYOffset + "px").show(); 
                 $(".ATT_blackcontent").animate({scrollTop: 0},10);
                 $('.ATT_blackcontent *').css("display","none").delay(100).fadeIn(750);
@@ -601,37 +686,37 @@
             $('.MOD_island').bind('click',function(){                    //blackbutton叫出black
                 $('.MOD_black').css("top",window.pageYOffset + "px").animate({height: window.innerHeight});
             });
-            $('.black').on('click', function(e){                   //black的click效果(消失)
+            $('.black,.black_cross').on('click', function(e){                   //black的click效果(消失)
                 var target = $(e.target);
-                if (target.attr('class') == 'black') {
+                if (target.attr('class') == 'black'||target.attr('class') == 'black_cross') {
                     $(this).hide();
                     changeheight();
                 }
             });
-            $('.ATT_black').on('click', function(e){                   //black的click效果(消失)
+            $('.ATT_black,.att_black_cross').on('click', function(e){         
                 var target = $(e.target);
-                if (target.attr('class') == 'ATT_black') {
+                if (target.attr('class') == 'ATT_black'||target.attr('class') == 'att_black_cross') {
                     $(this).hide();
                     changeheight();
-                    $('#arrow_left').css("opacity",0.5);
-                    $('#arrow_right').css("opacity",1);
+                    $('#att_arrow_left').css("opacity",0.5);
+                    $('#att_arrow_right').css("opacity",1);
                 }
             });
-            $('.img_gallery_black').on('click', function(e){                   
+            $('.img_gallery_black,img_gallery_cross').on('click', function(e){                   
                 var target = $(e.target);
-                if (target.attr('class') == 'img_gallery_black') {
+                if (target.attr('class') == 'img_gallery_black'||target.attr('class') == 'img_gallery_cross') {
                     $(this).animate({width:"0%"});
                     changeheight();
                 }
             });
-            $('.MOD_black').on('click', function(e){                   
+            $('.MOD_black,mod_black_cross').on('click', function(e){                   
                 var target = $(e.target);
-                if (target.attr('class') == 'MOD_black') {
+                if (target.attr('class') == 'MOD_black'||target.attr('class') == 'mod_black_cross') {
                     $(this).animate({height:"0%"});
                     changeheight();
                 }
             });
-            $('#arrow_right').bind('click',function(){
+            $('#att_arrow_right').bind('click',function(){
                 if (att_content_number >= 1 && att_content_number < 3) {
                     att_content_number += 1;
                     $("#att_content" + (att_content_number-1)).animate({left: -100 + '%'},300);
@@ -647,14 +732,14 @@
                         }
                     }
                     if (att_content_number == 3)  {
-                        $('#arrow_right').css("opacity",0.4);
+                        $('#att_arrow_right').css("opacity",0.4);
                     } 
                     else {
-                        $('#arrow_left,#arrow_right').css("opacity",1);
+                        $('#att_arrow_left,#att_arrow_right').css("opacity",1);
                     }
                 }      
             });
-            $('#arrow_left').bind('click',function(){
+            $('#att_arrow_left').bind('click',function(){
                 if (att_content_number > 1 && att_content_number <= 3) {       
                     att_content_number -= 1;
                     $("#att_content" + (att_content_number+1)).animate({left: 100 + '%'},300);
@@ -670,26 +755,26 @@
                         }
                     } 
                     if (att_content_number == 1)  {
-                        $('#arrow_left').css("opacity",0.4);
+                        $('#att_arrow_left').css("opacity",0.4);
                     } 
                     else {
-                        $('#arrow_left,#arrow_right').css("opacity",1);
+                        $('#att_arrow_left,#att_arrow_right').css("opacity",1);
                     }
                 }            
             });
             $(window).load(function() {                            //讓loading_page load完之後消失
-                $(".loading_page").delay(1000).fadeOut(1000);
-                setTimeout(function(){$('body').css("overflow", "scroll");changeheight();}, 1000);
+                $(".loading_page").delay(2000).fadeOut(1000);
+                setTimeout(function(){$('body').css("overflow", "scroll");changeheight();}, 2000);
                 changeheight();
-                $("html,body").delay(2000).animate({scrollTop: (4*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 800);
-                setTimeout(function(){$("body").disableScroll();}, 2800);
-                $(".clickicon").delay(2700).fadeIn(200).delay(300).fadeOut(200);
-                setTimeout(function(){$(".clickicon").css("left",113 + "%");}, 3400);
-                $(".clickicon").delay(900).fadeIn(200).delay(300).fadeOut(200);
-                $("#door5,#1F_wall").delay(3000).fadeOut(300).delay(2000).fadeIn(300);
-                $(".man").delay(3350).animate({left: 58 + "%"},200);
-                $(".man").delay(1250).animate({left: 70. + "%"},200);
-                setTimeout(function(){$("body").enableScroll();}, 5600);
+                $("html,body").delay(3000).animate({scrollTop: (4*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 800);
+                setTimeout(function(){$("body").disableScroll();}, 3800);
+                $(".clickicon").delay(3900).fadeIn(200).delay(400).fadeOut(200);
+                setTimeout(function(){$(".clickicon").css("left",113 + "%");}, 4700);
+                $(".clickicon").delay(1100).fadeIn(200).delay(400).fadeOut(200);
+                $("#door5,#1F_wall").delay(4400).fadeOut(300).delay(2000).fadeIn(300);
+                $(".man").delay(4800).animate({left: 58 + "%"},200);
+                $(".man").delay(1450).animate({left: 70. + "%"},200);
+                setTimeout(function(){$("body").enableScroll();}, 6600);
                 $(".ATT_black").css("display","none");
                 $(".img_gallery_black").animate({width:"0%"},10);
                 $(".MOD_black").animate({height:"0%"},10);
@@ -769,9 +854,9 @@
                 $('.wall_right_rect').attr('width',w/50).attr('height',h).attr('y',0).attr('x',0);
                 $('.wall_top_rect').attr('width',w).attr('height', h/1300*40).attr('y',0).attr('x',0);
                 $('.wall_button_rect').attr('width',w).attr('height', h/1300*40).attr('y',0).attr('x',0);
-                $('.ATT_blackcontent p').css({"font-size": innerWidth*0.016 + "px"});
-                $('.ATT_blackcontent h1').css({"font-size": innerWidth*0.033 + "px"});
-                $('.ATT_blackcontent h5').css({"font-size": innerWidth*0.023 + "px"});
+                $('p').css({"font-size": innerWidth*0.016 + "px"});
+                $('h1').css({"font-size": innerWidth*0.033 + "px"});
+                $('h5').css({"font-size": innerWidth*0.023 + "px"});
                 if ($('.img_gallery_black').css("width") != "0px") {
                     $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 }
@@ -791,14 +876,15 @@
 <body>
     <div class="body-wrap">
         <div class="background_div">
-            <img src="background.jpg" class="background_img">
+            <img src="sky.png" class="background_img">
         </div>
         <div class="loading_page">
             <div class='loader loader--circularSquare'></div>
         </div>
         <div class="img_gallery_black">
             <div class="img_gallery">
-                <div style="padding: 15px">
+                <div style="padding: 15px;position:relative;">
+                    <img src="cross_icon.png" style="position:absolute;top:0%;left:92%;" width = "8%" height = "auto" class="img_gallery_cross">
                     <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
                     <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
                     <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
@@ -809,25 +895,29 @@
         </div>
         <div class="black">
             <div class="blackcontent">
+                <img src="cross_icon.png" style="position:absolute;top:2%;left:95%;" width = "4%" height = "auto" class="black_cross">
                 <div>
                     <h1>Software Development</h1>
-                    <img src="thumb_dsc01763_1024.jpg" width="100%" height="50%">
+                    <img src="SD_img.jpg" width="100%" height="auto" style="padding:20px">
                 </div>
-                <div>
-                    <p>"Never increase, beyond what is necessary, the number of entities required to explain anything." William of Ockham (1285-1349),Free Web Building Tutorials At W3Schools you will find all the Web-building tutorials you need.W3Schools.com - The largest Web Developers' Site on the internet!
+                <div style="padding: 20px;color: #c3d825; font-family: 'Noto Sans TC', sans-serif;">
+                    <p>程式開發組主要目的為利用程式輔助各組進行分析和操作，所學範圍從基礎的C#、REVIT API
+                    到前後端網頁設計，希望藉由程式當作各組溝通的橋樑，將現有數據轉換成可讀的資料，分析過後
+                    再上傳網站將成果展示。
                     </p>
                 </div>
             </div>
         </div>
         <div class="ATT_black">
-            <div class="arrow_left">
-                <img src="arrow_right.png" id="arrow_left">
+            <div class="att_arrow_left">
+                <img src="arrow_right.png" id="att_arrow_left">
             </div>
-            <div class="arrow_right">
-                <img src="arrow_right.png" id="arrow_right">
+            <div class="att_arrow_right">
+                <img src="arrow_right.png" id="att_arrow_right">
             </div>
             <div class="ATT_blackcontent">
                 <div style="padding: 90px" id="att_content1">
+                    <img src="cross_icon.png" style="position:fixed;top:5%;left:83%;z-index:11;" width = "3%" height = "auto" class="att_black_cross">
                     <h1>專案介紹－樹德夢工廠<br></h1>
                     <p>
                     &nbsp;&nbsp;在此專案中，我們學生團隊在樹德夢工廠的設計階段中，透過使用分析軟體進行模擬果，並依據結果來提供設計上的建議；反之，也可以將目前的設計，透過軟體來分析其優劣，並從中改善當前設計。在這項模擬中，我們使用為軟體 Ecotect 來進行分析，並建立樹德夢工廠的簡易模型，且著墨於辦公大樓的部分。於計畫開始時，大樓大部份的開窗尚未決定，所以我們透過思考方案，使用Ecotect建出了三種辦公室的開窗模型： 1.落地窗 2.大排開窗 3.簡單開窗，並透過軟體本身的日照、陰影模擬功能，了解各種開窗方式、位置受日照的影響，以及室內的照度值，最後探討各方案須補足的室內照明，以及辦公室各個主要區域較適合的開窗方式。
@@ -863,22 +953,74 @@
         </div>
         <div class="MOD_black">
             <div class="MOD_blackcontent">
-                <div style="padding: 90px" id="MOD_content1">
-                    <h1>一、前言</h1>
+                <div style="padding: 70px;margin: 20px;" id="MOD_content1">
+                    <img src="cross_icon.png" style="position:absolute;top:5%;left:94%;" width = "4%" height = "auto" class="mod_black_cross">
+                    <h1>前言</h1>
                     <p>&nbsp;&nbsp;本案未來所設計與建置的綠屋頂將位於台灣大學土木工程學系研究大樓頂，其設計概念參考英國團隊目前使用中的綠屋頂，為了使英國團隊在未來能提供廠商(ALUMASC)視覺化的綠屋頂建模，同時可用於能耗相關分析，因此期望繪製綠屋頂元件，增進後續階段不管是呈現上、溝通上、分析上的效率，甚至能上傳網路空間供其他相關單位使用。</p>
                     <p>&nbsp;&nbsp;目前英國團隊共使用三種類型的屋頂如圖1，主要差別為灌溉層的類型，透過不同綠屋頂類型，比較效率與功能上較好的綠屋頂。為了能進行進一步的分析，綠屋頂各分層數據也相當重要，目前根據廠商提供資料整理各層數據如表1，欠缺部分尚未獲得相關數據，將於未來繼續向廠商詢問。<br></p>
                     <p>&nbsp;&nbsp;藉由以上資料與數據期望使用Autodesk Revit 軟體繪製綠屋頂元件以達到以下目標:<br>
                     1.  提供完整的綠屋頂模型樣板提供有需求者日後使用<br>
                     2.  綠屋頂模型中各分層提供足夠的數據資料供日後分析使用。<br>
                     3.  期望使用者可以簡單、快速依照需求，改變模型的規格與數據資料。</p>
-                    <div class="container">  
-                        <div class="flip Y">  
-                            <div class="front">
+                    <div>
+                        <div class="container">  
+                            <div class="flip Y" style="padding: 20px;margin-bottom:50px;">  
+                                <div class="front" id="MOD1_front">
+                                </div>  
+                                <div class="back" id="MOD1_back">
+                                </div>  
                             </div>  
-                            <div class="back">
-                            </div>  
-                        </div>  
+                        </div>
+                    </div> 
+                    <div style="float:left">
+                        <p>圖1.三種綠屋頂剖面示意圖</p>
+                        <p>表1.三種綠屋頂數據資料(ALUMASC提供)</p>
                     </div>
+                </div>
+                <div style="padding: 90px" id="MOD_content2">
+                    <h1>用建立族群的方式建構綠屋頂元件<br></h1>
+                    <p>
+                    &nbsp;&nbsp;為了方便使用者日後能快速利用綠屋頂元件，建立已經定義好的族群是最先考慮的方式，使用者不須備有操作Revit的知識，只需了解匯入族群即可使用綠屋頂模型，對使用者而言簡易且方便。
+                    </p>
+                    <p>建立族群須於Revit的族群樣板中繪製模型，由於未來期望使用者匯入綠屋頂族群後，只能將其放置於專案模型的屋頂上，因此初始設定選擇「屋頂樣板」，將族群繪製在內建的屋頂樣板上方，以清楚定義綠屋頂族群的角色，避免使用者誤用。族群模型的建立相對於專案中模型繪製簡易許多，利用不同厚度的長方體代表綠屋頂不同分層，同時藉由顏色與材質設定將綠屋頂的架構視覺化。其中由於灌溉層為數個小型杯狀盒構成，也是不同類型綠屋頂差異最為明顯的部分，因此最初繪製特別加以塑形以符合實際外觀如圖2，然而完成後發現由於杯狀模型會消耗電腦資源，在後續更改模型或是匯入模型皆會造成軟體運算變慢，考量使用者使用時的便利性以及未來修正模型的效率，最後將灌溉層簡化為長方體，使用較為顯眼的顏色如圖3，提醒使用者該層重要性，同時優化模型使用時便利性。</p>
+                    <div>
+                        <div class="container">  
+                            <div class="flip2 Y" style="padding: 20px;margin-bottom:50px;">  
+                                <div class="front">
+                                </div>  
+                                <div class="back">
+                                </div>  
+                            </div>  
+                        </div>
+                    </div>
+                    <div style="float:left">
+                        <p>圖2 依實際外觀繪製的灌溉層</p>
+                        <p>圖3 簡化灌溉層增加使用便利性</p>
+                    </div>
+                </div>
+                <div style="padding: 90px" id="MOD_content3">
+                    <p>&nbsp;&nbsp;在族群模型中，相關數據的輸入簡易，但因Revit族群樣版的設計上並未提供族群內部自行分層的功能，因此各層的數據例如:灌溉層的總儲水量、土壤層的孔隙率、植被的種類等等，全部都記錄在一個族群模型中，無法將數據指派給各分層量體，即使用者匯入此綠屋頂模型後，會看到所有數據資料都在模型上，無法分層分類，容易造成混淆，日後若結合其他分析軟體也容易失準，不管是在概念上還是使用上都有相當的缺陷，無法滿足現階段的需求與目標。</p>
+                    <p>&nbsp;&nbsp;在依使用者需求改變模型的部分，族群建模最大的限制為無法自由更改綠屋頂族群的形狀，雖然我們將綠屋頂族群設定為1平方公尺的大小，供使用自行匯入放置製成各種大小的綠屋頂，然而若是不規則形或是長寬非整數大小者，使用者放置次族群時自由度將大幅下降，為族群建模最大缺點。另一方面，族群建模中在多類別族群的匯入上有其優勢。本案中共有三種類型的綠屋頂元件(TypeA、TypeB、TypeC)，我們可利用Revit的巢狀物件功能，讓使用者只需要匯入一個族群模型，即可根據自己的需求任意切換屋頂類型:
+                    <div>
+                        <div class="container">  
+                            <div class="flip3 Y" style="padding: 20px;margin-bottom:50px;">  
+                                <div class="front">
+                                </div>  
+                                <div class="back">
+                                </div>  
+                            </div>  
+                        </div>
+                    </div>
+                    <div style="float:right">
+                        <p>圖4 加入族群參數</p>
+                        <p>圖5 使用者可快速依自己需求切換屋頂類型</p>
+                    </div>
+                </div>
+                <div style="margin-left: 90px;margin-bottom: 90px;float:left;" id="MOD_content4">
+                    <p>Step1 在一個族群檔案中同時匯入所有屋頂類型的族群模型。</p>
+                    <p>Step2 在此族群模型中加入族群參數，如圖4，並給予名稱&nbsp;ex:green_roof。</p>
+                    <p>Step3 將此族群匯入專案中，即可於於參數green_roof中切換類型，如圖5。</p>
+                    <p>&nbsp;&nbsp;族群模型最大優勢為使用者容易使用、巢狀物件支援快速切換族群模型類型，降低使用者使用上的困難度，但在後續進一步於自由塑形、數據資料分析上有其限制。使用族群模型建立綠屋頂元件為一開始較為直觀的想法，卻無法完全符合我們的需求，因此在下一階段開始嘗試不同的方式建立綠屋頂元件。</p>
                 </div>
             </div>
         </div>
@@ -893,18 +1035,21 @@
                 </div>
                 <div class="col-in-10 col-m-in-10">
                     <div class="floor">
-                        <img src="5F.png" class="floor_bg">
+                        <img src="ROOF_bg.png" class="floor_bg">
                         <img src="ROOF_wall.png" class="wall">
                         <svg class="door_svg">
                             <rect class="door" id="door1" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
+                        <img src="ROOF_potplant.png" class="ROOF_potplant">
                     </div>
                     <div class="floor" >
-                        <img src="4F.png" class="floor_bg">
+                        <img src="ATT_bg.png" class="floor_bg">
                         <img src="ATT_wall.png" class="wall">
                         <svg class="door_svg">
                             <rect class="door" id="door2" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
+                        <img src="ATT_project.png" class="ATT_project">
+                        <img src="ATT_fan.png" class="ATT_fan">
                     </div>
                     <div class="floor">
                         <img src="SD_bg.png" class="floor_bg"> 
@@ -918,18 +1063,6 @@
                             <text class="SD_text_inner1" text-anchor="middle" fill="yellow" >Software</text>
                             <text class="SD_text_inner2" text-anchor="middle" fill="yellow" >Development</text>
                         </svg> 
-                        <svg class="wall_left">
-                            <rect class="wall_left_rect" style="fill:#000033">
-                        </svg> 
-                        <svg class="wall_right">
-                            <rect class="wall_right_rect" style="fill:#000033">
-                        </svg>
-                        <svg class="wall_top">
-                            <rect class="wall_top_rect" style="fill:#000033">
-                        </svg>
-                        <svg class="wall_button">
-                            <rect class="wall_button_rect" style="fill:#000033">
-                        </svg>
                         <img src="SD_wall.png" class="wall">
                     </div>
                     <div class="floor">
@@ -942,13 +1075,15 @@
                         </svg> 
                     </div>
                     <div class="floor">
-                        <img src="1F.png" class="floor_bg">
+                        <img src="INT_bg.png" class="floor_bg">
                         <img src="INT_wall.png" class="wall" id="1F_wall">
                         <svg class="door_svg">
                             <rect class="door" id="door5" x="50" y="20" width="150" height="150" style="fill:#cc6600">
                         </svg>
+                        <img src="INT_infodesk.png" class="INT_infodesk">
                         <img src="clickicon.png" class="clickicon">
                         <img src="grass.png" class="grass">
+                        <img src="INT_license.png" class="INT_license">
                     </div>
                 </div>
                 <div class="col-in-3 col-m-in-3">
