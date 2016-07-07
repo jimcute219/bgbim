@@ -831,12 +831,12 @@
                 h = parseFloat($('.floor_bg').css('height').replace("px", ""));
                 elevator_top = (window.innerHeight - h)/2 + h*0.3 ;
                 root_height = window.innerHeight - 20 - (elevator_top + h*0.7);
+                $('.background_img').css({"width":window.innerWidth +"px","height": (4*h + roof_height -(window.innerHeight - h)/2)*0.25 + window.innerHeight +'px'});
                 $('.roof').height($('.roof img').css('height'));
                 $('.root img').height(root_height + "px");
                 $('.root').height($('.root img').height());
                 $('.sidebar').height(h*5 + "px");
                 $('.outside').height((h*5+roof_height+root_height) + "px");
-                $('background_img').height((h*5+roof_height+root_height) + "px").width(100 +"%");
                 $('.floor').height($('.floor_bg').css('height'));
                 $('.wall').height($('.floor_bg').css('height')).width($('.floor_bg').css('width'));
                 $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
