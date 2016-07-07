@@ -802,9 +802,9 @@
             $(window).bind('scroll',function(e){                   //左右兩側滾動視差
                 scrolled = $(window).scrollTop();
                 parallaxScroll();
-                if (scrolled < (roof_height - elevator_top)) {
-                    $('.elevator_div,.elevator_div .elevator').css({"top":roof_height-scrolled +"px"});
-                    $('.elevator_div .man').css({"top":roof_height-scrolled + h*0.7*0.25 +"px"});
+                if (scrolled < (roof_height - elevator_top + 20)) {
+                    $('.elevator_div,.elevator_div .elevator').css({"top":roof_height-scrolled+20 +"px"});
+                    $('.elevator_div .man').css({"top":roof_height-scrolled + h*0.7*0.25+20 +"px"});
                 }
                 else {
                     $('.elevator_div,.elevator_div .elevator').css({"top":elevator_top +"px"});
@@ -844,14 +844,14 @@
                 $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.door').attr('width',w/50).attr('height',h*7/10).attr('y',0).attr('x',0);
                 if (elevator_top < roof_height) {
-                    $('.elevator_div,.elevator_div .elevator').css({"top":roof_height +"px"});
-                    $('.elevator_div .elevator').css({"top":roof_height +"px"});
-                    $('.elevator_div .man').css({"top":roof_height + h*0.7*0.25 +"px"});
+                    $('.elevator_div,.elevator_div .elevator').css({"top":roof_height+20 +"px"});
+                    $('.elevator_div .elevator').css({"top":roof_height+20 +"px"});
+                    $('.elevator_div .man').css({"top":roof_height + h*0.7*0.25+20 +"px"});
                 }
                 else {
-                    $('.elevator_div').css({"top":elevator_top +"px"});
-                    $('.elevator_div .man').css({"top":elevator_top + h*0.7*0.25 +"px"});
-                    $('.elevator_div .elevator').css({"top":elevator_top +"px"});
+                    $('.elevator_div').css({"top":elevator_top+20 +"px"});
+                    $('.elevator_div .man').css({"top":elevator_top + h*0.7*0.25+20 +"px"});
+                    $('.elevator_div .elevator').css({"top":elevator_top+20 +"px"});
                 }
                 $('.SD_text_inner1').attr({"x":"50%","y":"40%","font-size": innerWidth*0.02 + "px"});
                 $('.SD_text_inner2').attr({"x":"50%","y":"70%","font-size": innerWidth*0.026 + "px"});
