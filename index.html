@@ -91,6 +91,13 @@
             position: relative;                               /*電梯div*/
             background-color: lightgray;
         }
+        .elevator_back {
+            position: absolute;
+            top: 0%;
+            right: 0%;
+            width: 100%;
+            height: 100%;
+        }
         .loading_page {   
             display: block;                              /*loading頁面*/
             background: gainsboro;
@@ -276,16 +283,16 @@
         }
         .ATT_fan {
             position: absolute;
-            left: 66%;
-            top: 44%;
-            width: 15%;
+            left: 76%;
+            top: 40%;
+            width: 17%;
             z-index: 2;
         }
         .ATT_project {
             position: absolute;
-            left: 14.5%;
+            left: 15%;
             top: 3%;
-            width: 68%;
+            width: 63%;
             z-index: 2;
             -webkit-transform: scale(1);
             transform: scale(1);
@@ -413,7 +420,7 @@
         .elevator_div .elevator {
             position: fixed;
             z-index: 9;
-            width: 18.75%;
+            width: 17.5%;
             height: auto;
             left: 68.75%;
         }
@@ -768,13 +775,13 @@
                 changeheight();
                 $("html,body").delay(3000).animate({scrollTop: (4*h + roof_height -(window.innerHeight - h)/2 ) +'px'}, 800);
                 setTimeout(function(){$("body").disableScroll();}, 3800);
-                $(".clickicon").delay(3900).fadeIn(200).delay(400).fadeOut(200);
-                setTimeout(function(){$(".clickicon").css("left",113 + "%");}, 4700);
-                $(".clickicon").delay(1100).fadeIn(200).delay(400).fadeOut(200);
-                $("#door5,#1F_wall").delay(4400).fadeOut(300).delay(2000).fadeIn(300);
-                $(".man").delay(4800).animate({left: 58 + "%"},200);
-                $(".man").delay(1450).animate({left: 70. + "%"},200);
-                setTimeout(function(){$("body").enableScroll();}, 6600);
+                $(".clickicon").delay(3900).fadeIn(400).delay(400).fadeOut(400);
+                setTimeout(function(){$(".clickicon").css("left",113 + "%");}, 5100);
+                $(".clickicon").delay(1500).fadeIn(400).delay(400).fadeOut(400);
+                $("#door5,#1F_wall").delay(4600).fadeOut(400).delay(2200).fadeIn(400);
+                $(".man").delay(5200).animate({left: 58 + "%"},200);
+                $(".man").delay(1850).animate({left: 70. + "%"},200);
+                setTimeout(function(){$("body").enableScroll();}, 7200);
                 $(".ATT_black").css("display","none");
                 $(".img_gallery_black").animate({width:"0%"},10);
                 $(".MOD_black").animate({height:"0%"},10);
@@ -876,7 +883,7 @@
 <body>
     <div class="body-wrap">
         <div class="background_div">
-            <img src="sky.png" class="background_img">
+            <img src="sky5.png" class="background_img">
         </div>
         <div class="loading_page">
             <div class='loader loader--circularSquare'></div>
@@ -1088,6 +1095,7 @@
                 </div>
                 <div class="col-in-3 col-m-in-3">
                     <div class="sidebar">
+                        <img src="elevator_back.png" class="elevator_back">
                     </div>
                     <div class="elevator_div">
                         <img src="elevator.png" class="elevator">
