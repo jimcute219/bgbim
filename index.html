@@ -496,8 +496,8 @@
             position: absolute;
             width: 10%;
             height: auto;
-            top:45%;
-            left: 95%;
+            top:40%;
+            left: 75%;
             z-index: 10;
             display: none;
         }
@@ -529,16 +529,9 @@
             font-family: 'Noto Sans TC', sans-serif;
             font-size: 35px;
         }
-         
-        .container{  
-            width:1320px;  
-            margin:50px auto;  
-        }  
-
         .flip{  
-          width:640px;  
-          height: 450px;  
-          margin:10px;  
+          width:100%;  
+          height: 100%;   
           float:left;  
           position: relative;  
         }  
@@ -580,12 +573,10 @@
           backface-visibility: hidden;  
         }   
         .flip2{  
-          width:730px;  
-          height: 450px;  
-          margin:10px;  
+          width:100%;  
+          height: 100%;  
           float:right;  
-          position: relative; 
-          margin-right: 70px;  
+          position: relative;  
         }      
         .flip2 div.front {  
           background: url(mod_img3.jpg); 
@@ -598,12 +589,10 @@
           z-index: 2;  
         } 
         .flip3{  
-          width:550px;  
-          height: 300px;  
-          margin:10px;  
+          width:100%;  
+          height: 100%;   
           float:left;  
-          position: relative; 
-          margin-right: 70px;  
+          position: relative;  
         }      
         .flip3 div.front {  
           background: url(mod_img5.jpg); 
@@ -634,6 +623,7 @@
             var elevator_top = (window.innerHeight - h)/2 + h*0.3 ;
             var root_height = window.innerHeight - 20 - (elevator_top + h*0.7);
             var current_wall = "";
+            var able_to_scroll;
             $('.wall').click(function(){
                 h = parseFloat($('.floor_bg').css('height').replace("px", ""));
                 roof_height = parseFloat($('.roof img').css('height').replace("px", "")); 
@@ -647,6 +637,7 @@
                             current_wall = $(this).attr('id');
                             setTimeout(function(){
                                 $("body").disableScroll();
+                                able_to_scroll = false;
                             }, 400);
                         }
                         else {                                                    //redundant
@@ -668,6 +659,7 @@
                 current_wall = "";
                 setTimeout(function(){
                     $("body").enableScroll();
+                    able_to_scroll = true;
                 }, 200);
             });
             $('.SD_text').bind('click',function(){                    //blackbutton叫出black
@@ -775,7 +767,7 @@
                 setTimeout(function(){$("body").disableScroll();}, 3800);
                 $(".clickicon").delay(3900).fadeIn(400).delay(400).fadeOut(400);
                 setTimeout(function(){$(".clickicon").css("left",113 + "%");}, 5100);
-                $(".clickicon").delay(1500).fadeIn(400).delay(400).fadeOut(400);
+                $(".clickicon").delay(1200).fadeIn(400).delay(400).fadeOut(400);
                 $("#door5,#wall5").delay(4600).fadeOut(400).delay(2200).fadeIn(400);
                 $(".man").delay(5200).animate({left: 58 + "%"},200);
                 $(".man").delay(1850).animate({left: 70. + "%"},200);
@@ -790,12 +782,26 @@
                 if (current_wall != "") {
                      for (var i = 1;i <=5; i++) {                              //redundant 直接抓
                         if (current_wall == ("wall"+ i)) {                                 
-                            $("html,body").scrollTop((i-1)*h + roof_height -(window.innerHeight - h)/2 );                                 
+                            $("html,body").scrollTop((i-1)*h + roof_height -(window.innerHeight - h)/2 );
+                            if ($('.ATT_black').is(':visible')) {$('.ATT_black').css({"top":window.pageYOffset + "px"})}
+                            if ($('.black').is(':visible')) {$('.black').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
+                            if ($('.img_gallery_black').css("width") != "0px") {
+                                $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"});
+                            }
+                            else {
+                                $('.img_gallery_black').css({"height":window.innerHeight+"px"});
+                            }
+                            if ($('.MOD_black').css("height") != "0px") {
+                                $('.MOD_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"});
+                            }
+                            else {
+                                $('.MOD_black').css({"width":window.innerWidth+"px"});
+                            }                                  
                             break;
                         }
                     }
                 }
-                $("body").disableScroll();
+                if (able_to_scroll == false) { $("body").disableScroll() };
             });
             $(window).bind('scroll',function(e){                   //左右兩側滾動視差
                 scrolled = $(window).scrollTop();
@@ -840,6 +846,12 @@
                 $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.ATT_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                $('#MOD_content1,#MOD_content2,#MOD_content3').css({"padding":window.innerWidth*0.056 +"px"});
+                $('.container1').css({"width":window.innerWidth*0.4 +"px","height":window.innerWidth*0.3 +'px',"padding":window.innerWidth*0.02 +"px"});
+                $('.container2').css({"width":window.innerWidth*0.4 +"px","height":window.innerWidth*0.3 +'px',"padding":window.innerWidth*0.02 +"px"});
+                $('.container3').css({"width":window.innerWidth*0.35 +"px","height":window.innerWidth*0.25 +'px',"padding":window.innerWidth*0.02 +"px"});
+                $('.container1text').css({"width":window.innerWidth*0.28 +"px","height":window.innerWidth*0.3 +'px',"padding":window.innerWidth*0.02 +"px"});
+                $('.container3text').css({"width":window.innerWidth*0.33 +"px","height":window.innerHeight*0.25 +'px',"padding":window.innerWidth*0.02 +"px"});
                 if (elevator_top < roof_height + innerWidth*0.1875*20/300) {
                     $('.elevator_div,.elevator_div .elevator').css({"top":roof_height + innerWidth*0.1875*20/300 +"px"});
                     $('.elevator_div .elevator').css({"top":roof_height + innerWidth*0.1875*20/300 +"px"});
@@ -861,14 +873,16 @@
                 $('p').css({"font-size": innerWidth*0.016 + "px"});
                 $('h1').css({"font-size": innerWidth*0.033 + "px"});
                 $('h5').css({"font-size": innerWidth*0.023 + "px"});
+                if ($('.ATT_black').is(':visible')) {$('.ATT_black').css({"top":window.pageYOffset + "px"})}
+                if ($('.black').is(':visible')) {$('.black').css({"top":window.pageYOffset + "px"})}
                 if ($('.img_gallery_black').css("width") != "0px") {
-                    $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                    $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":window.pageYOffset + "px"});
                 }
                 else {
                     $('.img_gallery_black').css({"height":window.innerHeight+"px"});
                 }
                 if ($('.MOD_black').css("height") != "0px") {
-                    $('.MOD_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                    $('.MOD_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":window.pageYOffset + "px"});
                 }
                 else {
                     $('.MOD_black').css({"width":window.innerWidth+"px"});
@@ -957,65 +971,60 @@
         </div>
         <div class="MOD_black">
             <div class="MOD_blackcontent">
-                <div style="padding: 70px;margin: 20px;" id="MOD_content1">
+                <div id="MOD_content1">
                     <img src="cross_icon.png" style="position:absolute;top:5%;left:94%;" width = "4%" height = "auto" class="mod_black_cross">
                     <h1>前言</h1>
                     <p>&nbsp;&nbsp;本案未來所設計與建置的綠屋頂將位於台灣大學土木工程學系研究大樓頂，其設計概念參考英國團隊目前使用中的綠屋頂，為了使英國團隊在未來能提供廠商(ALUMASC)視覺化的綠屋頂建模，同時可用於能耗相關分析，因此期望繪製綠屋頂元件，增進後續階段不管是呈現上、溝通上、分析上的效率，甚至能上傳網路空間供其他相關單位使用。</p>
-                    <p>&nbsp;&nbsp;目前英國團隊共使用三種類型的屋頂如圖1，主要差別為灌溉層的類型，透過不同綠屋頂類型，比較效率與功能上較好的綠屋頂。為了能進行進一步的分析，綠屋頂各分層數據也相當重要，目前根據廠商提供資料整理各層數據如表1，欠缺部分尚未獲得相關數據，將於未來繼續向廠商詢問。<br></p>
+                    <p>&nbsp;&nbsp;目前英國團隊共使用三種類型的屋頂如圖1，主要差別為灌溉層的類型，透過不同綠屋頂類型，比較效率與功能上較好的綠屋頂。為了能進行進一步的分析，綠屋頂各分層數據也相當重要，目前根據廠商提供資料整理各層數據如表1，欠缺部分尚未獲得相關數據，將於未來繼續向廠商詢問。</p>
                     <p>&nbsp;&nbsp;藉由以上資料與數據期望使用Autodesk Revit 軟體繪製綠屋頂元件以達到以下目標:<br>
                     1.  提供完整的綠屋頂模型樣板提供有需求者日後使用<br>
                     2.  綠屋頂模型中各分層提供足夠的數據資料供日後分析使用。<br>
                     3.  期望使用者可以簡單、快速依照需求，改變模型的規格與數據資料。</p>
-                    <div>
-                        <div class="container">  
-                            <div class="flip Y" style="padding: 20px;margin-bottom:50px;">  
-                                <div class="front" id="MOD1_front">
-                                </div>  
-                                <div class="back" id="MOD1_back">
-                                </div>  
+                    <div class="container1" style="float:left">   
+                        <div class="flip Y">  
+                            <div class="front" id="MOD1_front">
+                            </div>  
+                            <div class="back" id="MOD1_back">
                             </div>  
                         </div>
-                    </div> 
-                    <div style="float:left">
+                    </div>
+                    <div style="float:left" class="container1text">
                         <p>圖1.三種綠屋頂剖面示意圖</p>
-                        <p>表1.三種綠屋頂數據資料(ALUMASC提供)</p>
+                        <p>表1.三種綠屋頂數據資料</p>
+                        <p>(ALUMASC提供)</p>
                     </div>
                 </div>
-                <div style="padding: 90px" id="MOD_content2">
+                <div id="MOD_content2">
                     <h1>用建立族群的方式建構綠屋頂元件<br></h1>
                     <p>
                     &nbsp;&nbsp;為了方便使用者日後能快速利用綠屋頂元件，建立已經定義好的族群是最先考慮的方式，使用者不須備有操作Revit的知識，只需了解匯入族群即可使用綠屋頂模型，對使用者而言簡易且方便。
                     </p>
                     <p>建立族群須於Revit的族群樣板中繪製模型，由於未來期望使用者匯入綠屋頂族群後，只能將其放置於專案模型的屋頂上，因此初始設定選擇「屋頂樣板」，將族群繪製在內建的屋頂樣板上方，以清楚定義綠屋頂族群的角色，避免使用者誤用。族群模型的建立相對於專案中模型繪製簡易許多，利用不同厚度的長方體代表綠屋頂不同分層，同時藉由顏色與材質設定將綠屋頂的架構視覺化。其中由於灌溉層為數個小型杯狀盒構成，也是不同類型綠屋頂差異最為明顯的部分，因此最初繪製特別加以塑形以符合實際外觀如圖2，然而完成後發現由於杯狀模型會消耗電腦資源，在後續更改模型或是匯入模型皆會造成軟體運算變慢，考量使用者使用時的便利性以及未來修正模型的效率，最後將灌溉層簡化為長方體，使用較為顯眼的顏色如圖3，提醒使用者該層重要性，同時優化模型使用時便利性。</p>
-                    <div>
-                        <div class="container">  
-                            <div class="flip2 Y" style="padding: 20px;margin-bottom:50px;">  
-                                <div class="front">
-                                </div>  
-                                <div class="back">
-                                </div>  
+                    <div class="container2" style="float:right">  
+                        <div class="flip2 Y">  
+                            <div class="front">
                             </div>  
-                        </div>
+                            <div class="back">
+                            </div>  
+                        </div>  
                     </div>
                     <div style="float:left">
                         <p>圖2 依實際外觀繪製的灌溉層</p>
                         <p>圖3 簡化灌溉層增加使用便利性</p>
                     </div>
                 </div>
-                <div style="padding: 90px" id="MOD_content3">
+                <div id="MOD_content3">
                     <p>&nbsp;&nbsp;在族群模型中，相關數據的輸入簡易，但因Revit族群樣版的設計上並未提供族群內部自行分層的功能，因此各層的數據例如:灌溉層的總儲水量、土壤層的孔隙率、植被的種類等等，全部都記錄在一個族群模型中，無法將數據指派給各分層量體，即使用者匯入此綠屋頂模型後，會看到所有數據資料都在模型上，無法分層分類，容易造成混淆，日後若結合其他分析軟體也容易失準，不管是在概念上還是使用上都有相當的缺陷，無法滿足現階段的需求與目標。</p>
                     <p>&nbsp;&nbsp;在依使用者需求改變模型的部分，族群建模最大的限制為無法自由更改綠屋頂族群的形狀，雖然我們將綠屋頂族群設定為1平方公尺的大小，供使用自行匯入放置製成各種大小的綠屋頂，然而若是不規則形或是長寬非整數大小者，使用者放置次族群時自由度將大幅下降，為族群建模最大缺點。另一方面，族群建模中在多類別族群的匯入上有其優勢。本案中共有三種類型的綠屋頂元件(TypeA、TypeB、TypeC)，我們可利用Revit的巢狀物件功能，讓使用者只需要匯入一個族群模型，即可根據自己的需求任意切換屋頂類型:
-                    <div>
-                        <div class="container">  
-                            <div class="flip3 Y" style="padding: 20px;margin-bottom:50px;">  
-                                <div class="front">
-                                </div>  
-                                <div class="back">
-                                </div>  
+                    <div class="container3" style="float:left">  
+                         <div class="flip3 Y">  
+                            <div class="front">
                             </div>  
-                        </div>
+                            <div class="back">
+                            </div>  
+                        </div>  
                     </div>
-                    <div style="float:right">
+                    <div style="float:right" class="container3text">
                         <p>圖4 加入族群參數</p>
                         <p>圖5 使用者可快速依自己需求切換屋頂類型</p>
                     </div>
