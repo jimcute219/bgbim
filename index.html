@@ -633,28 +633,27 @@
             var h = parseFloat($('.floor_bg').css('height').replace("px", ""));
             var elevator_top = (window.innerHeight - h)/2 + h*0.3 ;
             var root_height = window.innerHeight - 20 - (elevator_top + h*0.7);
-            var current_door = "";
-            $('.door').click(function(){
+            var current_wall = "";
+            $('.wall').click(function(){
                 h = parseFloat($('.floor_bg').css('height').replace("px", ""));
                 roof_height = parseFloat($('.roof img').css('height').replace("px", "")); 
-                if (current_door == ""){
+                if (current_wall == ""){
                     if($(this).is(":animated")){                       //svg讓牆消失
                     }
                     else {
-                        if ($(this).parent().siblings(".wall").is(':visible')) {  //redundant
+                        if ($(this).is(':visible')) {  //redundant
                             $(".wall").fadeIn(400);                               //redundant
-                            $(this).parent().siblings(".wall").delay(400).fadeToggle(250);
                             $(this).delay(400).fadeToggle(250); 
-                            current_door = $(this).attr('id');
+                            current_wall = $(this).attr('id');
                             setTimeout(function(){
                                 $("body").disableScroll();
                             }, 400);
                         }
                         else {                                                    //redundant
-                            $(this).parent().siblings(".wall").fadeToggle(400);   //redundant
+                            $(this).fadeToggle(400);   //redundant
                         }
                         for (var i = 1;i <=5; i++) {                              //redundant 直接抓
-                            if (this.id == ("door"+ i)) {
+                            if (this.id == ("wall"+ i)) {
                                  $("html,body").animate({scrollTop: ((i-1)*h + roof_height -(window.innerHeight - h)/2 )}, 400);
                                  $(".man").delay(450).animate({left: 58 + "%"},200);
                                  break;
@@ -665,9 +664,8 @@
             });
             $('.elevator,.man').bind('click',function(){
                 $(".man").animate({left: 70 + "%"},200);
-                $("#"+ current_door).delay(200).fadeToggle(400);
-                $("#"+ current_door).parent().siblings(".wall").delay(200).fadeToggle(400);
-                current_door = "";
+                $("#"+ current_wall).delay(200).fadeToggle(400);
+                current_wall = "";
                 setTimeout(function(){
                     $("body").enableScroll();
                 }, 200);
@@ -778,7 +776,7 @@
                 $(".clickicon").delay(3900).fadeIn(400).delay(400).fadeOut(400);
                 setTimeout(function(){$(".clickicon").css("left",113 + "%");}, 5100);
                 $(".clickicon").delay(1500).fadeIn(400).delay(400).fadeOut(400);
-                $("#door5,#1F_wall").delay(4600).fadeOut(400).delay(2200).fadeIn(400);
+                $("#door5,#wall5").delay(4600).fadeOut(400).delay(2200).fadeIn(400);
                 $(".man").delay(5200).animate({left: 58 + "%"},200);
                 $(".man").delay(1850).animate({left: 70. + "%"},200);
                 setTimeout(function(){$("body").enableScroll();}, 7200);
@@ -789,9 +787,9 @@
             $(window).resize(function() {
                 changeheight();
                 $("body").enableScroll();
-                if (current_door != "") {
+                if (current_wall != "") {
                      for (var i = 1;i <=5; i++) {                              //redundant 直接抓
-                        if (current_door == ("door"+ i)) {                                 
+                        if (current_wall == ("wall"+ i)) {                                 
                             $("html,body").scrollTop((i-1)*h + roof_height -(window.innerHeight - h)/2 );                                 
                             break;
                         }
@@ -842,7 +840,6 @@
                 $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.ATT_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
-                $('.door').attr('width',w/50).attr('height',h*7/10).attr('y',0).attr('x',0);
                 if (elevator_top < roof_height + innerWidth*0.1875*20/300) {
                     $('.elevator_div,.elevator_div .elevator').css({"top":roof_height + innerWidth*0.1875*20/300 +"px"});
                     $('.elevator_div .elevator').css({"top":roof_height + innerWidth*0.1875*20/300 +"px"});
@@ -1043,26 +1040,17 @@
                 <div class="col-in-10 col-m-in-10">
                     <div class="floor">
                         <img src="ROOF_bg.png" class="floor_bg">
-                        <img src="ROOF_wall.png" class="wall">
-                        <svg class="door_svg">
-                            <rect class="door" id="door1" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                        </svg>
+                        <img src="ROOF_wall.png" class="wall" id="wall1">
                         <img src="ROOF_potplant.png" class="ROOF_potplant">
                     </div>
                     <div class="floor" >
                         <img src="ATT_bg.png" class="floor_bg">
-                        <img src="ATT_wall.png" class="wall">
-                        <svg class="door_svg">
-                            <rect class="door" id="door2" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                        </svg>
+                        <img src="ATT_wall.png" class="wall" id="wall2">
                         <img src="ATT_project.png" class="ATT_project">
                         <img src="ATT_fan.png" class="ATT_fan">
                     </div>
                     <div class="floor">
                         <img src="SD_bg.png" class="floor_bg"> 
-                        <svg class="door_svg">
-                            <rect class="door" id="door3" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                        </svg>
                         <img src="SD_intro_noword.png" class="SD_intro">
                         <img src="SD_tvwebpage.png" class="SD_tvwebpage">
                         <img src="SD_tvroofdata.png" class="SD_tvroofdata">
@@ -1070,23 +1058,17 @@
                             <text class="SD_text_inner1" text-anchor="middle" fill="yellow" >Software</text>
                             <text class="SD_text_inner2" text-anchor="middle" fill="yellow" >Development</text>
                         </svg> 
-                        <img src="SD_wall.png" class="wall">
+                        <img src="SD_wall.png" class="wall" id="wall3">
                     </div>
                     <div class="floor">
                         <img src="MOD_bg.png" class="floor_bg">
-                        <img src="MOD_wall.png" class="wall">
+                        <img src="MOD_wall.png" class="wall" id="wall4">
                         <img src="MOD_toybox.png" class="MOD_toybox">
                         <img src="MOD_island.png" class="MOD_island">
-                        <svg class="door_svg">
-                            <rect class="door" id="door4" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                        </svg> 
                     </div>
                     <div class="floor">
                         <img src="INT_bg.png" class="floor_bg">
-                        <img src="INT_wall.png" class="wall" id="1F_wall">
-                        <svg class="door_svg">
-                            <rect class="door" id="door5" x="50" y="20" width="150" height="150" style="fill:#cc6600">
-                        </svg>
+                        <img src="INT_wall.png" class="wall" id="wall5">
                         <img src="INT_infodesk.png" class="INT_infodesk">
                         <img src="clickicon.png" class="clickicon">
                         <img src="grass.png" class="grass">
