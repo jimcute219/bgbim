@@ -127,7 +127,7 @@
                 transform: rotate(1turn);
             }
         }
-        .black {                                       /*彈出式div背景*/
+        .SD_intro , .ATT_intro{                                       /*彈出式div背景*/
             background-color: rgba(0,0,0,0.5);
             position: absolute;
             z-index: 9;
@@ -139,33 +139,34 @@
             z-index: 9;
             display: block;
         }
-        .MOD_black {
+        .MOD_black1,.MOD_black2 {
             background-color: rgba(0,0,0,0);
             position: absolute;
             display: block;
             top: 0%;
             z-index: 10;
         }
-        .blackcontent{                                 /*彈出式wrap div*/
+        .SD_intro_content,.ATT_intro_content{                                 /*彈出式wrap div*/
             background-color: rgba(0,0,0,0.8);
-            width: 70%;
+            width: 62.5%;
             height: 80%;
             position: absolute;
             top: 10%;
-            left: 15%;
+            left: 6.25%;
             z-index: 10;
             display: block;
         }
-        .blackcontent div {                            /*彈出式div內容 分左右半邊*/
-            width: 50%;
+        .SD_intro_content div ,.ATT_intro_content div{                            /*彈出式div內容 */
+            width: 100%;
             height: 100%;
-            float: left;
+            text-align: center;
+            padding: 10%;
         }
-        .blackcontent div h1 {
+        .SD_intro_content div h1 ,.ATT_intro_content div h1{
             text-align: center;
             color: lightgreen;
         }
-        .blackcontent div p {
+        .SD_intro_content div p .ATT_intro_content div padding: {
             margin: 5px;
             margin-top: 10%;
             text-align: left;
@@ -217,7 +218,7 @@
             font-family: 'Noto Sans TC', sans-serif;
             font-size: 35px;
         }
-        .MOD_blackcontent {
+        .MOD_blackcontent1 ,.MOD_blackcontent2 {
             background-color: rgba(0,0,0,1);
             position: absolute;
             width: 81.25%;
@@ -237,7 +238,7 @@
         .img_gallery{
             background-color: rgba(0,0,0,0.8);
             position: absolute;
-            z-index: 9; 
+            z-index: 12; 
             width: 31.25%;
             height: 100%;
             top: 0%;
@@ -269,17 +270,32 @@
         }
         .INT_infodesk {
             position: absolute;
-            left: 37%;
-            top: 38%;
-            width: 27%;
+            left: 19%;
+            top: 40%;
+            width: 40%;
             z-index: 2;
         }
-        .ROOF_potplant {
+        .INT_photo {
             position: absolute;
-            left: 2%;
-            top: 77%;
+            left: 49%;
+            top: 23.08%;
+            width: 30%;
+            z-index: 2;
+        }
+        .ROOF_plant {
+            position: absolute;
+            left: 0%;
+            top: 0%;
             width: 50%;
             z-index: 2;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        .ROOF_plant:hover {
+            -webkit-transform: scale(1.05);
+            transform: scale(1.05);
         }
         .ATT_fan {
             position: absolute;
@@ -287,6 +303,14 @@
             top: 40%;
             width: 15%;
             z-index: 2;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        .ATT_fan:hover {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
         }
         .ATT_project {
             position: absolute;
@@ -303,7 +327,7 @@
             -webkit-transform: scale(1.1);
             transform: scale(1.1);
         }
-        .SD_intro {
+        .SD_intro_noword {
             position: absolute;
             left: 64%;
             top: 3.2%;
@@ -394,9 +418,9 @@
         }
         .INT_license {
             position: absolute;
-            left: 44%;
-            top: 74%;
-            width: 11%;
+            left: 13%;
+            top: 3%;
+            width: 12.5%;
             z-index: 2;
             -webkit-transform: scale(1);
             transform: scale(1);
@@ -475,7 +499,7 @@
         }
         .grass {
             position: absolute;
-            z-index: 10;
+            z-index: 5;
             width: 129.9%;
             height: 10%;
             top: 90%;
@@ -663,9 +687,12 @@
                 }, 200);
             });
             $('.SD_text').bind('click',function(){                    //blackbutton叫出black
-                $('.black').css("top",window.pageYOffset + "px").show(); 
-                $('.blackcontent').children().css("display","none").delay(100).fadeIn(750);
-                changeheight(); 
+                $('.SD_intro').css("top",window.pageYOffset + "px").show(); 
+                $('.SD_intro_content').children().css("display","none").delay(100).fadeIn(750); 
+            });
+            $('.ATT_fan').bind('click',function(){                    //blackbutton叫出black
+                $('.ATT_intro').css("top",window.pageYOffset + "px").show(); 
+                $('.ATT_intro_content').children().css("display","none").delay(100).fadeIn(750); 
             });
             $('.ATT_project').bind('click',function(){                    //blackbutton叫出black
                 $('.ATT_black').css("top",window.pageYOffset + "px").show(); 
@@ -675,26 +702,26 @@
                     $("#att_content" + i).css({left: (i-1)*100 + '%'});
                 }
                 att_content_number = 1;
-                changeheight(); 
             });
-            $('.SD_tvroofdata').bind('click',function(){                    //blackbutton叫出black
+            $('.INT_photo').bind('click',function(){                    //blackbutton叫出black
                 $('.img_gallery_black').css("top",window.pageYOffset + "px").animate({width: "100%"}); 
             });
             $('.MOD_island').bind('click',function(){                    //blackbutton叫出black
-                $('.MOD_black').css("top",window.pageYOffset + "px").animate({height: window.innerHeight});
+                $('.MOD_black1').css("top",window.pageYOffset + "px").animate({height: window.innerHeight});
             });
-            $('.black,.black_cross').on('click', function(e){                   //black的click效果(消失)
+            $('.MOD_toybox').bind('click',function(){                    //blackbutton叫出black
+                $('.MOD_black2').css("top",window.pageYOffset + "px").animate({height: window.innerHeight});
+            });
+            $('.SD_intro,.black_cross,.ATT_intro').on('click', function(e){                   //black的click效果(消失)
                 var target = $(e.target);
-                if (target.attr('class') == 'black'||target.attr('class') == 'black_cross') {
+                if (target.attr('class') == 'SD_intro'||target.attr('class') == 'ATT_intro'||target.attr('class') == 'black_cross') {
                     $(this).hide();
-                    changeheight();
                 }
             });
             $('.ATT_black,.att_black_cross').on('click', function(e){         
                 var target = $(e.target);
                 if (target.attr('class') == 'ATT_black'||target.attr('class') == 'att_black_cross') {
                     $(this).hide();
-                    changeheight();
                     $('#att_arrow_left').css("opacity",0.5);
                     $('#att_arrow_right').css("opacity",1);
                 }
@@ -703,14 +730,12 @@
                 var target = $(e.target);
                 if (target.attr('class') == 'img_gallery_black'||target.attr('class') == 'img_gallery_cross') {
                     $(this).animate({width:"0%"});
-                    changeheight();
                 }
             });
-            $('.MOD_black,mod_black_cross').on('click', function(e){                   
+            $('.MOD_black1,mod_black_cross,.MOD_black2').on('click', function(e){                   
                 var target = $(e.target);
-                if (target.attr('class') == 'MOD_black'||target.attr('class') == 'mod_black_cross') {
+                if (target.attr('class') == 'MOD_black1'||target.attr('class') == 'MOD_black2'||target.attr('class') == 'mod_black_cross') {
                     $(this).animate({height:"0%"});
-                    changeheight();
                 }
             });
             $('#att_arrow_right').bind('click',function(){
@@ -774,7 +799,7 @@
                 setTimeout(function(){$("body").enableScroll();}, 7200);
                 $(".ATT_black").css("display","none");
                 $(".img_gallery_black").animate({width:"0%"},10);
-                $(".MOD_black").animate({height:"0%"},10);
+                $(".MOD_black1,.MOD_black2").animate({height:"0%"},10);
             }); 
             $(window).resize(function() {
                 changeheight();
@@ -784,18 +809,25 @@
                         if (current_wall == ("wall"+ i)) {                                 
                             $("html,body").scrollTop((i-1)*h + roof_height -(window.innerHeight - h)/2 );
                             if ($('.ATT_black').is(':visible')) {$('.ATT_black').css({"top":window.pageYOffset + "px"})}
-                            if ($('.black').is(':visible')) {$('.black').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
+                            if ($('.SD_intro').is(':visible')) {$('.SD_intro').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
+                            if ($('.ATT_intro').is(':visible')) {$('.ATT_intro').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
                             if ($('.img_gallery_black').css("width") != "0px") {
                                 $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"});
                             }
                             else {
                                 $('.img_gallery_black').css({"height":window.innerHeight+"px"});
                             }
-                            if ($('.MOD_black').css("height") != "0px") {
-                                $('.MOD_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"});
+                            if ($('.MOD_black1').css("height") != "0px") {
+                                $('.MOD_black1').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"});
                             }
                             else {
-                                $('.MOD_black').css({"width":window.innerWidth+"px"});
+                                $('.MOD_black1').css({"width":window.innerWidth+"px"});
+                            }
+                            if ($('.MOD_black2').css("height") != "0px") {
+                                $('.MOD_black2').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"});
+                            }
+                            else {
+                                $('.MOD_black2').css({"width":window.innerWidth+"px"});
                             }                                  
                             break;
                         }
@@ -843,7 +875,7 @@
                 $('.outside').height((h*5+roof_height+root_height) + "px");
                 $('.floor').height($('.floor_bg').css('height'));
                 $('.wall').height($('.floor_bg').css('height')).width($('.floor_bg').css('width'));
-                $('.black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                $('.SD_intro,.ATT_intro').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.ATT_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('#MOD_content1,#MOD_content2,#MOD_content3').css({"padding":window.innerWidth*0.056 +"px"});
@@ -874,18 +906,25 @@
                 $('h1').css({"font-size": innerWidth*0.033 + "px"});
                 $('h5').css({"font-size": innerWidth*0.023 + "px"});
                 if ($('.ATT_black').is(':visible')) {$('.ATT_black').css({"top":window.pageYOffset + "px"})}
-                if ($('.black').is(':visible')) {$('.black').css({"top":window.pageYOffset + "px"})}
+                if ($('.SD_intro').is(':visible')) {$('.SD_intro').css({"top":window.pageYOffset + "px"})}
+                if ($('.ATT_intro').is(':visible')) {$('.ATT_intro').css({"top":window.pageYOffset + "px"})}
                 if ($('.img_gallery_black').css("width") != "0px") {
                     $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":window.pageYOffset + "px"});
                 }
                 else {
                     $('.img_gallery_black').css({"height":window.innerHeight+"px"});
                 }
-                if ($('.MOD_black').css("height") != "0px") {
-                    $('.MOD_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":window.pageYOffset + "px"});
+                if ($('.MOD_black1').css("height") != "0px") {
+                    $('.MOD_black1').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":window.pageYOffset + "px"});
                 }
                 else {
-                    $('.MOD_black').css({"width":window.innerWidth+"px"});
+                    $('.MOD_black1').css({"width":window.innerWidth+"px"});
+                }
+                if ($('.MOD_black2').css("height") != "0px") {
+                    $('.MOD_black2').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":window.pageYOffset + "px"});
+                }
+                else {
+                    $('.MOD_black2').css({"width":window.innerWidth+"px"});
                 }
             };
         });
@@ -903,25 +942,32 @@
             <div class="img_gallery">
                 <div style="padding: 15px;position:relative;">
                     <img src="cross_icon.png" style="position:absolute;top:0%;left:92%;" width = "8%" height = "auto" class="img_gallery_cross">
-                    <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
-                    <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
-                    <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
-                    <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
-                    <img src="wall.jpg" style="margin: 15px" width = "90%" height = "auto">
+                    <img src="ph_01.JPG" style="margin: 15px" width = "90%" height = "auto">
+                    <img src="ph_02.JPG" style="margin: 15px" width = "90%" height = "auto">
+                    <img src="ph_03.JPG" style="margin: 15px" width = "90%" height = "auto">
+                    <img src="ph_04.JPG" style="margin: 15px" width = "90%" height = "auto">
                 </div>
             </div>
         </div>
-        <div class="black">
-            <div class="blackcontent">
+        <div class="SD_intro">
+            <div class="SD_intro_content">
                 <img src="cross_icon.png" style="position:absolute;top:2%;left:95%;" width = "4%" height = "auto" class="black_cross">
                 <div>
                     <h1>Software Development</h1>
-                    <img src="SD_img.jpg" width="100%" height="auto" style="padding:20px">
-                </div>
-                <div style="padding: 20px;color: #c3d825; font-family: 'Noto Sans TC', sans-serif;">
                     <p>程式開發組主要目的為利用程式輔助各組進行分析和操作，所學範圍從基礎的C#、REVIT API
                     到前後端網頁設計，希望藉由程式當作各組溝通的橋樑，將現有數據轉換成可讀的資料，分析過後
                     再上傳網站將成果展示。
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="ATT_intro">
+            <div class="ATT_intro_content">
+                <img src="cross_icon.png" style="position:absolute;top:2%;left:95%;" width = "4%" height = "auto" class="black_cross">
+                <div>
+                    <h1>Analysis Tools Testing</h1>
+                    <p>Analysis Tools Testing（簡稱ATT組），在Blue-Green BIM team中負責「能源模擬軟體」的測試比較，測試過的程式涵括Ecotect、Simulation CFD、EQuest等。
+                    2014年曾協助資工系進行系館能源模擬，2015年參與樹德夢工廠的能源分析。現行專案為臺大土木研究大樓的空調能源測試。
                     </p>
                 </div>
             </div>
@@ -969,8 +1015,8 @@
                 </div>
             </div>
         </div>
-        <div class="MOD_black">
-            <div class="MOD_blackcontent">
+        <div class="MOD_black1">
+            <div class="MOD_blackcontent1">
                 <div id="MOD_content1">
                     <img src="cross_icon.png" style="position:absolute;top:5%;left:94%;" width = "4%" height = "auto" class="mod_black_cross">
                     <h1>前言</h1>
@@ -994,6 +1040,10 @@
                         <p>(ALUMASC提供)</p>
                     </div>
                 </div>
+            </div>    
+        </div>
+        <div class="MOD_black2">
+            <div class="MOD_blackcontent2">
                 <div id="MOD_content2">
                     <h1>用建立族群的方式建構綠屋頂元件<br></h1>
                     <p>
@@ -1050,7 +1100,9 @@
                     <div class="floor">
                         <img src="ROOF_bg.png" class="floor_bg">
                         <img src="ROOF_wall.png" class="wall" id="wall1">
-                        <img src="ROOF_potplant.png" class="ROOF_potplant">
+                        <a href="http://ntugreenroof.wix.com/green#!untitled/c1uu" target="_blank">
+                            <img src="ROOF_plant.png" class="ROOF_plant">
+                        </a>
                     </div>
                     <div class="floor" >
                         <img src="ATT_bg.png" class="floor_bg">
@@ -1060,9 +1112,11 @@
                     </div>
                     <div class="floor">
                         <img src="SD_bg.png" class="floor_bg"> 
-                        <img src="SD_intro_noword.png" class="SD_intro">
+                        <img src="SD_intro_noword.png" class="SD_intro_noword">
                         <img src="SD_tvwebpage.png" class="SD_tvwebpage">
-                        <img src="SD_tvroofdata.png" class="SD_tvroofdata">
+                        <a href="http://test.ggjason.tw/Prototype/" target="_blank">
+                            <img src="SD_tvroofdata.png" class="SD_tvroofdata">
+                        </a>
                         <svg class="SD_text"> 
                             <text class="SD_text_inner1" text-anchor="middle" fill="yellow" >Software</text>
                             <text class="SD_text_inner2" text-anchor="middle" fill="yellow" >Development</text>
@@ -1082,6 +1136,7 @@
                         <img src="clickicon.png" class="clickicon">
                         <img src="grass.png" class="grass">
                         <img src="INT_license.png" class="INT_license">
+                        <img src="INT_photo.png" class="INT_photo">
                     </div>
                 </div>
                 <div class="col-in-3 col-m-in-3">
