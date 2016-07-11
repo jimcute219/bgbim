@@ -14,7 +14,6 @@
             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.4); 
             border-radius: 3px;
         }
- 
         ::-webkit-scrollbar-thumb {
             border-radius: 3px;
             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.6); 
@@ -78,6 +77,14 @@
             width: 100%;
             height: auto;
         }
+        .license {
+            background-color: rgba(0,0,0,0);
+            position: absolute;
+            width: 100%;
+            top: 0%;
+            left: 0%;
+            z-index: 10;
+        }
         .floor {                                       
             position: relative;                         /*樓層div*/
             padding: 0px;
@@ -97,6 +104,30 @@
             right: 0%;
             width: 100%;
             height: 100%;
+        }
+        .elevator_div {
+            position: fixed;
+        }
+        .elevator_div .man {
+            position: fixed;
+            z-index: 13;
+            width: 18.75%;
+            height: auto;
+            left: 70%;
+        }
+        .elevator_div .elevator {
+            position: fixed;
+            z-index: 9;
+            width: 17.5%;
+            height: auto;
+            left: 68.75%;
+        }
+        .background_div {
+            z-index: -2;
+        }
+        .background_img {
+            position: fixed;
+            z-index: -1; 
         }
         .loading_page {   
             display: block;                              /*loading頁面*/
@@ -127,26 +158,13 @@
                 transform: rotate(1turn);
             }
         }
-        .SD_intro , .ATT_intro{                                       /*彈出式div背景*/
+        .SD_intro , .ATT_intro, .INT_intro{                                       /*彈出式div背景*/
             background-color: rgba(0,0,0,0.5);
             position: absolute;
             z-index: 9;
             display: none;
         }
-        .ATT_black {                                       /*彈出式div背景*/
-            background-color: rgba(0,0,0,0.5);
-            position: absolute;
-            z-index: 9;
-            display: block;
-        }
-        .MOD_black1,.MOD_black2 {
-            background-color: rgba(0,0,0,0);
-            position: absolute;
-            display: block;
-            top: 0%;
-            z-index: 10;
-        }
-        .SD_intro_content,.ATT_intro_content{                                 /*彈出式wrap div*/
+        .SD_intro_content,.ATT_intro_content,.INT_intro_content{                             
             background-color: rgba(0,0,0,0.8);
             width: 62.5%;
             height: 80%;
@@ -156,27 +174,16 @@
             z-index: 10;
             display: block;
         }
-        .SD_intro_content div ,.ATT_intro_content div{                            /*彈出式div內容 */
+        .SD_intro_content div ,.ATT_intro_content div ,.INT_intro_content div{
             width: 100%;
             height: 100%;
             text-align: center;
             padding: 10%;
         }
-        .SD_intro_content div h1 ,.ATT_intro_content div h1{
-            text-align: center;
-            color: lightgreen;
-        }
-        .SD_intro_content div p .ATT_intro_content div padding: {
-            margin: 5px;
-            margin-top: 10%;
-            text-align: left;
-            text-indent: 30px;
-            font-size: 25px;
-        }
-        .ATT_blackcontent div {                            /*彈出式div內容 分左右半邊*/
-            width: 100%;
-            height: 100%;
+        .ATT_black {                                       /*彈出式div背景*/
+            background-color: rgba(0,0,0,0.5);
             position: absolute;
+            z-index: 9;
             display: block;
         }
         .ATT_blackcontent {                                
@@ -190,33 +197,18 @@
             overflow-x: hidden;
             overflow-y: scroll;  
         }
-        .ATT_blackcontent p {
-            margin: 5px;
-            text-align: left;
-            margin-buttom: 2%;
-            text-indent: 30px;
-            color: #c3d825;
-            font-family: 'Noto Sans TC', sans-serif;
-            font-size: 25px;
+        .ATT_blackcontent div {                         
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: block;
         }
-        .ATT_blackcontent h1 {
-            margin: 5px;
-            margin-buttom: 8%;
-            text-align: center;
-            text-indent: 30px;
-            color: #c3d825;
-            font-family: 'Noto Sans TC', sans-serif;
-            font-size: 50px;
-        }
-        .ATT_blackcontent h5 {
-            margin: 5px;
-            margin-top: 3%;
-            margin-top: 3%;
-            text-align: left;
-            text-indent: 30px;
-            color: #c3d825;
-            font-family: 'Noto Sans TC', sans-serif;
-            font-size: 35px;
+        .MOD_black1,.MOD_black2 {
+            background-color: rgba(0,0,0,0);
+            position: absolute;
+            display: block;
+            top: 0%;
+            z-index: 10;
         }
         .MOD_blackcontent1 ,.MOD_blackcontent2 {
             background-color: rgba(0,0,0,1);
@@ -246,27 +238,22 @@
             overflow-x: hidden;
             overflow-y: scroll; 
         }
-        .outside {                                      /*左右兩側div*/
-            /*background-color: #33ccff;
-            background: -webkit-linear-gradient(#33ccff, white);
-            background: -o-linear-gradient(#33ccff, white);
-            background: -moz-linear-gradient(#33ccff, white);
-            background: linear-gradient(#33ccff, white);*/
-        }
-        .wall {                                        /*外牆圖片*/
+        .wall {                                     
             width:100%;
             position: absolute;
             top:0px;
             left:0px;
             z-index: 3;
         }
-        .door_svg {                                         
-            position: absolute;
-            z-index: 6;
-            width: 2%;
-            height: 70%;
-            top: 30%;
-            right: 0%;
+        .INT_infodesk , .INT_photo ,.INT_license ,.ROOF_plant ,.ATT_fan ,.ATT_project ,.SD_tvwebpage ,.SD_tvroofdata, .SD_text ,.MOD_toybox ,.MOD_island {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            -webkit-transition: .3s ease-in-out;
+            transition: .3s ease-in-out;
+        }
+        .INT_infodesk:hover , .INT_photo:hover ,.INT_license:hover ,.ATT_fan:hover ,.ATT_project:hover ,.SD_tvwebpage:hover ,.SD_tvroofdata:hover ,.SD_text:hover ,.MOD_toybox:hover ,.MOD_island:hover{
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
         }
         .INT_infodesk {
             position: absolute;
@@ -282,16 +269,19 @@
             width: 30%;
             z-index: 2;
         }
+        .INT_license {
+            position: absolute;
+            left: 13%;
+            top: 3%;
+            width: 12.5%;
+            z-index: 2;
+        }
         .ROOF_plant {
             position: absolute;
             left: 0%;
             top: 0%;
             width: 50%;
             z-index: 2;
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transition: .3s ease-in-out;
-            transition: .3s ease-in-out;
         }
         .ROOF_plant:hover {
             -webkit-transform: scale(1.05);
@@ -303,14 +293,6 @@
             top: 40%;
             width: 15%;
             z-index: 2;
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transition: .3s ease-in-out;
-            transition: .3s ease-in-out;
-        }
-        .ATT_fan:hover {
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
         }
         .ATT_project {
             position: absolute;
@@ -318,14 +300,6 @@
             top: 3%;
             width: 63%;
             z-index: 2;
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transition: .3s ease-in-out;
-            transition: .3s ease-in-out;
-        }
-        .ATT_project:hover {
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
         }
         .SD_intro_noword {
             position: absolute;
@@ -339,14 +313,6 @@
             top: 3.1%;
             width: 27%;
             z-index: 2;
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transition: .3s ease-in-out;
-            transition: .3s ease-in-out;
-        }
-        .SD_tvwebpage:hover {
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
         }
         .SD_tvroofdata {
             position: absolute;
@@ -354,14 +320,6 @@
             top: 2.3%;
             width: 30.2%;
             z-index: 2;
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transition: .3s ease-in-out;
-            transition: .3s ease-in-out;
-        }
-        .SD_tvroofdata:hover {
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
         }
         .SD_text {
             position: absolute;
@@ -369,10 +327,6 @@
             height: 35%;
             left: 64%;
             top: 28%;
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transition: .3s ease-in-out;
-            transition: .3s ease-in-out;
         }
         .SD_text_inner1 {
             font-family: 'Oswald', sans-serif;
@@ -382,24 +336,12 @@
             font-family: 'Oswald', sans-serif;
             font-size: 40px;
         }
-        .SD_text:hover {
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-        }
         .MOD_toybox {
             position: absolute;
             left: 65.5%;
             top: 62%;
             width: 22.6%;
             z-index: 2;
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transition: .3s ease-in-out;
-            transition: .3s ease-in-out;
-        }
-        .MOD_toybox:hover {
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
         }
         .MOD_island {
             position: absolute;
@@ -407,46 +349,6 @@
             top: 9%;
             width: 52.2%;
             z-index: 2;
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transition: .3s ease-in-out;
-            transition: .3s ease-in-out;
-        }
-        .MOD_island:hover {
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-        }
-        .INT_license {
-            position: absolute;
-            left: 13%;
-            top: 3%;
-            width: 12.5%;
-            z-index: 2;
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transition: .3s ease-in-out;
-            transition: .3s ease-in-out; 
-        }
-        .INT_license:hover {
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-        }
-        .elevator_div {
-            position: fixed;
-        }
-        .elevator_div .man {
-            position: fixed;
-            z-index: 13;
-            width: 18.75%;
-            height: auto;
-            left: 70%;
-        }
-        .elevator_div .elevator {
-            position: fixed;
-            z-index: 9;
-            width: 17.5%;
-            height: auto;
-            left: 68.75%;
         }
         #att_content1{
             top: 0%;
@@ -505,13 +407,6 @@
             top: 90%;
             left: 0%;
         }
-        .background_div {
-            z-index: -2;
-        }
-        .background_img {
-            position: fixed;
-            z-index: -1; 
-        }
         .soil {
             width: 100%;
             height: 100%;
@@ -552,6 +447,21 @@
             color: #c3d825;
             font-family: 'Noto Sans TC', sans-serif;
             font-size: 35px;
+        }
+        .license p ,.license a{
+            color: #a0d8ef;       
+        }
+        .SD_intro h1 ,.SD_intro p {
+            color: #a0d8ef;
+        }
+        .ATT_intro h1,.ATT_intro p,.ATT_black h1,.ATT_black h5,.ATT_black p{
+            color: #dbd0e6;
+        }
+        .INT_intro h1,.INT_intro p {
+            color: #ffff99;
+        }
+        .MOD_black1 h1,.MOD_black1 p,.MOD_black2 h1,.MOD_black2 p{
+            color: #c3d825;
         }
         .flip{  
           width:100%;  
@@ -690,11 +600,18 @@
                 $('.SD_intro').css("top",window.pageYOffset + "px").show(); 
                 $('.SD_intro_content').children().css("display","none").delay(100).fadeIn(750); 
             });
-            $('.ATT_fan').bind('click',function(){                    //blackbutton叫出black
+            $('.INT_infodesk').bind('click',function(){                   
+                $('.INT_intro').css("top",window.pageYOffset + "px").show(); 
+                $('.INT_intro_content').children().css("display","none").delay(100).fadeIn(750); 
+            });
+            $('.INT_license').bind('click',function(){                   
+                $('.license').show("slide"); 
+            });
+            $('.ATT_fan').bind('click',function(){                   
                 $('.ATT_intro').css("top",window.pageYOffset + "px").show(); 
                 $('.ATT_intro_content').children().css("display","none").delay(100).fadeIn(750); 
             });
-            $('.ATT_project').bind('click',function(){                    //blackbutton叫出black
+            $('.ATT_project').bind('click',function(){                 
                 $('.ATT_black').css("top",window.pageYOffset + "px").show(); 
                 $(".ATT_blackcontent").animate({scrollTop: 0},10);
                 $('.ATT_blackcontent *').css("display","none").delay(100).fadeIn(750);
@@ -703,8 +620,13 @@
                 }
                 att_content_number = 1;
             });
-            $('.INT_photo').bind('click',function(){                    //blackbutton叫出black
-                $('.img_gallery_black').css("top",window.pageYOffset + "px").animate({width: "100%"}); 
+            $('.INT_photo').bind('click',function(){
+                $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":window.pageYOffset + "px"});
+                $('.img_gallery_black').css("top",window.pageYOffset + "px").animate({width:'toggle'},300);
+                $('#photo1').delay(400).show( "slide");
+                $('#photo2').delay(800).animate({width:'toggle'},350);
+                $('#photo3').delay(1200).animate({width:'toggle'},350);
+                $('#photo4').delay(1600).animate({width:'toggle'},350);
             });
             $('.MOD_island').bind('click',function(){                    //blackbutton叫出black
                 $('.MOD_black1').css("top",window.pageYOffset + "px").animate({height: window.innerHeight});
@@ -712,9 +634,9 @@
             $('.MOD_toybox').bind('click',function(){                    //blackbutton叫出black
                 $('.MOD_black2').css("top",window.pageYOffset + "px").animate({height: window.innerHeight});
             });
-            $('.SD_intro,.black_cross,.ATT_intro').on('click', function(e){                   //black的click效果(消失)
+            $('.SD_intro,.black_cross,.ATT_intro,.INT_intro').on('click', function(e){                   //black的click效果(消失)
                 var target = $(e.target);
-                if (target.attr('class') == 'SD_intro'||target.attr('class') == 'ATT_intro'||target.attr('class') == 'black_cross') {
+                if (target.attr('class') == 'SD_intro'||target.attr('class') == 'ATT_intro'||target.attr('class') == 'INT_intro'||target.attr('class') == 'black_cross') {
                     $(this).hide();
                 }
             });
@@ -729,14 +651,18 @@
             $('.img_gallery_black,img_gallery_cross').on('click', function(e){                   
                 var target = $(e.target);
                 if (target.attr('class') == 'img_gallery_black'||target.attr('class') == 'img_gallery_cross') {
-                    $(this).animate({width:"0%"});
+                    $(this).animate({width:'toggle'},350);
                 }
+                $(".photo").hide();
             });
             $('.MOD_black1,mod_black_cross,.MOD_black2').on('click', function(e){                   
                 var target = $(e.target);
                 if (target.attr('class') == 'MOD_black1'||target.attr('class') == 'MOD_black2'||target.attr('class') == 'mod_black_cross') {
                     $(this).animate({height:"0%"});
                 }
+            });
+            $('.root_cross').on('click', function(e){                   
+                $('.license').hide("slide");
             });
             $('#att_arrow_right').bind('click',function(){
                 if (att_content_number >= 1 && att_content_number < 3) {
@@ -798,7 +724,9 @@
                 $(".man").delay(1850).animate({left: 70. + "%"},200);
                 setTimeout(function(){$("body").enableScroll();}, 7200);
                 $(".ATT_black").css("display","none");
-                $(".img_gallery_black").animate({width:"0%"},10);
+                $(".img_gallery_black").hide();
+                $(".photo").hide();
+                $('.license').hide();
                 $(".MOD_black1,.MOD_black2").animate({height:"0%"},10);
             }); 
             $(window).resize(function() {
@@ -811,7 +739,8 @@
                             if ($('.ATT_black').is(':visible')) {$('.ATT_black').css({"top":window.pageYOffset + "px"})}
                             if ($('.SD_intro').is(':visible')) {$('.SD_intro').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
                             if ($('.ATT_intro').is(':visible')) {$('.ATT_intro').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
-                            if ($('.img_gallery_black').css("width") != "0px") {
+                            if ($('.INT_intro').is(':visible')) {$('.INT_intro').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
+                            if ($('.img_gallery_black').is(':visible')) {
                                 $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"});
                             }
                             else {
@@ -871,13 +800,16 @@
                 $('.roof').height($('.roof img').css('height'));
                 $('.root img').height(root_height + "px");
                 $('.root').height($('.root img').height());
+                $('.license').height($('.root img').height()).css("top",5*h);
                 $('.sidebar').height(h*5 + "px");
                 $('.outside').height((h*5+roof_height+root_height) + "px");
                 $('.floor').height($('.floor_bg').css('height'));
                 $('.wall').height($('.floor_bg').css('height')).width($('.floor_bg').css('width'));
-                $('.SD_intro,.ATT_intro').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                $('.SD_intro,.ATT_intro,.INT_intro').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                $('.SD_intro_content,.ATT_intro_content,.INT_intro_content').css({"width":w+"px","height":h+"px","top":(innerHeight-h)/2 +"px"});
                 $('.ATT_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":window.pageYOffset + "px"});
                 $('#MOD_content1,#MOD_content2,#MOD_content3').css({"padding":window.innerWidth*0.056 +"px"});
                 $('.container1').css({"width":window.innerWidth*0.4 +"px","height":window.innerWidth*0.3 +'px',"padding":window.innerWidth*0.02 +"px"});
                 $('.container2').css({"width":window.innerWidth*0.4 +"px","height":window.innerWidth*0.3 +'px',"padding":window.innerWidth*0.02 +"px"});
@@ -905,10 +837,12 @@
                 $('p').css({"font-size": innerWidth*0.016 + "px"});
                 $('h1').css({"font-size": innerWidth*0.033 + "px"});
                 $('h5').css({"font-size": innerWidth*0.023 + "px"});
+                $('.license p').css({"font-size": innerWidth*0.008 + "px"});
                 if ($('.ATT_black').is(':visible')) {$('.ATT_black').css({"top":window.pageYOffset + "px"})}
                 if ($('.SD_intro').is(':visible')) {$('.SD_intro').css({"top":window.pageYOffset + "px"})}
                 if ($('.ATT_intro').is(':visible')) {$('.ATT_intro').css({"top":window.pageYOffset + "px"})}
-                if ($('.img_gallery_black').css("width") != "0px") {
+                if ($('.INT_intro').is(':visible')) {$('.INT_intro').css({"top":window.pageYOffset + "px"})}
+                if ($('.img_gallery_black').is(':visible')) {
                     $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":window.pageYOffset + "px"});
                 }
                 else {
@@ -926,6 +860,7 @@
                 else {
                     $('.MOD_black2').css({"width":window.innerWidth+"px"});
                 }
+                $('.root_cross').width(4 + "%").height("auto");
             };
         });
     </script>
@@ -942,10 +877,10 @@
             <div class="img_gallery">
                 <div style="padding: 15px;position:relative;">
                     <img src="cross_icon.png" style="position:absolute;top:0%;left:92%;" width = "8%" height = "auto" class="img_gallery_cross">
-                    <img src="ph_01.JPG" style="margin: 15px" width = "90%" height = "auto">
-                    <img src="ph_02.JPG" style="margin: 15px" width = "90%" height = "auto">
-                    <img src="ph_03.JPG" style="margin: 15px" width = "90%" height = "auto">
-                    <img src="ph_04.JPG" style="margin: 15px" width = "90%" height = "auto">
+                    <img src="ph_01.JPG" style="margin: 15px" width = "90%" height = "auto" class="photo" id="photo1">
+                    <img src="ph_02.JPG" style="margin: 15px" width = "90%" height = "auto" class="photo" id="photo2">
+                    <img src="ph_03.JPG" style="margin: 15px" width = "90%" height = "auto" class="photo" id="photo3">
+                    <img src="ph_04.JPG" style="margin: 15px" width = "90%" height = "auto" class="photo" id="photo4">
                 </div>
             </div>
         </div>
@@ -968,6 +903,16 @@
                     <h1>Analysis Tools Testing</h1>
                     <p>Analysis Tools Testing（簡稱ATT組），在Blue-Green BIM team中負責「能源模擬軟體」的測試比較，測試過的程式涵括Ecotect、Simulation CFD、EQuest等。
                     2014年曾協助資工系進行系館能源模擬，2015年參與樹德夢工廠的能源分析。現行專案為臺大土木研究大樓的空調能源測試。
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="INT_intro">
+            <div class="INT_intro_content">
+                <img src="cross_icon.png" style="position:absolute;top:2%;left:95%;" width = "4%" height = "auto" class="black_cross">
+                <div>
+                    <h1>Blue-Green-BIM</h1>
+                    <p>近年來歐盟開始倡導Blue-Green (BG) 設計，嘗試整合都市永續排水系統（Blue: sustainable drainage systems）及都市植被綠化（Green: urban vegetation），來更有效率地使用都市的能源與水資源，減少都市的水災損失，及提升都市景觀及舒適度。此外，新興的BIM (Building Information Modeling) 技術也正以革命性的觀念與先進技術引領建築產業進步，提升建築工程之效能、品質、安全與永續性。本團隊與Imperial College London合作，並在謝尚賢教授的指導下，針對以上議題進行研究，且根據不同的知識領域分為四個小組進行 :  BIM 模型組、分析工具組、綠屋頂組、以及程式開發組。
                     </p>
                 </div>
             </div>
@@ -1045,6 +990,7 @@
         <div class="MOD_black2">
             <div class="MOD_blackcontent2">
                 <div id="MOD_content2">
+                    <img src="cross_icon.png" style="position:absolute;top:5%;left:94%;" width = "4%" height = "auto" class="mod_black_cross">
                     <h1>用建立族群的方式建構綠屋頂元件<br></h1>
                     <p>
                     &nbsp;&nbsp;為了方便使用者日後能快速利用綠屋頂元件，建立已經定義好的族群是最先考慮的方式，使用者不須備有操作Revit的知識，只需了解匯入族群即可使用綠屋頂模型，對使用者而言簡易且方便。
@@ -1150,6 +1096,11 @@
                 </div>
                 <div class="root">
                     <img src="soil.png" class="soil">
+                    <div class="license">
+                        <img src="cross_icon.png" style="position:absolute;top:0%;left:40%;" width = "0.4%" height = "auto" class="root_cross">
+                        <p>brickwall-background&nbsp;&nbsp;<a href="http://www.freepik.com">Designed by Freepik</a></p>
+                        <p>Icons made by &nbsp;<a href="http://www.freepik.com" title="Freepik">Freepik</a> &nbsp;from &nbsp;<a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>&nbsp; is licensed by &nbsp;<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">&nbsp;CC 3.0 BY</a></p>
+                    </div>
                 </div>
             </div>
             <div class="col-2 col-m-2">
