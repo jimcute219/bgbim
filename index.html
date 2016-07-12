@@ -158,13 +158,13 @@
                 transform: rotate(1turn);
             }
         }
-        .SD_intro , .ATT_intro, .INT_intro{                                       /*彈出式div背景*/
+        .SD_intro , .ATT_intro, .INT_intro, .SD_web{                                       
             background-color: rgba(0,0,0,0.5);
             position: absolute;
             z-index: 9;
             display: none;
         }
-        .SD_intro_content,.ATT_intro_content,.INT_intro_content{                             
+        .SD_intro_content,.ATT_intro_content,.INT_intro_content,.SD_web_content{                             
             background-color: rgba(0,0,0,0.8);
             width: 62.5%;
             height: 80%;
@@ -174,7 +174,7 @@
             z-index: 10;
             display: block;
         }
-        .SD_intro_content div ,.ATT_intro_content div ,.INT_intro_content div{
+        .SD_intro_content div ,.ATT_intro_content div ,.INT_intro_content div,.SD_web_content div{
             width: 100%;
             height: 100%;
             text-align: center;
@@ -452,7 +452,7 @@
             color: #ffff99;
             text-align: center;       
         }
-        .SD_intro h1 ,.SD_intro p {
+        .SD_intro h1 ,.SD_intro p,.SD_web h1 ,.SD_web p {
             color: #a0d8ef;
         }
         .ATT_intro h1,.ATT_intro p,.ATT_black h1,.ATT_black h5,.ATT_black p{
@@ -597,9 +597,13 @@
                     able_to_scroll = true;
                 }, 200);
             });
-            $('.SD_text').bind('click',function(){                    //blackbutton叫出black
+            $('.SD_text').bind('click',function(){                    //
                 $('.SD_intro').css("top",window.pageYOffset + "px").show(); 
                 $('.SD_intro_content').children().css("display","none").delay(100).fadeIn(750); 
+            });
+            $('.SD_tvwebpage').bind('click',function(){                    //
+                $('.SD_web').css("top",window.pageYOffset + "px").show(); 
+                $('.SD_web_content').children().css("display","none").delay(100).fadeIn(750); 
             });
             $('.INT_infodesk').bind('click',function(){                   
                 $('.INT_intro').css("top",window.pageYOffset + "px").show(); 
@@ -628,6 +632,7 @@
                 $('#photo2').delay(800).animate({width:'toggle'},350);
                 $('#photo3').delay(1200).animate({width:'toggle'},350);
                 $('#photo4').delay(1600).animate({width:'toggle'},350);
+                $('.member_text').delay(400).fadeIn(200);
             });
             $('.MOD_island').bind('click',function(){                    //blackbutton叫出black
                 $('.MOD_black1').css("top",window.pageYOffset + "px").animate({height: window.innerHeight});
@@ -635,9 +640,9 @@
             $('.MOD_toybox').bind('click',function(){                    //blackbutton叫出black
                 $('.MOD_black2').css("top",window.pageYOffset + "px").animate({height: window.innerHeight});
             });
-            $('.SD_intro,.black_cross,.ATT_intro,.INT_intro').on('click', function(e){                   //black的click效果(消失)
+            $('.SD_intro,.black_cross,.ATT_intro,.INT_intro,.SD_web').on('click', function(e){                   //black的click效果(消失)
                 var target = $(e.target);
-                if (target.attr('class') == 'SD_intro'||target.attr('class') == 'ATT_intro'||target.attr('class') == 'INT_intro'||target.attr('class') == 'black_cross') {
+                if (target.attr('class') == 'SD_intro'||target.attr('class') == 'SD_web'||target.attr('class') == 'ATT_intro'||target.attr('class') == 'INT_intro'||target.attr('class') == 'black_cross') {
                     $(this).hide();
                 }
             });
@@ -652,9 +657,10 @@
             $('.img_gallery_black,img_gallery_cross').on('click', function(e){                   
                 var target = $(e.target);
                 if (target.attr('class') == 'img_gallery_black'||target.attr('class') == 'img_gallery_cross') {
-                    $(this).animate({width:'toggle'},350);
+                    $(this).delay(100).animate({width:'toggle'},350);
+                    $(".photo").hide();
+                    $(".member_text").hide();
                 }
-                $(".photo").hide();
             });
             $('.MOD_black1,mod_black_cross,.MOD_black2').on('click', function(e){                   
                 var target = $(e.target);
@@ -728,6 +734,7 @@
                 $(".img_gallery_black").hide();
                 $(".photo").hide();
                 $('.license').hide();
+                $(".member_text").hide();
                 $(".MOD_black1,.MOD_black2").animate({height:"0%"},10);
             }); 
             $(window).resize(function() {
@@ -739,6 +746,7 @@
                             $("html,body").scrollTop((i-1)*h + roof_height -(window.innerHeight - h)/2 );
                             if ($('.ATT_black').is(':visible')) {$('.ATT_black').css({"top":window.pageYOffset + "px"})}
                             if ($('.SD_intro').is(':visible')) {$('.SD_intro').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
+                            if ($('.SD_web').is(':visible')) {$('.SD_web').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
                             if ($('.ATT_intro').is(':visible')) {$('.ATT_intro').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
                             if ($('.INT_intro').is(':visible')) {$('.INT_intro').css({"top":(i-1)*h + roof_height -(window.innerHeight - h)/2 + "px"})}
                             if ($('.img_gallery_black').is(':visible')) {
@@ -806,8 +814,8 @@
                 $('.outside').height((h*5+roof_height+root_height) + "px");
                 $('.floor').height($('.floor_bg').css('height'));
                 $('.wall').height($('.floor_bg').css('height')).width($('.floor_bg').css('width'));
-                $('.SD_intro,.ATT_intro,.INT_intro').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
-                $('.SD_intro_content,.ATT_intro_content,.INT_intro_content').css({"width":w+"px","height":h+"px","top":(innerHeight-h)/2 +"px"});
+                $('.SD_intro,.ATT_intro,.INT_intro,.SD_web').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
+                $('.SD_intro_content,.ATT_intro_content,.INT_intro_content,.SD_web_content').css({"width":w+"px","height":h+"px","top":(innerHeight-h)/2 +"px"});
                 $('.ATT_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.loading_page').css({"width":window.innerWidth+"px","height":window.innerHeight+"px"});
                 $('.img_gallery_black').css({"width":window.innerWidth+"px","height":window.innerHeight+"px","top":window.pageYOffset + "px"});
@@ -841,6 +849,7 @@
                 $('.license p').css({"font-size": innerWidth*0.012 + "px"});
                 if ($('.ATT_black').is(':visible')) {$('.ATT_black').css({"top":window.pageYOffset + "px"})}
                 if ($('.SD_intro').is(':visible')) {$('.SD_intro').css({"top":window.pageYOffset + "px"})}
+                if ($('.SD_web').is(':visible')) {$('.SD_web').css({"top":window.pageYOffset + "px"})}
                 if ($('.ATT_intro').is(':visible')) {$('.ATT_intro').css({"top":window.pageYOffset + "px"})}
                 if ($('.INT_intro').is(':visible')) {$('.INT_intro').css({"top":window.pageYOffset + "px"})}
                 if ($('.img_gallery_black').is(':visible')) {
@@ -876,8 +885,12 @@
         </div>
         <div class="img_gallery_black">
             <div class="img_gallery">
+                <div style="padding: 15px;">
+                <img src="cross_icon.png" style="position:absolute;top:0%;left:92%;" width = "8%" height = "auto" class="img_gallery_cross">        
+                <p style="text-align:center;color:#ffff99;" class="member_text">Members:<br>
+                    郭瀚嶸&nbsp;張碩羽&nbsp;黃俊翔&nbsp;許皓威&nbsp;<br>薛祖明&nbsp;周寬也&nbsp;魏太兵&nbsp;李銘祥&nbsp;<br>楊舒涵&nbsp;徐偉哲&nbsp;張佐安&nbsp;劉翼傑&nbsp;<br>陳藝方&nbsp;趙浩雅&nbsp;吳軒竹&nbsp;周敬淳&nbsp;<br>邱文心&nbsp;吳柏勳&nbsp;蕭又齊&nbsp;高紫欣&nbsp;<br>林修逸&nbsp;王泓智&nbsp;簡維廷&nbsp;王智灝&nbsp;<br>陳鵬元
+                </div>
                 <div style="padding: 15px;position:relative;">
-                    <img src="cross_icon.png" style="position:absolute;top:0%;left:92%;" width = "8%" height = "auto" class="img_gallery_cross">
                     <img src="ph_01.JPG" style="margin: 15px" width = "90%" height = "auto" class="photo" id="photo1">
                     <img src="ph_02.JPG" style="margin: 15px" width = "90%" height = "auto" class="photo" id="photo2">
                     <img src="ph_03.JPG" style="margin: 15px" width = "90%" height = "auto" class="photo" id="photo3">
@@ -914,6 +927,16 @@
                 <div>
                     <h1>Blue-Green-BIM</h1>
                     <p>近年來歐盟開始倡導Blue-Green (BG) 設計，嘗試整合都市永續排水系統（Blue: sustainable drainage systems）及都市植被綠化（Green: urban vegetation），來更有效率地使用都市的能源與水資源，減少都市的水災損失，及提升都市景觀及舒適度。此外，新興的BIM (Building Information Modeling) 技術也正以革命性的觀念與先進技術引領建築產業進步，提升建築工程之效能、品質、安全與永續性。本團隊與Imperial College London合作，並在謝尚賢教授的指導下，針對以上議題進行研究，且根據不同的知識領域分為四個小組進行 :  BIM 模型組、分析工具組、綠屋頂組、以及程式開發組。
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="SD_web">
+            <div class="SD_web_content">
+                <img src="cross_icon.png" style="position:absolute;top:2%;left:95%;" width = "4%" height = "auto" class="black_cross">
+                <div>
+                    <h1>Blue Green BIM網站建置</h1>
+                    <p>2016前半年，本組的主要成果是完成本網站的第一個版本建置。本網站是希望能以趣味的呈現方式，呈現Blue Green BIM的各部門的概況。從手繪使用流程到建置出本網站，除了部分使用素材輔助呈現，整體的設計都是由團隊成員從無到有建立起來的。本網站除了讓我們熟悉前端設計，也為Blue Green BIM開啟一個讓大家認識我們的管道。
                     </p>
                 </div>
             </div>
@@ -1061,7 +1084,7 @@
                         <img src="SD_bg.png" class="floor_bg"> 
                         <img src="SD_intro_noword.png" class="SD_intro_noword">
                         <img src="SD_tvwebpage.png" class="SD_tvwebpage">
-                        <a href="http://test.ggjason.tw/Prototype/" target="_blank">
+                        <a href="http://www.bgbim.tw/Prototype/" target="_blank">
                             <img src="SD_tvroofdata.png" class="SD_tvroofdata">
                         </a>
                         <svg class="SD_text"> 
